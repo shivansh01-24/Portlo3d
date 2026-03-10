@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+.next/
+out/
+
+# Local env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.user
+.DS_Store
+Thumbs.db
+
+# Serve / logs
+*.log
+npm-debug.log*
+.cache/
+
+# OS
+desktop.ini
