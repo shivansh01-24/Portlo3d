@@ -458,16 +458,19 @@ function updateProjects(delta, camera, scrollProgress) {
 
     // ── Camera ──
     if (focusedCardIdx !== null || focusExiting) {
-        const cg = cardMeshes[focusedCardIdx ?? cflowTarget];
-        const wpX  = cg.position.x;
-        const wpY  = SECTION_Y + 2.4;
-        const camZ = SECTION_Z + 3 - focusZoom * 1.5;
-        camera.position.x += (wpX  - camera.position.x) * 0.08;
-        camera.position.y += (wpY  - camera.position.y) * 0.08;
-        camera.position.z += (camZ - camera.position.z) * 0.08;
-        camera.lookAt(cg.position.x + vaultGroup.position.x,
-                      cg.position.y + vaultGroup.position.y,
-                      vaultGroup.position.z);
+        const cg    = cardMeshes[focusedCardIdx ?? cflowTarget];
+        // Card world position: vaultGroup.y + cg.local.y = SECTION_Y + 1.2
+        const cardWorldX = cg.position.x + vaultGroup.position.x;
+        const cardWorldY = SECTION_Y + 1.2;                  // exact card centre Y
+        const cardWorldZ = vaultGroup.position.z;            // cards are at Z=0 local
+
+        // Camera floats directly in front at the same height — no looking from above
+        const camZoom  = SECTION_Z + 3.5 - focusZoom * 2.8;
+        camera.position.x += (cardWorldX - camera.position.x) * 0.07;
+        camera.position.y += (cardWorldY - camera.position.y) * 0.07;
+        camera.position.z += (camZoom    - camera.position.z) * 0.07;
+        camera.lookAt(cardWorldX, cardWorldY, cardWorldZ);
+
     } else {
         // Browse: camera centered, looking down the rail
         const browseY = SECTION_Y + 2.2 + (1 - entry) * 3;
