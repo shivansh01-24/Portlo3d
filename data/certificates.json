@@ -1,0 +1,52 @@
+{
+    "certificates": [
+        {
+            "title": "Web Development Bootcamp",
+            "issuer": "Udemy",
+            "date": "2024",
+            "image": null,
+            "link": "https://docs.google.com/document/d/your-web-dev-cert"
+        },
+        {
+            "title": "React & Redux Mastery",
+            "issuer": "Coursera",
+            "date": "2024",
+            "image": null,
+            "link": "https://docs.google.com/document/d/your-react-cert"
+        },
+        {
+            "title": "JavaScript Algorithms",
+            "issuer": "freeCodeCamp",
+            "date": "2023",
+            "image": null,
+            "link": "https://docs.google.com/document/d/your-js-cert"
+        },
+        {
+            "title": "Python Programming",
+            "issuer": "HackerRank",
+            "date": "2023",
+            "image": null,
+            "link": "https://docs.google.com/document/d/your-python-cert"
+        },
+        {
+            "title": "Data Structures & Algorithms",
+            "issuer": "GeeksforGeeks",
+            "date": "2023",
+            "image": null,
+            "link": "https://docs.google.com/document/d/your-dsa-cert"
+        },
+        {
+            "title": "Full Stack Development",
+            "issuer": "Udemy",
+            "date": "2024",
+            "image": null,
+            "link": "https://docs.google.com/document/d/your-fullstack-cert"
+        }
+    ],
+    "stats": {
+        "projects": 25,
+        "technologies": 15,
+        "commits": 500,
+        "masterDocLink": "https://docs.google.com/document/d/your-master-cert-doc"
+    }
+}

@@ -31,5 +31,9 @@ Thumbs.db
 npm-debug.log*
 .cache/
 
+# Internal docs
+PORTFOLIO_AI_BUILD_PROMPT.md
+*.build.md
+
 # OS
 desktop.ini

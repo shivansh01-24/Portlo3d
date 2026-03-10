@@ -1,0 +1,76 @@
+{
+  "projects": [
+    {
+      "title": "3D Portfolio Website",
+      "description": "An immersive Three.js portfolio with cinematic camera, hacker room, and interactive sections.",
+      "tech": [
+        "Three.js",
+        "JavaScript",
+        "GSAP"
+      ],
+      "link": "https://shivansh-portfolio.vercel.app",
+      "github": "https://github.com/shivansh/3d-portfolio",
+      "demo": "https://shivansh-portfolio-demo.vercel.app"
+    },
+    {
+      "title": "E-Commerce Platform",
+      "description": "Full-stack e-commerce app with payment integration, cart system, and admin dashboard.",
+      "tech": [
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
+      "link": "https://shivansh-ecommerce.vercel.app",
+      "github": "https://github.com/shivansh/ecommerce-platform",
+      "demo": "https://shivansh-ecommerce-demo.vercel.app"
+    },
+    {
+      "title": "AI Chat Assistant",
+      "description": "Real-time chat application powered by AI with natural language processing capabilities.",
+      "tech": [
+        "Python",
+        "FastAPI",
+        "React"
+      ],
+      "link": "https://shivansh-aichat.vercel.app",
+      "github": "https://github.com/shivansh/ai-chat-assistant",
+      "demo": "https://shivansh-aichat-demo.vercel.app"
+    },
+    {
+      "title": "Task Manager Pro",
+      "description": "Productivity app with drag-and-drop boards, notifications, and team collaboration features.",
+      "tech": [
+        "React",
+        "Firebase",
+        "CSS"
+      ],
+      "link": "https://shivansh-taskmanager.vercel.app",
+      "github": "https://github.com/shivansh/task-manager-pro",
+      "demo": "https://shivansh-taskmanager-demo.vercel.app"
+    },
+    {
+      "title": "Weather Dashboard",
+      "description": "Real-time weather data visualization with interactive charts, maps, and 7-day forecasts.",
+      "tech": [
+        "JavaScript",
+        "API",
+        "Chart.js"
+      ],
+      "link": "https://shivansh-weather.vercel.app",
+      "github": "https://github.com/shivansh/weather-dashboard",
+      "demo": "https://shivansh-weather-demo.vercel.app"
+    },
+    {
+      "title": "Social Media Clone",
+      "description": "Full-featured social platform with posts, likes, comments, and real-time messaging system.",
+      "tech": [
+        "Next.js",
+        "PostgreSQL",
+        "Socket.io"
+      ],
+      "link": "https://shivansh-social.vercel.app",
+      "github": "https://github.com/shivansh/social-media-clone",
+      "demo": "https://shivansh-social-demo.vercel.app"
+    }
+  ]
+}
