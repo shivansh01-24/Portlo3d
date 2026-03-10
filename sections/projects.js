@@ -1,524 +1,525 @@
 import * as THREE from 'three';
 
 /**
- * Projects Section — "The Underground Vault"
- *
- * Premium circular gallery with floating holographic project cards.
- * Cards load from projects.json with individual links.
- * Ultra-smooth carousel rotation with momentum feel.
+ * Projects Section — "Command Deck" Cover Flow
+ * Cards on a flat X-rail. Center card always perfectly face-forward.
+ * Scroll one step at a time. Click center = zoom in. Click again = open URL.
  */
 
-const SECTION_Z = -32;
-const SECTION_Y = -2.5;
+const SECTION_Z  = -32;
+const SECTION_Y  = -2.5;
+const CARD_W     = 2.5;
+const CARD_H     = 1.7;
+const CARD_GAP   = 3.4;   // X spacing between cards
+const TILT_MAX   = 1.15;  // max rotation.y (radians) for side cards — ~66°
 
 let vaultGroup;
 let cardMeshes = [];
-let cardData = [];
-let carousel;
-let hoverOverlay = null;
+let cardData   = [];
 let onCompleteCallback = null;
 let sectionDone = false;
-let carouselAngle = 0;
 let initialized = false;
-let entryAnim = 0;
-let cameraRef = null; // stored for raycasting
+let entryAnim   = 0;
+let cameraRef   = null;
 
+// ── Cover-flow state ──
+let cflowOffset = 0;      // smooth fractional current center (0..n-1)
+let cflowTarget = 0;      // integer snap target
+let lastScrollTime = 0;
+const SCROLL_COOLDOWN = 0.45; // seconds between steps
+
+// ── Focus / zoom state ──
+let focusedCardIdx = null;
+let focusZoom      = 0;
+let focusExiting   = false;
+
+// ── Hint ──
+let bottomHint = null;
+let hintPhase  = 'scroll';
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  CREATE
+// ─────────────────────────────────────────────────────────────────────────────
 async function createProjects(camera, rendererDom) {
-    cameraRef = camera;
+    cameraRef  = camera;
     vaultGroup = new THREE.Group();
     vaultGroup.position.set(0, SECTION_Y, SECTION_Z);
 
-    // Load JSON
+    // ── Load data ──
     try {
         const resp = await fetch('./data/projects.json');
         const json = await resp.json();
         cardData = json.projects || [];
-    } catch (e) {
-        console.warn('Could not load projects.json');
-        cardData = [{ title: 'Project', description: 'A cool project', tech: ['JS'], link: null, github: null, demo: null }];
+    } catch {
+        cardData = [{ title: 'Project', description: 'A cool project.', tech: ['JS'], link: null, github: null, demo: null }];
     }
 
-    // ═══════════════════════════════
-    //  UNDERGROUND CAVERN — premium look
-    // ═══════════════════════════════
+    // ════════════════════════════════════════
+    //  ENVIRONMENT
+    // ════════════════════════════════════════
 
-    // Floor — dark reflective
-    const floorMat = new THREE.MeshStandardMaterial({
-        color: 0x060610, roughness: 0.3, metalness: 0.8, side: THREE.DoubleSide
-    });
-    const floor = new THREE.Mesh(new THREE.CircleGeometry(8, 48), floorMat);
+    // ── Dark floor ──
+    const floorMat = new THREE.MeshStandardMaterial({ color: 0x040410, roughness: 0.2, metalness: 0.9 });
+    const floor    = new THREE.Mesh(new THREE.PlaneGeometry(40, 20), floorMat);
     floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -0.01;
+    floor.position.y = -1.4;
     vaultGroup.add(floor);
 
-    // Floor glow ring
-    const ringGeo = new THREE.RingGeometry(3.8, 4.0, 64);
-    const ringMat = new THREE.MeshBasicMaterial({
-        color: 0x1a0033, transparent: true, opacity: 0.4,
-        side: THREE.DoubleSide, blending: THREE.AdditiveBlending
-    });
-    const floorRing = new THREE.Mesh(ringGeo, ringMat);
-    floorRing.rotation.x = -Math.PI / 2;
-    floorRing.position.y = 0.01;
-    floorRing.userData.isFloorRing = true;
-    vaultGroup.add(floorRing);
-
-    // Ceiling dome
-    const domeGeo = new THREE.SphereGeometry(8, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
-    const domeMat = new THREE.MeshStandardMaterial({
-        color: 0x040408, roughness: 0.95, metalness: 0.1, side: THREE.BackSide
-    });
-    const dome = new THREE.Mesh(domeGeo, domeMat);
-    dome.position.y = 0;
-    vaultGroup.add(dome);
-
-    // ── Atmospheric lighting ──
-    const centerGlow = new THREE.PointLight(0x2211aa, 2, 14);
-    centerGlow.position.set(0, 4, 0);
-    vaultGroup.add(centerGlow);
-
-    const floorLight = new THREE.PointLight(0x110033, 1.5, 8);
-    floorLight.position.set(0, 0.05, 0);
-    floorLight.userData.isFloorLight = true;
-    vaultGroup.add(floorLight);
-
-    // Accent spotlights pointing down at cards
-    for (let i = 0; i < 3; i++) {
-        const a = (i / 3) * Math.PI * 2;
-        const sp = new THREE.PointLight(0x3322aa, 0.6, 6);
-        sp.position.set(Math.cos(a) * 5, 4, Math.sin(a) * 5);
-        vaultGroup.add(sp);
+    // ── Neon grid overlay on floor ──
+    const gc = document.createElement('canvas');
+    gc.width = gc.height = 512;
+    const gx = gc.getContext('2d');
+    gx.fillStyle = '#000';
+    gx.fillRect(0, 0, 512, 512);
+    gx.strokeStyle = 'rgba(80,0,255,0.55)';
+    gx.lineWidth = 1;
+    for (let v = 0; v <= 512; v += 32) {
+        gx.beginPath(); gx.moveTo(v, 0); gx.lineTo(v, 512); gx.stroke();
+        gx.beginPath(); gx.moveTo(0, v); gx.lineTo(512, v); gx.stroke();
     }
+    const gridTex  = new THREE.CanvasTexture(gc);
+    gridTex.wrapS  = gridTex.wrapT = THREE.RepeatWrapping;
+    gridTex.repeat.set(8, 5);
+    const gridMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(40, 20),
+        new THREE.MeshBasicMaterial({ map: gridTex, transparent: true, opacity: 0.35,
+            blending: THREE.AdditiveBlending, depthWrite: false })
+    );
+    gridMesh.rotation.x = -Math.PI / 2;
+    gridMesh.position.y = -1.39;
+    vaultGroup.add(gridMesh);
 
-    // ── Floating particles ──
-    const dustCount = 250;
-    const dPos = new Float32Array(dustCount * 3);
-    const dCol = new Float32Array(dustCount * 3);
-    for (let i = 0; i < dustCount; i++) {
-        const a = Math.random() * Math.PI * 2;
-        const r = 0.5 + Math.random() * 7;
-        dPos[i * 3] = Math.cos(a) * r;
-        dPos[i * 3 + 1] = Math.random() * 5 + 0.3;
-        dPos[i * 3 + 2] = Math.sin(a) * r;
-        const hue = Math.random();
-        const c = new THREE.Color().setHSL(0.7 + hue * 0.15, 0.6, 0.5 + Math.random() * 0.3);
-        dCol[i * 3] = c.r; dCol[i * 3 + 1] = c.g; dCol[i * 3 + 2] = c.b;
+    // ── Back wall — animated hex canvas ──
+    const wc = document.createElement('canvas');
+    wc.width = 1024; wc.height = 512;
+    const wx = wc.getContext('2d');
+    wx.fillStyle = '#010110';
+    wx.fillRect(0, 0, 1024, 512);
+    const hexR = 28, hexH = hexR * Math.sqrt(3);
+    for (let row = -1; row < 20; row++) {
+        for (let col = -1; col < 42; col++) {
+            const cx = col * hexR * 1.5 + (row & 1) * hexR * 0.75;
+            const cy = row * hexH * 0.5;
+            wx.beginPath();
+            for (let k = 0; k < 6; k++) {
+                const ang = Math.PI / 6 + k * Math.PI / 3;
+                const hx = cx + hexR * 0.88 * Math.cos(ang);
+                const hy = cy + hexR * 0.88 * Math.sin(ang);
+                k === 0 ? wx.moveTo(hx, hy) : wx.lineTo(hx, hy);
+            }
+            wx.closePath();
+            const alpha = 0.15 + Math.random() * 0.2;
+            wx.strokeStyle = `rgba(60,0,200,${alpha.toFixed(2)})`;
+            wx.lineWidth = 0.7;
+            wx.stroke();
+        }
     }
-    const dGeo = new THREE.BufferGeometry();
-    dGeo.setAttribute('position', new THREE.BufferAttribute(dPos, 3));
-    dGeo.setAttribute('color', new THREE.BufferAttribute(dCol, 3));
-    const dust = new THREE.Points(dGeo, new THREE.PointsMaterial({
-        size: 0.04, vertexColors: true, transparent: true, opacity: 0.6,
-        blending: THREE.AdditiveBlending, depthWrite: false,
-    }));
-    dust.userData.isDust = true;
-    vaultGroup.add(dust);
+    const wallTex  = new THREE.CanvasTexture(wc);
+    const backWall = new THREE.Mesh(
+        new THREE.PlaneGeometry(36, 10),
+        new THREE.MeshBasicMaterial({ map: wallTex, transparent: true, opacity: 0.75,
+            blending: THREE.AdditiveBlending })
+    );
+    backWall.position.set(0, 2.5, -7);
+    vaultGroup.add(backWall);
 
-    // ═══════════════════════════════
-    //  CAROUSEL — premium floating cards
-    // ═══════════════════════════════
-    carousel = new THREE.Group();
-    carousel.position.y = 2;
-    vaultGroup.add(carousel);
+    // ── Ceiling glow strip ──
+    const strip = new THREE.Mesh(
+        new THREE.BoxGeometry(10, 0.06, 0.4),
+        new THREE.MeshBasicMaterial({ color: 0x3311ff, transparent: true, opacity: 0.7 })
+    );
+    strip.position.set(0, 5, 0);
+    vaultGroup.add(strip);
 
+    // ── Lighting ──
+    const topLight = new THREE.PointLight(0x3311ff, 4, 16);
+    topLight.position.set(0, 5, 0);
+    topLight.userData.isPulse = true;
+    vaultGroup.add(topLight);
+
+    const ambLight = new THREE.AmbientLight(0x110033, 1);
+    vaultGroup.add(ambLight);
+
+    [-10, 10].forEach((x, si) => {
+        const sl = new THREE.PointLight(0x5522bb, 1.5, 10);
+        sl.position.set(x, 3, 0);
+        sl.userData.isSide = true;
+        sl.userData.si = si;
+        vaultGroup.add(sl);
+    });
+
+    // ════════════════════════════════════════
+    //  CARDS  (placed in vaultGroup, not a rotating carousel)
+    // ════════════════════════════════════════
     const n = cardData.length;
-    const radius = 4.2;
-
     cardData.forEach((proj, i) => {
-        const angle = (i / n) * Math.PI * 2;
+        const hue   = i / Math.max(n, 1);
+        const color = new THREE.Color().setHSL(hue, 0.9, 0.60);
+
         const cardGroup = new THREE.Group();
-        cardGroup.position.set(
-            Math.sin(angle) * radius,
-            0,
-            Math.cos(angle) * radius
-        );
-        cardGroup.rotation.y = -angle + Math.PI;
+        // X position set each frame; Y and Z static
+        cardGroup.position.set(0, 1.2, 0);
 
-        // Card dimensions
-        const cardW = 2.4, cardH = 1.6;
-
-        // Card back panel — dark glass
+        // ── Glass back panel ──
         const bgMat = new THREE.MeshPhysicalMaterial({
-            color: 0x080818, roughness: 0.1, metalness: 0.6,
-            transparent: true, opacity: 0.9,
-            emissive: 0x0a0020, emissiveIntensity: 0.1,
-            clearcoat: 0.5, clearcoatRoughness: 0.2,
+            color: 0x060618, roughness: 0.05, metalness: 0.75,
+            transparent: true, opacity: 0.92,
+            emissive: new THREE.Color().setHSL(hue, 0.6, 0.05), emissiveIntensity: 1,
+            clearcoat: 1, clearcoatRoughness: 0.08,
         });
-        const bg = new THREE.Mesh(new THREE.BoxGeometry(cardW, cardH, 0.03), bgMat);
-        cardGroup.add(bg);
+        cardGroup.add(new THREE.Mesh(new THREE.BoxGeometry(CARD_W, CARD_H, 0.05), bgMat));
 
-        // Neon border — unique hue per card
-        const hue = (i / n);
-        const borderColor = new THREE.Color().setHSL(hue, 0.85, 0.55);
-        const borderGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(cardW + 0.02, cardH + 0.02, 0.035));
-        const border = new THREE.LineSegments(borderGeo,
-            new THREE.LineBasicMaterial({ color: borderColor, transparent: true, opacity: 0.8 })
+        // ── Neon border ──
+        const borderGeo = new THREE.EdgesGeometry(new THREE.BoxGeometry(CARD_W + 0.03, CARD_H + 0.03, 0.06));
+        cardGroup.add(new THREE.LineSegments(borderGeo,
+            new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.9 })));
+
+        // ── Top accent bar ──
+        const bar = new THREE.Mesh(
+            new THREE.BoxGeometry(CARD_W - 0.12, 0.03, 0.06),
+            new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.65 })
         );
-        cardGroup.add(border);
+        bar.position.set(0, CARD_H / 2 - 0.06, 0.03);
+        cardGroup.add(bar);
 
-        // Top accent bar
-        const accentBar = new THREE.Mesh(
-            new THREE.BoxGeometry(cardW - 0.2, 0.025, 0.035),
-            new THREE.MeshBasicMaterial({ color: borderColor, transparent: true, opacity: 0.6 })
-        );
-        accentBar.position.y = cardH / 2 - 0.08;
-        accentBar.position.z = 0.02;
-        cardGroup.add(accentBar);
-
-        // Card content texture
-        const canvas = document.createElement('canvas');
-        canvas.width = 520; canvas.height = 350;
-        const ctx = canvas.getContext('2d');
-        drawProjectCard(ctx, proj, i, 520, 350, borderColor);
-        const tex = new THREE.CanvasTexture(canvas);
+        // ── Content canvas ──
+        const cvs = document.createElement('canvas');
+        cvs.width = 540; cvs.height = 360;
+        drawProjectCard(cvs.getContext('2d'), proj, i, 540, 360, color);
+        const tex = new THREE.CanvasTexture(cvs);
         tex.anisotropy = 4;
         const face = new THREE.Mesh(
-            new THREE.PlaneGeometry(cardW - 0.06, cardH - 0.06),
+            new THREE.PlaneGeometry(CARD_W - 0.07, CARD_H - 0.07),
             new THREE.MeshBasicMaterial({ map: tex, transparent: true })
         );
-        face.position.z = 0.02;
+        face.position.z = 0.028;
         cardGroup.add(face);
 
-        // Card glow — soft colored light
-        const glow = new THREE.PointLight(borderColor.getHex(), 0.4, 2.5);
-        glow.position.z = 0.6;
+        // ── Card glow light ──
+        const glow = new THREE.PointLight(color.getHex(), 0, 3.5);
+        glow.position.z = 1;
+        glow.userData.isCardGlow = true;
         cardGroup.add(glow);
 
-        // Bottom reflection glow (on floor)
-        const refGlow = new THREE.PointLight(borderColor.getHex(), 0.15, 1.5);
-        refGlow.position.set(0, -1.8, 0);
-        cardGroup.add(refGlow);
-
-        cardGroup.userData = { index: i, proj, borderColor, baseY: 0 };
-        carousel.add(cardGroup);
+        cardGroup.userData = { index: i, proj, color };
+        vaultGroup.add(cardGroup);
         cardMeshes.push(cardGroup);
     });
 
-    // Center pedestal — glowing crystal
-    const pedGeo = new THREE.CylinderGeometry(0.6, 0.9, 0.4, 8);
-    const pedMat = new THREE.MeshStandardMaterial({
-        color: 0x111128, roughness: 0.3, metalness: 0.7,
-        emissive: 0x110044, emissiveIntensity: 0.15
-    });
-    const pedestal = new THREE.Mesh(pedGeo, pedMat);
-    pedestal.position.y = -1.8;
-    carousel.add(pedestal);
+    // ════════════════════════════════════════
+    //  BOTTOM HINT
+    // ════════════════════════════════════════
+    if (!document.getElementById('vault-blink-style')) {
+        const st = document.createElement('style');
+        st.id = 'vault-blink-style';
+        st.textContent = `
+            @keyframes vaultBlink { 0%,100%{ opacity:1; } 50%{ opacity:0.3; } }
+            @keyframes vaultPulse { 0%,100%{ border-color:rgba(130,70,255,0.22); }
+                                    50%{     border-color:rgba(170,100,255,0.7); } }
+            #vault-hint { animation: vaultBlink 1.8s ease-in-out infinite,
+                                     vaultPulse 1.8s ease-in-out infinite; }
+        `;
+        document.head.appendChild(st);
+    }
+    bottomHint = document.createElement('div');
+    bottomHint.id = 'vault-hint';
+    bottomHint.style.cssText = `
+        position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+        color:#cc88ff; font-family:'Courier New',monospace; font-size:12px;
+        letter-spacing:3px; text-transform:uppercase;
+        background:rgba(2,0,10,0.7); backdrop-filter:blur(10px);
+        padding:9px 28px 8px; border:1px solid rgba(130,70,255,0.22);
+        border-radius:20px; pointer-events:none; z-index:50;
+        opacity:0; transition:opacity 1s ease;
+        text-shadow:0 0 14px rgba(180,100,255,0.7);
+    `;
+    document.body.appendChild(bottomHint);
+    setTimeout(() => { bottomHint.style.opacity = '1'; }, 800);
+    setHint('scroll');
 
-    // Crystal on pedestal
-    const crystalGeo = new THREE.OctahedronGeometry(0.25);
-    const crystalMat = new THREE.MeshPhysicalMaterial({
-        color: 0x6633ff, roughness: 0, metalness: 0.2,
-        transparent: true, opacity: 0.7,
-        emissive: 0x4422cc, emissiveIntensity: 0.5,
-        clearcoat: 1,
-    });
-    const crystal = new THREE.Mesh(crystalGeo, crystalMat);
-    crystal.position.y = -1.4;
-    crystal.userData.isCrystal = true;
-    carousel.add(crystal);
-
-    const crystalLight = new THREE.PointLight(0x6633ff, 1.5, 4);
-    crystalLight.position.y = -1.3;
-    crystalLight.userData.isCrystalLight = true;
-    carousel.add(crystalLight);
-
-    // ── Hover overlay ──
-    hoverOverlay = document.createElement('div');
-    hoverOverlay.id = 'project-hover';
-    hoverOverlay.style.cssText = `
-    position: fixed; bottom: 30px; left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Courier New', monospace;
-    pointer-events: auto; z-index: 15;
-    text-align: center;
-    background: linear-gradient(135deg, rgba(5,5,25,0.92), rgba(10,0,30,0.92));
-    border: 1px solid rgba(100,50,255,0.25);
-    border-radius: 10px;
-    padding: 14px 28px;
-    opacity: 0; transition: opacity 0.6s ease;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(100,50,255,0.15);
-  `;
-    document.body.appendChild(hoverOverlay);
-
-    // Vault scroll hint
-    const vaultHint = document.createElement('div');
-    vaultHint.style.cssText = `
-    position: fixed; top: 25px; left: 50%;
-    transform: translateX(-50%);
-    color: #8833ff; font-family: 'Courier New', monospace;
-    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-    opacity: 0; pointer-events: none; z-index: 15;
-    text-shadow: 0 0 12px rgba(136,51,255,0.6);
-    transition: opacity 1.2s ease;
-  `;
-    vaultHint.textContent = '⟡ Scroll to browse projects ⟡';
-    document.body.appendChild(vaultHint);
-    setTimeout(() => { vaultHint.style.opacity = '1'; }, 800);
-    setTimeout(() => { vaultHint.style.opacity = '0'; }, 6000);
-
-    // ── Raycaster for precise card clicks ──
+    // ════════════════════════════════════════
+    //  EVENT LISTENERS
+    // ════════════════════════════════════════
     const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2(-9999, -9999); // off-screen default
+    const mouse     = new THREE.Vector2(-9999, -9999);
 
-    // Track mouse position
     if (rendererDom) {
         rendererDom.addEventListener('mousemove', (e) => {
-            mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        // Click — only open link if raycast hits a card face
-        rendererDom.addEventListener('click', (e) => {
+            mouse.x =  (e.clientX / window.innerWidth)  * 2 - 1;
+            mouse.y = -(e.clientY / window.innerHeight)  * 2 + 1;
             if (!cameraRef) return;
             raycaster.setFromCamera(mouse, cameraRef);
-            // Collect all child meshes of all card groups
-            const hitTargets = [];
-            cardMeshes.forEach(cg => cg.children.forEach(c => {
-                if (c.isMesh) hitTargets.push(c);
-            }));
-            const hits = raycaster.intersectObjects(hitTargets, false);
-            if (!hits.length) return; // nothing hit — ignore click
-            // Find which card was hit
-            const hitObj = hits[0].object;
-            let hitCard = null;
-            cardMeshes.forEach(cg => {
-                if (cg.children.includes(hitObj)) hitCard = cg.userData;
-            });
-            if (!hitCard) return;
-            const p = hitCard.proj;
-            if (p.demo) window.open(p.demo, '_blank');
-            else if (p.link) window.open(p.link, '_blank');
-            else if (p.github) window.open(p.github, '_blank');
+            const tgts = [];
+            cardMeshes.forEach(cg => cg.children.forEach(c => { if (c.isMesh) tgts.push(c); }));
+            const hits = raycaster.intersectObjects(tgts, false);
+            rendererDom.style.cursor = hits.length ? 'pointer' : 'default';
         });
-    }
 
+        rendererDom.addEventListener('click', () => {
+            if (!cameraRef) return;
+            raycaster.setFromCamera(mouse, cameraRef);
+            const tgts = [];
+            cardMeshes.forEach(cg => cg.children.forEach(c => { if (c.isMesh) tgts.push(c); }));
+            const hits = raycaster.intersectObjects(tgts, false);
+            if (!hits.length) return;
+
+            let hitIdx = null;
+            cardMeshes.forEach((cg, i) => { if (cg.children.includes(hits[0].object)) hitIdx = i; });
+            if (hitIdx === null) return;
+
+            if (focusedCardIdx !== null) {
+                // Already zoomed — open URL
+                const p = cardMeshes[focusedCardIdx]?.userData?.proj;
+                if (p) {
+                    if      (p.demo)   window.open(p.demo,   '_blank');
+                    else if (p.link)   window.open(p.link,   '_blank');
+                    else if (p.github) window.open(p.github, '_blank');
+                }
+                return;
+            }
+
+            const centreIdx = Math.round(cflowOffset);
+            if (hitIdx !== centreIdx) {
+                // Bring clicked card to centre
+                cflowTarget = hitIdx;
+            } else {
+                // Zoom in on centre card
+                focusedCardIdx = hitIdx;
+                focusZoom      = 0;
+                focusExiting   = false;
+                setHint('focused');
+                rendererDom.style.cursor = 'pointer';
+            }
+        });
+
+        window.addEventListener('wheel', (e) => {
+            if (focusedCardIdx !== null) { exitFocus(rendererDom); return; }
+            const now = performance.now() * 0.001;
+            if (now - lastScrollTime < SCROLL_COOLDOWN) return;
+            lastScrollTime = now;
+            cflowTarget = Math.max(0, Math.min(cardData.length - 1,
+                cflowTarget + (e.deltaY > 0 ? 1 : -1)));
+        }, { passive: true });
+    }
 
     initialized = true;
     return vaultGroup;
 }
 
-function getFocusedCard() {
-    if (!cardMeshes.length || !carousel) return null;
-    const n = cardMeshes.length;
-    const a = ((carousel.rotation.y % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
-    const idx = Math.round((a / (Math.PI * 2)) * n) % n;
-    return cardMeshes[idx] ? cardMeshes[idx].userData : null;
+// ─────────────────────────────────────────────────────────────────────────────
+//  HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+function setHint(mode) {
+    if (!bottomHint) return;
+    hintPhase = mode;
+    if (mode === 'scroll')  bottomHint.innerHTML = '&#x2193;&nbsp; Scroll to Browse &nbsp;&#x2193;';
+    if (mode === 'browse')  bottomHint.innerHTML = '&#x2190; Scroll &nbsp;|&nbsp; Click Centre Card to Inspect &#x2192;';
+    if (mode === 'focused') bottomHint.innerHTML = '&#x2191; Click to Open Project &nbsp;|&nbsp; Scroll to Go Back';
+}
+
+function exitFocus(dom) {
+    focusExiting = true;
+    if (dom) dom.style.cursor = 'default';
+    setHint('browse');
 }
 
 function drawProjectCard(ctx, proj, index, w, h, color) {
     // Background gradient
-    const grad = ctx.createLinearGradient(0, 0, 0, h);
-    grad.addColorStop(0, '#0c0c1e');
-    grad.addColorStop(0.5, '#080815');
-    grad.addColorStop(1, '#0a0a12');
-    ctx.fillStyle = grad;
+    const bg = ctx.createLinearGradient(0, 0, 0, h);
+    bg.addColorStop(0, '#0b0b1e');
+    bg.addColorStop(1, '#070710');
+    ctx.fillStyle = bg;
     ctx.fillRect(0, 0, w, h);
 
-    // Subtle grid pattern
-    ctx.strokeStyle = 'rgba(100,50,255,0.04)';
+    // Subtle grid
+    ctx.strokeStyle = `rgba(${Math.round(color.r * 255)},${Math.round(color.g * 255)},${Math.round(color.b * 255)},0.06)`;
     ctx.lineWidth = 0.5;
-    for (let x = 0; x < w; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
-    for (let y = 0; y < h; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+    for (let x = 0; x < w; x += 22) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+    for (let y = 0; y < h; y += 22) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+
+    const hex = '#' + color.getHexString();
 
     // Top accent line
-    const acGrad = ctx.createLinearGradient(30, 0, w - 30, 0);
-    acGrad.addColorStop(0, 'transparent');
-    acGrad.addColorStop(0.3, `#${color.getHexString()}`);
-    acGrad.addColorStop(0.7, `#${color.getHexString()}`);
-    acGrad.addColorStop(1, 'transparent');
-    ctx.fillStyle = acGrad;
-    ctx.fillRect(25, 16, w - 50, 2);
+    const ac = ctx.createLinearGradient(20, 0, w - 20, 0);
+    ac.addColorStop(0, 'transparent');
+    ac.addColorStop(0.4, hex);
+    ac.addColorStop(0.6, hex);
+    ac.addColorStop(1, 'transparent');
+    ctx.fillStyle = ac;
+    ctx.fillRect(20, 18, w - 40, 2);
 
-    // Project number badge
+    // Card number
     ctx.font = 'bold 10px monospace';
     ctx.textAlign = 'right';
-    ctx.fillStyle = `#${color.getHexString()}88`;
-    ctx.fillText(`#${String(index + 1).padStart(2, '0')}`, w - 20, 38);
+    ctx.fillStyle = hex + '88';
+    ctx.fillText('#' + String(index + 1).padStart(2, '0'), w - 18, 36);
 
-    // Title with glow
-    ctx.font = 'bold 24px monospace';
+    // Title
+    ctx.font = 'bold 26px monospace';
     ctx.textAlign = 'left';
-    ctx.shadowColor = `#${color.getHexString()}`;
-    ctx.shadowBlur = 12;
+    ctx.shadowColor = hex;
+    ctx.shadowBlur = 8;
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(proj.title, 22, 58);
+    ctx.fillText(proj.title || 'Project', 22, 64);
     ctx.shadowBlur = 0;
-
-    // Divider under title
-    ctx.fillStyle = `#${color.getHexString()}33`;
-    ctx.fillRect(22, 68, 80, 1);
 
     // Description
     ctx.font = '13px monospace';
-    ctx.fillStyle = '#999';
-    wrapText(ctx, proj.description, 22, 92, w - 44, 18);
+    ctx.fillStyle = 'rgba(180,180,210,0.85)';
+    wrapText(ctx, proj.description || '', 22, 92, w - 44, 19);
 
     // Tech tags
-    ctx.font = 'bold 10px monospace';
-    let tx = 22;
-    const ty = h - 80;
-    (proj.tech || []).forEach(t => {
-        const tw = ctx.measureText(t).width + 14;
-        // Tag bg
-        ctx.fillStyle = `#${color.getHexString()}15`;
-        roundRect(ctx, tx, ty - 10, tw, 18, 3);
-        ctx.fill();
-        ctx.strokeStyle = `#${color.getHexString()}55`;
-        ctx.lineWidth = 0.8;
-        roundRect(ctx, tx, ty - 10, tw, 18, 3);
-        ctx.stroke();
-        ctx.fillStyle = `#${color.getHexString()}`;
-        ctx.fillText(t, tx + 7, ty + 2);
-        tx += tw + 5;
-    });
+    if (proj.tech && proj.tech.length) {
+        let tx = 22;
+        proj.tech.slice(0, 5).forEach(t => {
+            const tw = ctx.measureText(t).width + 18;
+            roundRect(ctx, tx, h - 80, tw, 22, 5);
+            ctx.fillStyle = hex + '22';
+            ctx.fill();
+            ctx.strokeStyle = hex + '88';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.font = 'bold 10px monospace';
+            ctx.fillStyle = hex;
+            ctx.textAlign = 'center';
+            ctx.fillText(t, tx + tw / 2, h - 65);
+            tx += tw + 8;
+        });
+    }
 
     // Links
-    ctx.font = '10px monospace';
-    ctx.textAlign = 'center';
+    ctx.textAlign = 'left';
     let ly = h - 48;
-    if (proj.demo) {
-        ctx.fillStyle = '#00ff88';
-        ctx.fillText('▶ ' + proj.demo, w / 2, ly);
-        ly += 13;
-    }
-    if (proj.link) {
-        ctx.fillStyle = '#00aaff';
-        ctx.fillText('🌐 ' + proj.link, w / 2, ly);
-        ly += 13;
-    }
-    if (proj.github) {
-        ctx.fillStyle = '#777';
-        ctx.fillText('⟨/⟩ ' + proj.github, w / 2, ly);
-    }
+    [
+        { val: proj.demo,   icon: '▶', col: '#00ff88' },
+        { val: proj.link,   icon: '🌐', col: '#00aaff' },
+        { val: proj.github, icon: '⌥', col: '#aaaaaa' },
+    ].forEach(({ val, icon, col }) => {
+        if (!val) return;
+        ctx.font = '10px monospace';
+        ctx.fillStyle = col;
+        ctx.fillText(icon + ' ' + val, 22, ly);
+        ly += 14;
+    });
 
-    // Bottom accent
-    const btGrad = ctx.createLinearGradient(30, 0, w - 30, 0);
-    btGrad.addColorStop(0, 'transparent');
-    btGrad.addColorStop(0.5, `#${color.getHexString()}44`);
-    btGrad.addColorStop(1, 'transparent');
-    ctx.fillStyle = btGrad;
-    ctx.fillRect(25, h - 6, w - 50, 1);
+    // Bottom line
+    ctx.fillStyle = hex + '33';
+    ctx.fillRect(20, h - 7, w - 40, 1);
 }
 
 function roundRect(ctx, x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
     ctx.closePath();
 }
 
 function wrapText(ctx, text, x, y, maxW, lineH) {
     const words = text.split(' ');
     let line = '', ly = y;
-    words.forEach(word => {
+    for (const word of words) {
         const test = line + word + ' ';
         if (ctx.measureText(test).width > maxW && line) {
             ctx.fillText(line.trim(), x, ly);
-            line = word + ' ';
-            ly += lineH;
+            line = word + ' '; ly += lineH;
+            if (ly > 200) break;
         } else line = test;
-    });
+    }
     if (line) ctx.fillText(line.trim(), x, ly);
 }
 
-// ═══════════════════════════════
-//  UPDATE — ultra-smooth
-// ═══════════════════════════════
-
+// ─────────────────────────────────────────────────────────────────────────────
+//  UPDATE
+// ─────────────────────────────────────────────────────────────────────────────
 function updateProjects(delta, camera, scrollProgress) {
     if (!vaultGroup || !initialized) return;
     const time = performance.now() * 0.001;
+    const n    = cardMeshes.length;
 
-    // Entry fade-in (first 2 seconds)
-    entryAnim = Math.min(1, entryAnim + delta * 0.5);
-    const entryEase = 1 - Math.pow(1 - entryAnim, 3);
+    // Entry fade-in
+    const wasComplete = entryAnim >= 1;
+    entryAnim = Math.min(1, entryAnim + delta * 0.45);
+    const entry = 1 - Math.pow(1 - entryAnim, 3);
+    if (!wasComplete && entryAnim >= 1 && hintPhase === 'scroll') setHint('browse');
 
-    // Camera — smooth entry from above
-    camera.position.set(
-        0,
-        SECTION_Y + 2.2 + (1 - entryEase) * 3,
-        SECTION_Z
-    );
-    camera.rotation.set((1 - entryEase) * -0.3, 0, 0);
-
-    // Smooth carousel rotation with momentum
-    const targetAngle = scrollProgress * Math.PI * 2 * 1.5;
-    carouselAngle += (targetAngle - carouselAngle) * 0.025;
-    carousel.rotation.y = carouselAngle;
-
-    // Card animations
-    cardMeshes.forEach((cg, i) => {
-        // Gentle float
-        cg.position.y = Math.sin(time * 0.5 + i * 0.9) * 0.1;
-        // Subtle tilt
-        cg.rotation.x = Math.sin(time * 0.25 + i * 0.6) * 0.015;
-        cg.rotation.z = Math.sin(time * 0.3 + i * 0.8) * 0.008;
-        // Scale based on entry
-        cg.scale.setScalar(entryEase);
-    });
-
-    // Crystal spin
-    carousel.children.forEach(c => {
-        if (c.userData && c.userData.isCrystal) {
-            c.rotation.y = time * 0.4;
-            c.rotation.x = Math.sin(time * 0.3) * 0.2;
-            c.position.y = -1.4 + Math.sin(time * 0.6) * 0.08;
-        }
-        if (c.userData && c.userData.isCrystalLight) {
-            c.intensity = 1.5 + Math.sin(time * 0.8) * 0.5;
-        }
-    });
-
-    // Dust orbit
-    vaultGroup.children.forEach(c => {
-        if (c.userData && c.userData.isDust) {
-            const pos = c.geometry.attributes.position.array;
-            for (let i = 0; i < pos.length / 3; i++) {
-                pos[i * 3 + 1] += Math.sin(time * 0.3 + i * 0.2) * delta * 0.01;
-                const a = Math.atan2(pos[i * 3 + 2], pos[i * 3]) + delta * 0.005;
-                const r = Math.sqrt(pos[i * 3] ** 2 + pos[i * 3 + 2] ** 2);
-                pos[i * 3] = Math.cos(a) * r;
-                pos[i * 3 + 2] = Math.sin(a) * r;
-            }
-            c.geometry.attributes.position.needsUpdate = true;
-        }
-        // Floor ring glow pulse
-        if (c.userData && c.userData.isFloorRing) {
-            c.material.opacity = 0.3 + Math.sin(time * 0.5) * 0.15;
-        }
-        // Floor light pulse
-        if (c.userData && c.userData.isFloorLight) {
-            c.intensity = 1.5 + Math.sin(time * 0.4) * 0.5;
-        }
-    });
-
-    // Hover overlay
-    const focused = getFocusedCard();
-    if (focused && hoverOverlay) {
-        const p = focused.proj;
-        hoverOverlay.innerHTML = `
-      <div style="color:#fff;font-size:16px;font-weight:bold;margin-bottom:5px;text-shadow:0 0 8px rgba(100,50,255,0.4);">
-        ⟨ ${p.title} ⟩
-      </div>
-      <div style="color:#666;font-size:11px;margin-bottom:8px;letter-spacing:1px;">
-        ${p.tech ? p.tech.join(' · ') : ''}
-      </div>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        ${p.demo ? `<a href="${p.demo}" target="_blank" style="color:#00ff88;font-size:11px;text-decoration:none;padding:4px 10px;border:1px solid #00ff8844;border-radius:5px;transition:all 0.3s;">▶ Demo</a>` : ''}
-        ${p.link ? `<a href="${p.link}" target="_blank" style="color:#00aaff;font-size:11px;text-decoration:none;padding:4px 10px;border:1px solid #00aaff44;border-radius:5px;transition:all 0.3s;">🌐 Live</a>` : ''}
-        ${p.github ? `<a href="${p.github}" target="_blank" style="color:#bbb;font-size:11px;text-decoration:none;padding:4px 10px;border:1px solid #bbb4;border-radius:5px;transition:all 0.3s;">⟨/⟩ Code</a>` : ''}
-      </div>
-    `;
-        hoverOverlay.style.opacity = entryEase.toString();
+    // ── Focus zoom ──
+    const zoomTgt = (focusedCardIdx !== null && !focusExiting) ? 1 : 0;
+    focusZoom    += (zoomTgt - focusZoom) * Math.min(1, delta * 3.5);
+    if (focusExiting && focusZoom < 0.01) {
+        focusedCardIdx = null;
+        focusExiting   = false;
     }
+
+    // ── Cover-flow offset ──
+    cflowOffset += (cflowTarget - cflowOffset) * Math.min(1, delta * 5.5);
+
+    // ── Camera ──
+    if (focusedCardIdx !== null || focusExiting) {
+        const cg = cardMeshes[focusedCardIdx ?? cflowTarget];
+        const wpX  = cg.position.x;
+        const wpY  = SECTION_Y + 2.4;
+        const camZ = SECTION_Z + 3 - focusZoom * 1.5;
+        camera.position.x += (wpX  - camera.position.x) * 0.08;
+        camera.position.y += (wpY  - camera.position.y) * 0.08;
+        camera.position.z += (camZ - camera.position.z) * 0.08;
+        camera.lookAt(cg.position.x + vaultGroup.position.x,
+                      cg.position.y + vaultGroup.position.y,
+                      vaultGroup.position.z);
+    } else {
+        // Browse: camera centered, looking down the rail
+        const browseY = SECTION_Y + 2.2 + (1 - entry) * 3;
+        camera.position.x += (0         - camera.position.x) * 0.06;
+        camera.position.y += (browseY   - camera.position.y) * 0.06;
+        camera.position.z += (SECTION_Z + 3.5 - camera.position.z) * 0.06;
+        camera.rotation.x += (-0.05 * (1 - entry) - camera.rotation.x) * 0.06;
+        camera.rotation.y += (0 - camera.rotation.y) * 0.06;
+        camera.rotation.z += (0 - camera.rotation.z) * 0.06;
+    }
+
+    // ── Per-card cover-flow positioning ──
+    cardMeshes.forEach((cg, i) => {
+        const dist   = i - cflowOffset;          // float distance from centre
+        const absDist = Math.abs(dist);
+
+        // X position
+        const targetX = dist * CARD_GAP;
+        cg.position.x += (targetX - cg.position.x) * 0.1;
+
+        // Z depth — centre card comes slightly forward
+        const targetZ = -absDist * 0.5;
+        cg.position.z += (targetZ - cg.position.z) * 0.1;
+
+        // Rotation.y — perfectly 0 at centre, tilts inward on sides
+        const tiltTarget = Math.sign(dist) * Math.min(absDist * 0.75, TILT_MAX);
+        cg.rotation.y += (tiltTarget - cg.rotation.y) * 0.1;
+
+        // Subtle float (only when not focused)
+        const isFocused = i === focusedCardIdx;
+        if (!isFocused) {
+            cg.position.y = 1.2 + Math.sin(time * 0.5 + i * 1.1) * 0.06;
+        } else {
+            cg.position.y += (1.2 - cg.position.y) * 0.08;
+        }
+
+        // Scale — centre = 1, sides = smaller
+        const scaleTarget = entry * Math.max(0.5, 1 - absDist * 0.14);
+        cg.scale.setScalar(cg.scale.x + (scaleTarget - cg.scale.x) * 0.1);
+
+        // Glow light intensity — only bright at centre + focused
+        const glowTarget = (absDist < 0.5) ? (1.2 + focusZoom * 1.5) : 0;
+        cg.children.forEach(c => {
+            if (c.userData.isCardGlow) c.intensity += (glowTarget - c.intensity) * 0.08;
+        });
+    });
+
+    // ── Environment pulse ──
+    vaultGroup.children.forEach(c => {
+        if (c.userData.isPulse)  c.intensity = 3.5 + Math.sin(time * 0.6) * 1.0;
+        if (c.userData.isSide)   c.intensity = 1.3 + Math.sin(time * 0.4 + c.userData.si * 1.2) * 0.4;
+    });
 
     // Completion
     if (scrollProgress > 0.95 && !sectionDone) {
@@ -528,6 +529,6 @@ function updateProjects(delta, camera, scrollProgress) {
 }
 
 function onProjectsComplete(cb) { onCompleteCallback = cb; }
-function isProjectsDone() { return sectionDone; }
+function isProjectsDone()       { return sectionDone; }
 
 export { createProjects, updateProjects, onProjectsComplete, isProjectsDone };
