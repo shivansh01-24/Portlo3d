@@ -1832,7 +1832,8 @@ body {
 .cert-fan-stack .fan-card.pos-11,
 .cert-fan-stack .fan-card.pos-12,
 .cert-fan-stack .fan-card.pos-13,
-.cert-fan-stack .fan-card.pos-14 {
+.cert-fan-stack .fan-card.pos-14,
+.cert-fan-stack .fan-card.pos-15 {
   z-index: 1;
   transform: translateX(0) translateY(80px) scale(0.5) translateZ(-160px);
   opacity: 0;
@@ -1840,8 +1841,8 @@ body {
   pointer-events: none;
 }
 
-/* Left Flanking Orbit Positions (Supports 17-card, 14-card and 9-card setups) */
-.cert-fan-stack .fan-card.pos-15 {
+/* Left Flanking Orbit Positions (Supports 18-card, 17-card, 14-card and 9-card setups) */
+.cert-fan-stack .fan-card.pos-16 {
   z-index: 5;
   transform: translateX(-640px) translateY(38px) rotate(-14deg) scale(0.78) translateZ(-40px);
   opacity: 0.45;
@@ -1849,13 +1850,13 @@ body {
   pointer-events: auto;
 }
 
-.cert-fan-stack .fan-card.pos-15:hover {
+.cert-fan-stack .fan-card.pos-16:hover {
   transform: translateX(-600px) translateY(24px) rotate(-10deg) scale(0.85) translateZ(-10px);
   opacity: 0.8;
   filter: blur(0px);
 }
 
-.cert-fan-stack .fan-card.pos-16 {
+.cert-fan-stack .fan-card.pos-17 {
   z-index: 8;
   transform: translateX(-380px) translateY(8px) rotate(-7deg) scale(0.92) translateZ(10px);
   opacity: 0.88;
@@ -1863,7 +1864,7 @@ body {
   pointer-events: auto;
 }
 
-.cert-fan-stack .fan-card.pos-16:hover {
+.cert-fan-stack .fan-card.pos-17:hover {
   transform: translateX(-350px) translateY(-4px) rotate(-4deg) scale(0.98) translateZ(30px);
   opacity: 1;
 }
