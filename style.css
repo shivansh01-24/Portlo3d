@@ -2056,6 +2056,62 @@ body {
   margin: 0 auto;
 }
 
+/* Interactive Category Filter Bar */
+.cert-category-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 25;
+  flex-wrap: wrap;
+}
+
+.cert-filter-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.2px solid var(--border-glass);
+  color: var(--text-silver);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.35s var(--ease-spring);
+}
+
+.cert-filter-pill .pill-dot {
+  color: #22c55e;
+  font-size: 0.85rem;
+  filter: drop-shadow(0 0 6px #22c55e);
+}
+
+.cert-filter-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.cert-filter-pill.is-active {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  transform: scale(1.04);
+}
+
+.cert-filter-pill.is-active .pill-dot {
+  color: #000000;
+  filter: none;
+}
+
 .orbital-certificates-stage {
   position: relative;
   width: 100%;
@@ -2268,7 +2324,41 @@ body {
   filter: blur(0px);
 }
 
-/* Background Hidden Orbit Positions (Supports 19-card orbital deck) */
+/* Left Flanking Orbit Positions */
+.cert-fan-stack .fan-card.pos-left-2,
+.cert-fan-stack .fan-card.pos-17 {
+  z-index: 5;
+  transform: translateX(-640px) translateY(38px) rotate(-14deg) scale(0.78) translateZ(-40px);
+  opacity: 0.45;
+  filter: blur(1.5px);
+  pointer-events: auto;
+}
+
+.cert-fan-stack .fan-card.pos-left-2:hover,
+.cert-fan-stack .fan-card.pos-17:hover {
+  transform: translateX(-600px) translateY(24px) rotate(-10deg) scale(0.85) translateZ(-10px);
+  opacity: 0.8;
+  filter: blur(0px);
+}
+
+.cert-fan-stack .fan-card.pos-left-1,
+.cert-fan-stack .fan-card.pos-18 {
+  z-index: 8;
+  transform: translateX(-380px) translateY(8px) rotate(-7deg) scale(0.92) translateZ(10px);
+  opacity: 0.88;
+  filter: blur(0px);
+  pointer-events: auto;
+}
+
+.cert-fan-stack .fan-card.pos-left-1:hover,
+.cert-fan-stack .fan-card.pos-18:hover {
+  transform: translateX(-350px) translateY(-4px) rotate(-4deg) scale(0.98) translateZ(30px);
+  opacity: 1;
+}
+
+/* Background Hidden Orbit Positions */
+.cert-fan-stack .fan-card.pos-hidden,
+.cert-fan-stack .fan-card.is-filtered-out,
 .cert-fan-stack .fan-card.pos-3,
 .cert-fan-stack .fan-card.pos-4,
 .cert-fan-stack .fan-card.pos-5,
@@ -2288,34 +2378,6 @@ body {
   opacity: 0;
   filter: blur(6px);
   pointer-events: none;
-}
-
-/* Left Flanking Orbit Positions */
-.cert-fan-stack .fan-card.pos-17 {
-  z-index: 5;
-  transform: translateX(-640px) translateY(38px) rotate(-14deg) scale(0.78) translateZ(-40px);
-  opacity: 0.45;
-  filter: blur(1.5px);
-  pointer-events: auto;
-}
-
-.cert-fan-stack .fan-card.pos-17:hover {
-  transform: translateX(-600px) translateY(24px) rotate(-10deg) scale(0.85) translateZ(-10px);
-  opacity: 0.8;
-  filter: blur(0px);
-}
-
-.cert-fan-stack .fan-card.pos-18 {
-  z-index: 8;
-  transform: translateX(-380px) translateY(8px) rotate(-7deg) scale(0.92) translateZ(10px);
-  opacity: 0.88;
-  filter: blur(0px);
-  pointer-events: auto;
-}
-
-.cert-fan-stack .fan-card.pos-18:hover {
-  transform: translateX(-350px) translateY(-4px) rotate(-4deg) scale(0.98) translateZ(30px);
-  opacity: 1;
 }
 
 /* Orbit Pagination and Indicator Dots */

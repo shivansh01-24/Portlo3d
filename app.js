@@ -178,13 +178,42 @@
     ctx: null,
     time: 0,
     travelLightX: 0,
+    isRunning: false,
+    rafId: null,
 
     init() {
       if (!this.canvas) return;
       this.ctx = this.canvas.getContext('2d');
       this.resize();
       window.addEventListener('resize', () => this.resize(), { passive: true });
+
+      const heroSec = document.getElementById('hero');
+      if (heroSec && 'IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            this.start();
+          } else {
+            this.stop();
+          }
+        }, { threshold: 0.05 });
+        obs.observe(heroSec);
+      } else {
+        this.start();
+      }
+    },
+
+    start() {
+      if (this.isRunning) return;
+      this.isRunning = true;
       this.animate();
+    },
+
+    stop() {
+      this.isRunning = false;
+      if (this.rafId) {
+        cancelAnimationFrame(this.rafId);
+        this.rafId = null;
+      }
     },
 
     resize() {
@@ -195,7 +224,7 @@
     },
 
     animate() {
-      if (!this.ctx) return;
+      if (!this.ctx || !this.isRunning) return;
       this.time += 0.02;
       const w = this.canvas.width;
       const h = this.canvas.height;
@@ -222,7 +251,7 @@
       this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
       this.ctx.lineWidth = 5.5 * (window.devicePixelRatio || 1);
       this.ctx.shadowColor = '#ffffff';
-      this.ctx.shadowBlur = 28;
+      this.ctx.shadowBlur = 24;
       this.ctx.stroke();
 
       // 2. High-precision luminous core line
@@ -235,7 +264,7 @@
       this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
       this.ctx.lineWidth = 2.0 * (window.devicePixelRatio || 1);
       this.ctx.shadowColor = '#ffffff';
-      this.ctx.shadowBlur = 14;
+      this.ctx.shadowBlur = 12;
       this.ctx.stroke();
 
       // 3. Traveling bright pulse
@@ -257,12 +286,12 @@
 
       this.ctx.fillStyle = '#ffffff';
       this.ctx.shadowColor = '#ffffff';
-      this.ctx.shadowBlur = 24;
+      this.ctx.shadowBlur = 20;
       this.ctx.beginPath();
       this.ctx.arc(curX, curY, 3.5 * (window.devicePixelRatio || 1), 0, Math.PI * 2);
       this.ctx.fill();
 
-      requestAnimationFrame(() => this.animate());
+      this.rafId = requestAnimationFrame(() => this.animate());
     }
   };
 
@@ -274,8 +303,23 @@
     fill: document.getElementById('track-line-fill'),
     trackTopNum: document.getElementById('track-current-num'),
     navLinks: document.querySelectorAll('.nav-link'),
+    sectionData: [],
+    lastSectionId: '',
+    lastSectionName: '',
+
+    cacheSections() {
+      const sections = document.querySelectorAll('section[data-section-id]');
+      this.sectionData = Array.from(sections).map((sec) => ({
+        id: sec.getAttribute('data-section-id') || '01',
+        name: sec.getAttribute('id') || '',
+        top: sec.offsetTop,
+        bottom: sec.offsetTop + sec.offsetHeight
+      }));
+    },
 
     init() {
+      this.cacheSections();
+      window.addEventListener('resize', () => this.cacheSections(), { passive: true });
       window.addEventListener('scroll', () => {
         state.targetScrollY = window.scrollY;
       }, { passive: true });
@@ -296,38 +340,38 @@
     },
 
     updateLoop() {
-      state.scrollY += (state.targetScrollY - state.scrollY) * 0.14;
+      state.scrollY += (state.targetScrollY - state.scrollY) * 0.18;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = maxScroll > 0 ? Math.min(1, Math.max(0, state.scrollY / maxScroll)) : 0;
 
       if (this.fill) this.fill.style.height = `${progress * 100}%`;
       if (this.pip) this.pip.style.top = `${progress * 100}%`;
 
-      // Track Active Scene 01 to 08
-      const sections = document.querySelectorAll('section[data-section-id]');
+      // Zero-reflow section tracking
+      const viewMiddle = state.scrollY + window.innerHeight * 0.42;
       let currentSectionId = '01';
       let currentSectionName = 'hero';
 
-      sections.forEach((sec) => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.2) {
-          currentSectionId = sec.getAttribute('data-section-id');
-          currentSectionName = sec.getAttribute('id');
+      for (let i = 0; i < this.sectionData.length; i++) {
+        const sec = this.sectionData[i];
+        if (viewMiddle >= sec.top && viewMiddle <= sec.bottom) {
+          currentSectionId = sec.id;
+          currentSectionName = sec.name;
+          break;
         }
-      });
-
-      if (this.trackTopNum && this.trackTopNum.textContent !== currentSectionId) {
-        this.trackTopNum.textContent = currentSectionId;
       }
 
-      this.navLinks.forEach((link) => {
-        const secAttr = link.getAttribute('data-section');
-        if (secAttr === currentSectionName) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
+      if (this.lastSectionId !== currentSectionId) {
+        this.lastSectionId = currentSectionId;
+        if (this.trackTopNum) this.trackTopNum.textContent = currentSectionId;
+      }
+
+      if (this.lastSectionName !== currentSectionName) {
+        this.lastSectionName = currentSectionName;
+        this.navLinks.forEach((link) => {
+          link.classList.toggle('active', link.getAttribute('data-section') === currentSectionName);
+        });
+      }
 
       requestAnimationFrame(() => this.updateLoop());
     }
@@ -337,14 +381,15 @@
      05. 3D PROJECTS CAROUSEL SLIDER (CONTINUOUS ROTATING 3D DECK)
      ========================================================================== */
   const projectCarousel = {
-    slides: document.querySelectorAll('.project-slide-card'),
-    pills: document.querySelectorAll('.pag-pill'),
+    slides: [],
+    pills: [],
     prevBtn: document.getElementById('proj-prev-btn'),
     nextBtn: document.getElementById('proj-next-btn'),
     track: document.getElementById('projects-track'),
     currentIndex: 0,
     timer: null,
     isHovered: false,
+    isVisible: true,
 
     init() {
       this.slides = document.querySelectorAll('.project-slide-card');
@@ -353,6 +398,16 @@
 
       this.updateSlides();
       this.startAutoRotate();
+
+      const projSec = document.getElementById('projects');
+      if (projSec && 'IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          this.isVisible = entries[0].isIntersecting;
+          if (this.isVisible) this.startAutoRotate();
+          else this.stopAutoRotate();
+        }, { threshold: 0.1 });
+        obs.observe(projSec);
+      }
 
       // Pause on hover over track/cards, resume on mouse leave
       if (this.track) {
@@ -422,7 +477,7 @@
     startAutoRotate() {
       if (this.timer) clearInterval(this.timer);
       this.timer = setInterval(() => {
-        if (!this.isHovered) {
+        if (!this.isHovered && this.isVisible) {
           this.rotateNext();
         }
       }, 4200);
@@ -455,11 +510,7 @@
       });
 
       this.pills.forEach((pill, idx) => {
-        if (idx === this.currentIndex) {
-          pill.classList.add('is-active');
-        } else {
-          pill.classList.remove('is-active');
-        }
+        pill.classList.toggle('is-active', idx === this.currentIndex);
       });
     }
   };
@@ -490,37 +541,51 @@
   };
 
   /* ==========================================================================
-     07. 3D CARD TILT & SPECULAR SHEEN PHYSICS
+     07. 3D CARD TILT & SPECULAR SHEEN PHYSICS (GPU SMOOTH)
      ========================================================================== */
   function init3DTiltCards() {
     const tiltCards = document.querySelectorAll('[data-tilt]');
 
     tiltCards.forEach((card) => {
+      let rect = null;
+      let rafId = null;
+
+      card.addEventListener('mouseenter', () => {
+        rect = card.getBoundingClientRect();
+      }, { passive: true });
+
       card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        if (!rect) rect = card.getBoundingClientRect();
+        if (rafId) cancelAnimationFrame(rafId);
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+        rafId = requestAnimationFrame(() => {
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -6;
+          const rotateY = ((x - centerX) / centerX) * 6;
 
-        const rotateX = ((y - centerY) / centerY) * -7;
-        const rotateY = ((x - centerX) / centerX) * 7;
-
-        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      });
+          card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+      }, { passive: true });
 
       card.addEventListener('mouseleave', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rect = null;
         card.style.transform = '';
       });
     });
   }
 
   /* ==========================================================================
-     08. 3D CERTIFICATE AUTO-ORBITING CAROUSEL ENGINE
+     08. 3D CERTIFICATE AUTO-ORBITING CAROUSEL ENGINE (WITH CATEGORY FILTERING)
      ========================================================================== */
   const certOrbitEngine = {
-    cards: [],
+    allCards: [],
+    activeCards: [],
+    filterPills: [],
+    currentFilter: 'software', // Default to niche software & cloud first!
     stage: document.getElementById('cert-orbital-stage'),
     prevBtn: document.getElementById('cert-prev-btn'),
     nextBtn: document.getElementById('cert-next-btn'),
@@ -529,14 +594,26 @@
     activePosIndex: 0,
     timer: null,
     isHovered: false,
+    isVisible: true,
 
     init() {
-      this.cards = Array.from(document.querySelectorAll('.fan-card'));
-      if (!this.cards.length) return;
+      this.allCards = Array.from(document.querySelectorAll('.fan-card'));
+      this.filterPills = Array.from(document.querySelectorAll('.cert-filter-pill'));
+      if (!this.allCards.length) return;
 
-      this.createDots();
-      this.updatePositions();
+      this.setupFilter();
+      this.applyFilter('software');
       this.startAutoOrbit();
+
+      // Intersection observer to pause rotation when offscreen
+      if (this.stage && 'IntersectionObserver' in window) {
+        const obs = new IntersectionObserver((entries) => {
+          this.isVisible = entries[0].isIntersecting;
+          if (this.isVisible) this.startAutoOrbit();
+          else this.stopAutoOrbit();
+        }, { threshold: 0.1 });
+        obs.observe(this.stage);
+      }
 
       // Pause on hover, resume on mouse leave
       if (this.stage) {
@@ -578,15 +655,19 @@
       }
 
       // Direct Card Click
-      this.cards.forEach((card, idx) => {
+      this.allCards.forEach((card) => {
         card.addEventListener('click', (e) => {
-          const pos = (idx - this.activePosIndex + this.cards.length) % this.cards.length;
+          const idx = this.activeCards.indexOf(card);
+          if (idx === -1) return;
+
+          const total = this.activeCards.length;
+          const pos = (idx - this.activePosIndex + total) % total;
           if (pos !== 0) {
             e.stopPropagation();
             this.activePosIndex = idx;
             this.updatePositions();
           } else {
-            // Already in center: open modal
+            // Center card clicked: Open Fullscreen Lightbox Modal
             const imgSrc = card.getAttribute('data-cert-img');
             const docSrc = card.getAttribute('data-cert-doc') || imgSrc;
             const title = card.getAttribute('data-cert-title');
@@ -599,10 +680,49 @@
       });
     },
 
+    setupFilter() {
+      this.filterPills.forEach((pill) => {
+        pill.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const filter = pill.getAttribute('data-filter') || 'all';
+          this.applyFilter(filter);
+        });
+      });
+    },
+
+    applyFilter(filter) {
+      this.currentFilter = filter;
+      this.filterPills.forEach((pill) => {
+        pill.classList.toggle('is-active', pill.getAttribute('data-filter') === filter);
+      });
+
+      if (filter === 'all') {
+        this.activeCards = [...this.allCards];
+      } else {
+        this.activeCards = this.allCards.filter((card) => card.getAttribute('data-category') === filter);
+      }
+
+      // Update visibility classes
+      this.allCards.forEach((card) => {
+        const isIncluded = this.activeCards.includes(card);
+        if (!isIncluded) {
+          card.classList.add('is-filtered-out', 'pos-hidden');
+          card.style.display = 'none';
+        } else {
+          card.classList.remove('is-filtered-out');
+          card.style.display = '';
+        }
+      });
+
+      this.activePosIndex = 0;
+      this.createDots();
+      this.updatePositions();
+    },
+
     createDots() {
       if (!this.dotsContainer) return;
       this.dotsContainer.innerHTML = '';
-      this.cards.forEach((card, idx) => {
+      this.activeCards.forEach((card, idx) => {
         const dot = document.createElement('button');
         dot.className = `cert-dot ${idx === this.activePosIndex ? 'is-active' : ''}`;
         dot.setAttribute('aria-label', `View certificate ${idx + 1}`);
@@ -618,7 +738,7 @@
     startAutoOrbit() {
       if (this.timer) clearInterval(this.timer);
       this.timer = setInterval(() => {
-        if (!this.isHovered && !document.getElementById('cert-modal')?.classList.contains('is-active')) {
+        if (!this.isHovered && this.isVisible && !document.getElementById('cert-modal')?.classList.contains('is-active')) {
           this.rotateNext();
         }
       }, 4200);
@@ -629,24 +749,40 @@
     },
 
     rotateNext() {
-      this.activePosIndex = (this.activePosIndex + 1) % this.cards.length;
+      if (!this.activeCards.length) return;
+      this.activePosIndex = (this.activePosIndex + 1) % this.activeCards.length;
       this.updatePositions();
     },
 
     rotatePrev() {
-      this.activePosIndex = (this.activePosIndex - 1 + this.cards.length) % this.cards.length;
+      if (!this.activeCards.length) return;
+      this.activePosIndex = (this.activePosIndex - 1 + this.activeCards.length) % this.activeCards.length;
       this.updatePositions();
     },
 
     updatePositions() {
-      const total = this.cards.length;
-      this.cards.forEach((card, idx) => {
+      const total = this.activeCards.length;
+      if (!total) return;
+
+      this.activeCards.forEach((card, idx) => {
         // Clear all pos-* classes
-        for (let i = 0; i < total; i++) {
-          card.classList.remove(`pos-${i}`);
-        }
+        card.classList.remove('pos-0', 'pos-1', 'pos-2', 'pos-left-1', 'pos-left-2', 'pos-hidden');
+
         const pos = (idx - this.activePosIndex + total) % total;
-        card.classList.add(`pos-${pos}`);
+
+        if (pos === 0) {
+          card.classList.add('pos-0');
+        } else if (pos === 1) {
+          card.classList.add('pos-1');
+        } else if (pos === 2) {
+          card.classList.add('pos-2');
+        } else if (pos === total - 1) {
+          card.classList.add('pos-left-1');
+        } else if (pos === total - 2) {
+          card.classList.add('pos-left-2');
+        } else {
+          card.classList.add('pos-hidden');
+        }
       });
 
       // Update dots
@@ -658,8 +794,8 @@
       }
 
       // Update counter badge
-      if (this.counterBadge && this.cards[this.activePosIndex]) {
-        const activeCard = this.cards[this.activePosIndex];
+      if (this.counterBadge && this.activeCards[this.activePosIndex]) {
+        const activeCard = this.activeCards[this.activePosIndex];
         const title = activeCard.getAttribute('data-cert-title') || 'Certificate';
         const shortTitle = title.split(':')[0].trim();
         const numStr = String(this.activePosIndex + 1).padStart(2, '0');
@@ -774,7 +910,7 @@
       gridContainers.forEach((container) => {
         const children = container.children;
         Array.from(children).forEach((child, index) => {
-          const delay = (index % 6) * 0.12;
+          const delay = (index % 6) * 0.08;
           child.style.transitionDelay = `${delay}s`;
         });
       });
@@ -785,11 +921,11 @@
             entry.target.classList.add('is-revealed');
             entry.target.classList.remove('is-hidden-scroll', 'is-faded-top');
           } else {
-            const rect = entry.target.getBoundingClientRect();
-            if (rect.top > window.innerHeight * 0.95) {
+            const top = entry.boundingClientRect.top;
+            if (top > window.innerHeight * 0.95) {
               entry.target.classList.remove('is-revealed', 'is-faded-top');
               entry.target.classList.add('is-hidden-scroll');
-            } else if (rect.bottom < window.innerHeight * 0.1) {
+            } else if (entry.boundingClientRect.bottom < window.innerHeight * 0.1) {
               entry.target.classList.remove('is-revealed', 'is-hidden-scroll');
               entry.target.classList.add('is-faded-top');
             }
@@ -805,23 +941,21 @@
   };
 
   /* ==========================================================================
-     11. MAGNETIC BUTTONS & SPRING CURSOR TRACKING
+     11. MAGNETIC BUTTONS & SPRING CURSOR TRACKING (GPU ACCELERATED)
      ========================================================================== */
   function initCursorAndMagnetics() {
     const cursorGlow = document.getElementById('cursor-glow');
     const cursorDot = document.getElementById('cursor-dot');
 
     function animateCursor() {
-      state.mouseX += (state.targetMouseX - state.mouseX) * 0.16;
-      state.mouseY += (state.targetMouseY - state.mouseY) * 0.16;
+      state.mouseX += (state.targetMouseX - state.mouseX) * 0.18;
+      state.mouseY += (state.targetMouseY - state.mouseY) * 0.18;
 
       if (cursorGlow) {
-        cursorGlow.style.left = `${state.mouseX}px`;
-        cursorGlow.style.top = `${state.mouseY}px`;
+        cursorGlow.style.transform = `translate3d(${state.mouseX - 290}px, ${state.mouseY - 290}px, 0)`;
       }
       if (cursorDot) {
-        cursorDot.style.left = `${state.targetMouseX}px`;
-        cursorDot.style.top = `${state.targetMouseY}px`;
+        cursorDot.style.transform = `translate3d(${state.targetMouseX - 3.5}px, ${state.targetMouseY - 3.5}px, 0)`;
       }
       requestAnimationFrame(animateCursor);
     }
@@ -829,14 +963,21 @@
 
     const magneticButtons = document.querySelectorAll('.magnetic-btn');
     magneticButtons.forEach((btn) => {
+      let rect = null;
+      btn.addEventListener('mouseenter', () => {
+        rect = btn.getBoundingClientRect();
+      }, { passive: true });
+
       btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
+        if (!rect) rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.28}px, ${y * 0.28}px)`;
-      });
+        btn.style.transform = `translate3d(${x * 0.28}px, ${y * 0.28}px, 0)`;
+      }, { passive: true });
+
       btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0px, 0px)';
+        rect = null;
+        btn.style.transform = 'translate3d(0px, 0px, 0)';
       });
     });
   }
