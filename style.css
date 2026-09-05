@@ -1464,6 +1464,406 @@ body {
   margin: 0 auto;
 }
 
+/* ==========================================================================
+   LEETCODE & ALGORITHMIC PROBLEM SOLVING COMMAND DECK
+   ========================================================================== */
+.leetcode-analytics-deck {
+  background: rgba(12, 15, 23, 0.82);
+  border: 1.5px solid rgba(255, 161, 22, 0.22);
+  border-radius: 28px;
+  padding: 26px 30px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 161, 22, 0.06);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease-spring);
+}
+
+.leetcode-analytics-deck::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #ffa116, #00b8a3, transparent);
+}
+
+.leetcode-analytics-deck:hover {
+  border-color: rgba(255, 161, 22, 0.45);
+  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.92), 0 0 50px rgba(255, 161, 22, 0.14);
+}
+
+.leetcode-deck-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.leetcode-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.leetcode-logo-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 161, 22, 0.12);
+  border: 1px solid rgba(255, 161, 22, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(255, 161, 22, 0.25);
+}
+
+.leetcode-deck-pill {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #ffa116;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.leetcode-deck-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.leetcode-profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: rgba(255, 161, 22, 0.12);
+  border: 1px solid rgba(255, 161, 22, 0.4);
+  color: #ffa116;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.leetcode-profile-btn:hover {
+  background: #ffa116;
+  color: #06070a;
+  box-shadow: 0 0 25px rgba(255, 161, 22, 0.6);
+  transform: translateY(-2px);
+}
+
+.leetcode-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 1.3fr;
+  gap: 20px;
+}
+
+.lc-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.lc-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Card 1: Ring & Breakdown */
+.lc-card-ring {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+}
+
+.lc-ring-wrap {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  flex-shrink: 0;
+}
+
+.lc-radial-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.lc-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 9;
+}
+
+.lc-ring-easy {
+  fill: none;
+  stroke: #00b8a3;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 301.6;
+  stroke-dashoffset: 140;
+  filter: drop-shadow(0 0 6px rgba(0, 184, 163, 0.6));
+}
+
+.lc-ring-med {
+  fill: none;
+  stroke: #ffc01e;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 301.6;
+  stroke-dashoffset: 230;
+  filter: drop-shadow(0 0 6px rgba(255, 192, 30, 0.6));
+}
+
+.lc-ring-hard {
+  fill: none;
+  stroke: #ff375f;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 301.6;
+  stroke-dashoffset: 288;
+  filter: drop-shadow(0 0 6px rgba(255, 55, 95, 0.6));
+}
+
+.lc-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lc-ring-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.lc-ring-sub {
+  font-size: 0.60rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-silver);
+  margin-top: 2px;
+}
+
+.lc-diff-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.lc-diff-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.80rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.lc-diff-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-easy { background: #00b8a3; box-shadow: 0 0 8px #00b8a3; }
+.dot-med { background: #ffc01e; box-shadow: 0 0 8px #ffc01e; }
+.dot-hard { background: #ff375f; box-shadow: 0 0 8px #ff375f; }
+
+.lc-diff-label {
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+.lc-diff-count {
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.lc-diff-total {
+  font-size: 0.72rem;
+  color: #8b949e;
+}
+
+/* Card 2: Streak */
+.lc-stat-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.lc-flame-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 12px rgba(255, 100, 0, 0.7));
+  animation: flamePulse 2s ease-in-out infinite;
+}
+
+@keyframes flamePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.lc-streak-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: block;
+  line-height: 1;
+}
+
+.lc-streak-val .lc-unit {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffa116;
+}
+
+.lc-streak-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-silver);
+  margin-top: 3px;
+  display: block;
+}
+
+.lc-streak-metrics {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lc-metric-item {
+  flex: 1;
+}
+
+.lc-metric-num {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #00b8a3;
+  display: block;
+}
+
+.lc-metric-title {
+  font-size: 0.70rem;
+  color: var(--text-silver);
+  line-height: 1.3;
+}
+
+.lc-badges-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lc-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 192, 30, 0.1);
+  border: 1px solid rgba(255, 192, 30, 0.3);
+  font-size: 0.70rem;
+  font-weight: 700;
+  color: #ffc01e;
+}
+
+/* Card 3: Topics */
+.lc-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.lc-sub-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-silver);
+}
+
+.lc-lang-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+  padding: 3px 10px;
+}
+
+.lc-topics-desc {
+  font-size: 0.80rem;
+  color: var(--text-silver);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.lc-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lc-topic-tag {
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 3px 8px;
+  transition: all 0.2s ease;
+}
+
+.lc-topic-tag:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .leetcode-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .tech-grid-bento {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
