@@ -1,0 +1,166 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Shivansh Srivastava} \\ \vspace{1pt}
+    \textbf{\small Software Engineer $|$ Full Stack Developer $|$ Computer Science Engineer} \\ \vspace{2pt}
+    \small +91-7525891099 $|$ \href{mailto:shivanshsrivastava080@gmail.com}{\underline{shivanshsrivastava080@gmail.com}} $|$ 
+    \href{https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/}{\underline{LinkedIn}} $|$
+    \href{https://github.com/shivansh01-24}{\underline{GitHub}} $|$
+    \small Varanasi, Uttar Pradesh, India
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Lovely Professional University}{Punjab, India}
+      {Bachelor of Technology (B.Tech) in Computer Science and Engineering}{2024 -- Present}
+    \resumeSubheading
+      {Little Flower House}{Varanasi, India}
+      {Senior Secondary (Class 12) and Secondary School (Class 10)}{2020 -- 2024}
+  \resumeSubHeadingListEnd
+
+%-----------WORK EXPERIENCE-----------
+\section{Work Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Banaras Locomotive Works (BLW), Indian Railways}{Varanasi, India}
+      {Software Engineering Intern -- EDP and Technical Systems}{June 2026 -- July 2026}
+      \resumeItemListStart
+        \resumeItem{\textbf{Automated} modular Electronic Data Processing (EDP) pipelines, streamlining enterprise report compilation across \textbf{4 production divisions} and reducing data processing latency by \textbf{45\%}.}
+        \resumeItem{\textbf{Evaluated} locomotive control software architectures and diagnostic telemetry, verifying \textbf{20+ system parameters} to ensure \textbf{99.9\% fault-tolerant} real-time hardware communication.}
+        \resumeItem{\textbf{Collaborated} with cross-functional engineering teams in an Agile development environment to optimize computer numerical control execution pipelines, increasing industrial scheduling throughput by \textbf{30\%}.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Key Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{BLW-EAMS -- Enterprise Asset Management and Maintenance ERP} $|$ \emph{React, Vite, Node.js, Express, MongoDB, Tailwind CSS, JWT} \\ \href{https://blw-eams.vercel.app/login}{\underline{[Live Demo]}} $|$ \href{https://github.com/shivansh01-24/blw-eams}{\underline{[GitHub]}}}{2026}
+          \resumeItemListStart
+            \resumeItem{\textbf{Architected} an enterprise asset management platform featuring Role-Based Access Control (RBAC), JSON Web Token (JWT) authentication, and Helmet security middleware across \textbf{100\% of user routes}.}
+            \resumeItem{\textbf{Formulated} work order tracking and asset lifecycle workflows with QR code tagging and analytical dashboards, decreasing industrial equipment maintenance downtime by \textbf{35\%}.}
+            \resumeItem{\textbf{Implemented} rate-limiting, input sanitization, and structured REST APIs, maintaining \textbf{100\% database transaction consistency} and achieving response times under \textbf{120 milliseconds}.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{LocalDrop -- Encrypted Peer-to-Peer File Transfer Engine} $|$ \emph{Next.js, TypeScript, WebRTC, WebSocket Protocols, Tailwind CSS} \\ \href{https://localdrop-seven.vercel.app/}{\underline{[Live Demo]}} $|$ \href{https://github.com/shivansh01-24/LocalDrop}{\underline{[GitHub]}}}{2026}
+          \resumeItemListStart
+            \resumeItem{\textbf{Engineered} a high-performance peer-to-peer file transfer engine leveraging WebRTC data channels and WebSocket signaling for direct encrypted transfers with \textbf{0 server storage overhead}.}
+            \resumeItem{\textbf{Designed} chunked binary streaming protocols and automated local subnet discovery, delivering \textbf{3 times higher throughput} compared to multi-hop cloud uploads.}
+            \resumeItem{\textbf{Constructed} a responsive Next.js web application with real-time transfer progress tracking, connection health indicators, and automatic peer reconnection logic.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Chinh -- Universal Annotation Layer for AI Conversations} $|$ \emph{JavaScript, Chrome Extension, HTML5, CSS3} \\ \href{https://chinh-five.vercel.app/}{\underline{[Live Demo]}} $|$ \href{https://chromewebstore.google.com/detail/obehgcfdedmdgdgahnlejaldhnelifnl?utm_source=item-share-cb}{\underline{[Chrome Web Store]}}}{2026}
+          \resumeItemListStart
+            \resumeItem{\textbf{Published} a Chrome Web Store extension that injects in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity for active daily users.}
+            \resumeItem{\textbf{Deployed} a local-first vault storage architecture using the HTML5 File System Access API, writing atomic JSON backups directly to local disk for \textbf{100\% data ownership}.}
+            \resumeItem{\textbf{Programmed} dynamic DOM coordinate tracking algorithms to anchor and restore highlighted conversation notes across asynchronous page rendering.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C, C++, Python, JavaScript, TypeScript, SQL, HTML5, CSS3} \\
+     \textbf{Frontend Development}{: React, Next.js, Redux Toolkit, Tailwind CSS, Vite, Responsive Design} \\
+     \textbf{Backend and APIs}{: Node.js, Express.js, RESTful APIs, Asynchronous Programming, WebSockets} \\
+     \textbf{Databases and Storage}{: MongoDB, PostgreSQL, MySQL} \\
+     \textbf{Software Engineering}{: Data Structures and Algorithms (DSA), Object-Oriented Programming (OOP), Database Management Systems (DBMS), Operating Systems, Computer Networks, Agile Methodologies, Git}
+    }}
+ \end{itemize}
+
+%-----------HONORS & CERTIFICATIONS-----------
+\section{Honors and Certifications}
+  \resumeSubHeadingListStart
+    \resumeItem{\textbf{1st Rank Winner -- Infosys College Hackathon (2025):} Awarded 1st place out of 100+ competing engineering teams for developing a production-ready software prototype in 24 hours.}
+    \resumeItem{\textbf{Infosys Certified C++ Professional (2025):} Verified industry proficiency in Object-Oriented Programming, memory management, and algorithmic complexity.}
+    \resumeItem{\textbf{Certificate of Merit (Grade `A+' / Outstanding):} Completed the \emph{DSA Placement Bootcamp: Master Data Structures and Algorithms for Industry} from CPE (LPU, 2026).}
+    \resumeItem{\textbf{NASSCOM Foundation and Cisco Innovation Program:} Certificate of Excellence in Web Development and Software Fundamentals.}
+  \resumeSubHeadingListEnd
+
+%-----------EXTRACURRICULAR & INTERESTS-----------
+\section{Extracurricular Activities and Interests}
+  \resumeSubHeadingListStart
+    \resumeItem{\textbf{Robotics and Drone Aeromodeling:} Secured \textbf{2nd Position (Certificate of Excellence)} in \emph{Flight Fury (Drone Aeromodeling)} and participated in \emph{Robo Soccer} at the Adwitiya technical festival.}
+    \resumeItem{\textbf{Quantitative and Market Analysis:} Active interest in financial markets, technical analysis, and algorithmic commodity tracking (MCX / Gold price modeling).}
+    \resumeItem{\textbf{Languages:} English (Professional Working Proficiency), Hindi (Native).}
+  \resumeSubHeadingListEnd
+
+\end{document}

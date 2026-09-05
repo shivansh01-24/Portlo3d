@@ -1,0 +1,27 @@
+# Temporary & debug screenshots
+scene_*.png
+*debug.png
+*_preview.png
+temp_certs/
+__pycache__/
+*.log
+.DS_Store
+Thumbs.db
+node_modules/
+.tempmediaStorage/
+.user_uploaded/
+faded_hero_clean.png
+rim_only.png
+
+# Build & scratch test scripts
+*.py
+*.mjs
+*.ps1
+cl.txt
+repos.txt
+test.pdf
+*.docx
+
+# Python cache
+*.pyc
+*.pyo

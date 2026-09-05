@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shivansh Srivastava — Digital Creator & Software Engineer</title>
+  
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=10.0">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+</head>
+<body class="is-loading">
+
+  <!-- ==================== 00. CINEMATIC INTRO LOADER ==================== -->
+  <div class="loader-overlay" id="loader-overlay">
+    <div class="loader-content">
+      <div class="loader-num" id="loader-count">00%</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loader-bar"></div>
+      </div>
+      <div class="loader-label">INITIALIZING DIGITAL UNIVERSE</div>
+    </div>
+  </div>
+
+  <!-- Ambient Light Burst on Load -->
+  <div class="materialize-fx" id="materialize-fx">
+    <div class="light-seed" id="light-seed"></div>
+    <canvas id="burst-canvas" class="burst-canvas"></canvas>
+  </div>
+
+  <!-- Custom Cursor & Ambient Lighting -->
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <div class="cursor-dot" id="cursor-dot"></div>
+
+  <!-- Deep Space Canvas Starfield -->
+  <canvas id="atmosphere-canvas" class="atmosphere-canvas"></canvas>
+
+  <!-- ==================== HEADER & NAVIGATION ==================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#hero" class="logo-link magnetic-btn" aria-label="Shivansh Home">
+        <span class="logo-signature">Shivansh</span>
+      </a>
+
+      <nav class="nav-pills-bar" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="#about" class="nav-link" data-section="about">ABOUT</a></li>
+          <li><a href="#projects" class="nav-link" data-section="projects">PROJECTS</a></li>
+          <li><a href="#experience" class="nav-link" data-section="experience">EXPERIENCE</a></li>
+          <li><a href="#skills" class="nav-link" data-section="skills">SKILLS</a></li>
+          <li><a href="#certificates" class="nav-link" data-section="certificates">CERTIFICATES</a></li>
+          <li><a href="#contact" class="nav-link" data-section="contact">CONTACT</a></li>
+        </ul>
+      </nav>
+
+      <a href="#contact" class="cta-pill-btn magnetic-btn">
+        <span class="cta-text">LET'S TALK</span>
+        <span class="cta-star">✦</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ==================== LEFT VERTICAL SCROLL TRACKER (01 - 08) ==================== -->
+  <aside class="left-rail-indicator" aria-hidden="true">
+    <div class="track-number track-top" id="track-current-num">01</div>
+    <div class="track-line-wrapper">
+      <div class="track-line-bg"></div>
+      <div class="track-line-fill" id="track-line-fill"></div>
+      <div class="track-pip" id="track-pip"></div>
+    </div>
+    <div class="track-number track-bottom">08</div>
+  </aside>
+
+  <!-- ==================== MAIN UNIFIED VIEWPORT ==================== -->
+  <main class="page-container" id="main-content">
+
+    <!-- ==================== 01. HERO SCENE ==================== -->
+    <section class="section-hero" id="hero" data-section-id="01">
+      <div class="hero-stage">
+        
+        <!-- Left Hero Typography & Actions -->
+        <div class="hero-content-left">
+          <div class="hero-eyebrow reveal-item" data-delay="0.1">
+            <span class="eyebrow-text">Hi, I'm</span>
+          </div>
+
+          <h1 class="hero-title reveal-item" data-delay="0.2">
+            <span class="title-first">Shivansh</span>
+            <span class="title-script script-font">Srivastava</span>
+            <span class="title-role">Digital Creator.</span>
+          </h1>
+
+          <p class="hero-bio reveal-item" data-delay="0.35">
+            I design and build beautiful, functional digital experiences that make an impact. Passionate about minimal design, smooth interactions, and solving real problems.
+          </p>
+
+          <div class="hero-action-row reveal-item" data-delay="0.5">
+            <a href="#projects" class="primary-explore-btn magnetic-btn">
+              <span>EXPLORE MY WORK</span>
+              <span class="btn-star">✦</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Compositor -->
+        <div class="hero-visual-right">
+          <!-- Integrated Celestial Moon & Silhouette Masterpiece -->
+          <div class="character-silhouette-wrapper parallax-layer" data-speed="0.08">
+            <img src="assets/portrait.png?v=13.0" alt="Shivansh Celestial Hero Portrait" class="character-cutout-img" id="character-portrait">
+          </div>
+        </div>
+
+        <!-- Luminous Neon Wave Curve (Spanning Hero Stage, Behind Waist) -->
+        <div class="wave-canvas-wrapper">
+          <canvas id="neon-wave-canvas" class="neon-wave-canvas"></canvas>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 02. ABOUT SCENE ==================== -->
+    <section class="section-about" id="about" data-section-id="02">
+      <div class="about-stage">
+        
+        <!-- Top Split: Narrative & Large 3D Device Card -->
+        <div class="about-top-split">
+          
+          <div class="about-text-column">
+            <div class="section-eyebrow">
+              <span class="eyebrow-pill">02 &mdash; ABOUT ME</span>
+            </div>
+            
+            <h2 class="about-heading">
+              I'm a designer <br><span class="script-font">who codes.</span>
+            </h2>
+
+            <p class="about-body">
+              I blend creativity with logic to craft digital experiences that are not only visually stunning but also functional and user-friendly.
+            </p>
+
+            <p class="about-body sub-body">
+              With a strong foundation in UI/UX design and front-end development, I bring ideas to life on the screen.
+            </p>
+
+            <div class="about-cta-row">
+              <a href="Shivansh_Srivastava_Resume.pdf" download="Shivansh_Srivastava_Resume.pdf" class="download-resume-link magnetic-btn">
+                <span>DOWNLOAD RESUME</span>
+                <span class="btn-arrow">&darr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hand-drawn curved arrow connecting text to visual -->
+          <div class="pointer-arrow-wrap" aria-hidden="true">
+            <svg viewBox="0 0 160 80" class="pointer-arrow-svg">
+              <path d="M10 55 C 60 15, 110 20, 145 42" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.8" stroke-dasharray="5 4"/>
+              <path d="M132 30 L 146 43 L 132 50" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.8"/>
+            </svg>
+          </div>
+
+          <!-- Right Large Floating 3D Laptop/Tablet Card -->
+          <div class="about-card-column">
+            <div class="laptop-device-3d" id="laptop-device-3d" data-tilt>
+              <div class="laptop-screen-glass">
+                <div class="screen-corner-tag">++ -</div>
+                <div class="screen-art-wrap">
+                  <img src="assets/card_sketch.png" alt="Creator Avatar Illustration" class="creator-sketch-img">
+                </div>
+                <div class="screen-signature">Shiv.</div>
+                <div class="screen-rim-glow"></div>
+              </div>
+              <div class="laptop-ground-reflection"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom 4 Wide Pillar Capability Cards -->
+        <div class="about-capabilities-grid">
+          
+          <!-- Card 01: UI/UX Design -->
+          <div class="cap-card" data-tilt>
+            <div class="cap-card-top">
+              <div class="cap-icon-box">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <span class="cap-num">01</span>
+            </div>
+            <h3 class="cap-title">UI/UX Design</h3>
+            <p class="cap-desc">Designing clean, modern interfaces that provide intuitive navigation and great user experiences.</p>
+            <div class="cap-bottom-vector" aria-hidden="true">
+              <svg viewBox="0 0 160 50" class="cap-vector-svg">
+                <ellipse cx="80" cy="30" rx="65" ry="16" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+                <ellipse cx="80" cy="30" rx="35" ry="8" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                <circle cx="80" cy="30" r="2.5" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 02: Front-end Development -->
+          <div class="cap-card" data-tilt>
+            <div class="cap-card-top">
+              <div class="cap-icon-box">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <polyline points="16 18 22 12 16 6"/>
+                  <polyline points="8 6 2 12 8 18"/>
+                </svg>
+              </div>
+              <span class="cap-num">02</span>
+            </div>
+            <h3 class="cap-title">Front-end Development</h3>
+            <p class="cap-desc">Building fast, responsive and interactive websites with modern technologies.</p>
+            <div class="cap-bottom-vector" aria-hidden="true">
+              <svg viewBox="0 0 160 50" class="cap-vector-svg">
+                <path d="M 10 30 Q 45 10, 80 30 T 150 30" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" stroke-dasharray="2 3"/>
+                <circle cx="80" cy="30" r="2.5" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 03: Problem Solver -->
+          <div class="cap-card" data-tilt>
+            <div class="cap-card-top">
+              <div class="cap-icon-box">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+              </div>
+              <span class="cap-num">03</span>
+            </div>
+            <h3 class="cap-title">Problem Solver</h3>
+            <p class="cap-desc">I love solving complex problems with simple and efficient solutions.</p>
+            <div class="cap-bottom-vector" aria-hidden="true">
+              <svg viewBox="0 0 160 50" class="cap-vector-svg">
+                <ellipse cx="80" cy="30" rx="50" ry="14" stroke="rgba(255,255,255,0.3)" stroke-width="1" stroke-dasharray="4 4"/>
+                <circle cx="80" cy="30" r="2.5" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 04: Creative Thinker -->
+          <div class="cap-card" data-tilt>
+            <div class="cap-card-top">
+              <div class="cap-icon-box">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <span class="cap-num">04</span>
+            </div>
+            <h3 class="cap-title">Creative Thinker</h3>
+            <p class="cap-desc">Turning ideas into impactful visuals and digital experiences.</p>
+            <div class="cap-bottom-vector" aria-hidden="true">
+              <svg viewBox="0 0 160 50" class="cap-vector-svg">
+                <ellipse cx="80" cy="30" rx="55" ry="15" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                <ellipse cx="110" cy="25" rx="30" ry="8" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <circle cx="110" cy="25" r="2" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section Bottom Transition Scroll Row -->
+        <div class="about-bottom-scroll-row">
+          <div class="scroll-mouse-pill">
+            <span class="mouse-icon-wheel"></span>
+            <span class="scroll-label">SCROLL TO CONTINUE</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 03. FEATURED PROJECTS SCENE ==================== -->
+    <section class="section-projects" id="projects" data-section-id="03">
+      <div class="projects-stage">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-pill">FEATURED PROJECTS</span>
+          </div>
+          <h2 class="section-title">
+            Engineered for <span class="script-font">Impact</span>.
+          </h2>
+        </div>
+
+        <!-- 3D Carousel Showcase -->
+        <div class="projects-carousel-container">
+          
+          <button class="carousel-nav-btn prev-btn magnetic-btn" id="proj-prev-btn" aria-label="Previous Project">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+
+          <div class="projects-track-3d" id="projects-track">
+            
+            <!-- PROJECT 01: BLW-EAMS -->
+            <div class="project-slide-card active-center" data-project-index="0" data-tilt>
+              <div class="slide-card-inner">
+                <div class="slide-header">
+                  <span class="slide-num">01</span>
+                  <span class="slide-cat">ENTERPRISE ERP &bull; ASSET MANAGEMENT</span>
+                </div>
+                <div class="slide-screen-mockup erp-theme">
+                  <div class="mockup-holo-bg"></div>
+                  <div class="mockup-content">
+                    <span class="mockup-quote">LESS IS MORE.</span>
+                    <span class="mockup-tag">BLW-EAMS INDUSTRIAL PLATFORM</span>
+                  </div>
+                  <!-- Animated 3D Isometric Hologram Grid -->
+                  <div class="mockup-holo-art" aria-hidden="true">
+                    <svg viewBox="0 0 160 160" class="holo-svg-rotator spin-slow">
+                      <polygon points="80,25 135,55 135,115 80,145 25,115 25,55" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="6 4"/>
+                      <polygon points="80,45 115,65 115,105 80,125 45,105 45,65" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" fill="rgba(255,255,255,0.03)"/>
+                      <line x1="80" y1="25" x2="80" y2="145" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                      <line x1="25" y1="55" x2="135" y2="115" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                      <line x1="25" y1="115" x2="135" y2="55" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                      <circle cx="80" cy="85" r="5" fill="#ffffff" class="pulse-glow-dot"/>
+                    </svg>
+                  </div>
+                  <div class="mockup-badge">
+                    <span class="badge-ping"></span>
+                    <span>45% FASTER</span>
+                  </div>
+                </div>
+                <div class="slide-info">
+                  <h3 class="slide-title">BLW-EAMS</h3>
+                  <p class="slide-desc">Enterprise Asset Management ERP for Indian Railways with QR code tracking, JWT auth, and automated maintenance lifecycles.</p>
+                  <div class="slide-actions">
+                    <a href="https://blw-eams.vercel.app/login" target="_blank" rel="noopener" class="slide-btn primary-btn magnetic-btn">
+                      <span>VIEW PROJECT</span>
+                      <span class="btn-star">✦</span>
+                    </a>
+                    <a href="https://github.com/shivansh01-24/blw-eams" target="_blank" rel="noopener" class="slide-btn secondary-btn magnetic-btn">
+                      <span>SOURCE</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROJECT 02: LocalDrop -->
+            <div class="project-slide-card right-peek" data-project-index="1" data-tilt>
+              <div class="slide-card-inner">
+                <div class="slide-header">
+                  <span class="slide-num">02</span>
+                  <span class="slide-cat">NETWORKING &bull; P2P ENCRYPTION</span>
+                </div>
+                <div class="slide-screen-mockup p2p-theme">
+                  <div class="mockup-holo-bg"></div>
+                  <div class="mockup-content">
+                    <span class="mockup-quote">SEAMLESS P2P.</span>
+                    <span class="mockup-tag">WEBRTC HIGH-THROUGHPUT ENGINE</span>
+                  </div>
+                  <!-- Animated 3D Atomic P2P Node Orbit -->
+                  <div class="mockup-holo-art" aria-hidden="true">
+                    <svg viewBox="0 0 160 160" class="holo-svg-rotator spin-medium">
+                      <ellipse cx="80" cy="80" rx="60" ry="22" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none" transform="rotate(30 80 80)"/>
+                      <ellipse cx="80" cy="80" rx="60" ry="22" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none" transform="rotate(-30 80 80)"/>
+                      <ellipse cx="80" cy="80" rx="60" ry="22" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" fill="none" stroke-dasharray="4 4"/>
+                      <circle cx="80" cy="80" r="7" fill="#ffffff" class="pulse-glow-dot"/>
+                      <circle cx="130" cy="95" r="3.5" fill="#ffffff"/>
+                      <circle cx="30" cy="65" r="3.5" fill="#ffffff"/>
+                    </svg>
+                  </div>
+                  <div class="mockup-badge">
+                    <span class="badge-ping"></span>
+                    <span>ZERO SERVER</span>
+                  </div>
+                </div>
+                <div class="slide-info">
+                  <h3 class="slide-title">LocalDrop</h3>
+                  <p class="slide-desc">Browser-to-browser encrypted file sharing engine via WebRTC DataChannels and WebSocket signaling across local subnets.</p>
+                  <div class="slide-actions">
+                    <a href="https://localdrop-seven.vercel.app/" target="_blank" rel="noopener" class="slide-btn primary-btn magnetic-btn">
+                      <span>VIEW PROJECT</span>
+                      <span class="btn-star">✦</span>
+                    </a>
+                    <a href="https://github.com/shivansh01-24/LocalDrop" target="_blank" rel="noopener" class="slide-btn secondary-btn magnetic-btn">
+                      <span>SOURCE</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PROJECT 03: Chinh -->
+            <div class="project-slide-card left-peek" data-project-index="2" data-tilt>
+              <div class="slide-card-inner">
+                <div class="slide-header">
+                  <span class="slide-num">03</span>
+                  <span class="slide-cat">CHROME EXTENSION &bull; AI TOOLING</span>
+                </div>
+                <div class="slide-screen-mockup ai-theme">
+                  <div class="mockup-holo-bg"></div>
+                  <div class="mockup-content">
+                    <span class="mockup-quote">CONTEXT VAULT.</span>
+                    <span class="mockup-tag">CHROME WEB STORE PUBLISHED</span>
+                  </div>
+                  <!-- Animated 3D AI Crystal Prism -->
+                  <div class="mockup-holo-art" aria-hidden="true">
+                    <svg viewBox="0 0 160 160" class="holo-svg-rotator spin-reverse">
+                      <polygon points="80,20 128,60 128,110 80,145 32,110 32,60" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" fill="rgba(255,255,255,0.05)"/>
+                      <polygon points="80,45 108,70 108,100 80,120 52,100 52,70" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" stroke-dasharray="3 3"/>
+                      <circle cx="80" cy="80" r="6" fill="#ffffff" class="pulse-glow-dot"/>
+                      <line x1="80" y1="20" x2="80" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+                      <line x1="128" y1="110" x2="80" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+                      <line x1="32" y1="110" x2="80" y2="80" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+                    </svg>
+                  </div>
+                  <div class="mockup-badge">
+                    <span class="badge-ping"></span>
+                    <span>LOCAL-FIRST</span>
+                  </div>
+                </div>
+                <div class="slide-info">
+                  <h3 class="slide-title">Chinh</h3>
+                  <p class="slide-desc">Published Chrome extension injecting note-taking and prompt overlays across ChatGPT, Claude, Gemini, and Perplexity.</p>
+                  <div class="slide-actions">
+                    <a href="https://chromewebstore.google.com/detail/chinh/ijgeclhbbdffmfcbmdkkjggljgokcddb" target="_blank" rel="noopener" class="slide-btn primary-btn magnetic-btn">
+                      <span>CHROME STORE</span>
+                      <span class="btn-star">✦</span>
+                    </a>
+                    <a href="https://github.com/shivansh01-24/chinh" target="_blank" rel="noopener" class="slide-btn secondary-btn magnetic-btn">
+                      <span>SOURCE</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="carousel-nav-btn next-btn magnetic-btn" id="proj-next-btn" aria-label="Next Project">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+
+        </div>
+
+        <!-- Carousel Pagination Pills -->
+        <div class="carousel-pagination-row">
+          <button class="pag-pill is-active" data-index="0">01</button>
+          <button class="pag-pill" data-index="1">02</button>
+          <button class="pag-pill" data-index="2">03</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 04. EXPERIENCE JOURNEY SCENE ==================== -->
+    <section class="section-experience" id="experience" data-section-id="04">
+      <div class="experience-stage">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-pill">EXPERIENCE JOURNEY</span>
+          </div>
+          <h2 class="section-title">
+            Engineering &amp; <span class="script-font">Milestones</span>.
+          </h2>
+        </div>
+
+        <!-- Curved Interactive Glowing Timeline Track -->
+        <div class="timeline-visual-track">
+          
+          <svg class="timeline-svg-curve" viewBox="0 0 1200 240" fill="none" preserveAspectRatio="none">
+            <!-- Background guide path -->
+            <path d="M 50 160 C 250 180, 450 60, 600 120 C 750 180, 950 80, 1150 100" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" class="timeline-base-line"/>
+            <!-- Animated glowing progress path -->
+            <path d="M 50 160 C 250 180, 450 60, 600 120 C 750 180, 950 80, 1150 100" stroke="#ffffff" stroke-width="2.5" class="timeline-glow-path" id="timeline-glow-path"/>
+          </svg>
+
+          <!-- 5 Timeline Milestone Nodes -->
+          <div class="timeline-nodes-row">
+            
+            <div class="milestone-node node-below" style="left: 8%; top: 66%;">
+              <div class="node-bullet"><div class="node-inner-dot"></div></div>
+              <div class="node-card">
+                <span class="node-year">2022</span>
+                <p class="node-desc">Started coding first time</p>
+              </div>
+            </div>
+
+            <div class="milestone-node node-above" style="left: 28%; top: 32%;">
+              <div class="node-card">
+                <span class="node-year">2023</span>
+                <p class="node-desc">Built my first major project</p>
+              </div>
+              <div class="node-bullet"><div class="node-inner-dot"></div></div>
+            </div>
+
+            <div class="milestone-node node-below" style="left: 50%; top: 56%;">
+              <div class="node-bullet"><div class="node-inner-dot"></div></div>
+              <div class="node-card">
+                <span class="node-year">2024</span>
+                <p class="node-desc">Internships &amp; open source</p>
+              </div>
+            </div>
+
+            <div class="milestone-node node-above" style="left: 72%; top: 34%;">
+              <div class="node-card">
+                <span class="node-year">2025</span>
+                <p class="node-desc">Freelance &amp; collaborations</p>
+              </div>
+              <div class="node-bullet"><div class="node-inner-dot"></div></div>
+            </div>
+
+            <div class="milestone-node node-below" style="left: 90%; top: 50%;">
+              <div class="node-bullet active-pulse"><div class="node-inner-dot"></div></div>
+              <div class="node-card">
+                <span class="node-year">2026</span>
+                <p class="node-desc">Building impactful experiences</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Parallax Mountain Ridges in Background -->
+          <div class="mountains-silhouette-layer" aria-hidden="true">
+            <svg viewBox="0 0 1440 280" fill="none" class="mountains-svg">
+              <path d="M0,280 L0,180 L120,130 L280,210 L440,110 L620,190 L800,90 L980,170 L1160,100 L1320,180 L1440,140 L1440,280 Z" fill="url(#mountainGrad1)" opacity="0.6"/>
+              <path d="M0,280 L0,220 L160,170 L340,230 L520,160 L700,220 L900,150 L1080,210 L1260,160 L1440,200 L1440,280 Z" fill="url(#mountainGrad2)" opacity="0.85"/>
+              <defs>
+                <linearGradient id="mountainGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#141724" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#06070a" stop-opacity="0.95"/>
+                </linearGradient>
+                <linearGradient id="mountainGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0d0f18" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#06070a" stop-opacity="1"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 05. TECH STACK SCENE ==================== -->
+    <section class="section-skills" id="skills" data-section-id="05">
+      <div class="skills-stage">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-pill">TECH STACK</span>
+          </div>
+          <h2 class="section-title">
+            Toolkit &amp; <span class="script-font">Capabilities</span>.
+          </h2>
+        </div>
+
+        <!-- Massive Close-Up Tech Grid (10 Large Interactive Cards) -->
+        <div class="tech-grid-bento">
+          
+          <!-- 01. React -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-react">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#00d8ff" stroke-width="1.8">
+                  <ellipse cx="12" cy="12" rx="10" ry="4.5"/>
+                  <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/>
+                  <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>
+                  <circle cx="12" cy="12" r="2.2" fill="#00d8ff"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">FRONTEND ARCHITECTURE</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">React</h3>
+              <p class="tech-bento-sub">Component architecture, custom hooks, virtual DOM optimization.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <ellipse cx="70" cy="15" rx="55" ry="10" stroke="rgba(0, 216, 255, 0.35)" stroke-width="1.2" stroke-dasharray="4 3"/>
+                <circle cx="70" cy="15" r="2.5" fill="#00d8ff"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 02. Next.js -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-next">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#ffffff" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M9 16V8l8 8V8"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">FULL-STACK &amp; SSR</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">Next.js</h3>
+              <p class="tech-bento-sub">Server components, App Router, hybrid static/dynamic generation.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <line x1="10" y1="15" x2="130" y2="15" stroke="rgba(255, 255, 255, 0.3)" stroke-width="1.2"/>
+                <circle cx="70" cy="15" r="3" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 03. TypeScript -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-ts">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#3178c6" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="4"/>
+                  <path d="M7 8h6M10 8v8M14 12c1 0 3 .5 3 2s-2 2-3 2"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">TYPE SYSTEM</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">TypeScript</h3>
+              <p class="tech-bento-sub">Strict type inference, generics, robust enterprise architectures.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <polygon points="70,5 95,15 70,25 45,15" stroke="rgba(49, 120, 198, 0.4)" stroke-width="1.2" fill="none"/>
+                <circle cx="70" cy="15" r="2.5" fill="#3178c6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 04. Node.js -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-node">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#539e43" stroke-width="1.8">
+                  <path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z"/>
+                  <path d="M12 12l8-4.5M12 12v8M12 12L4 7.5"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">BACKEND RUNTIME</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">Node.js</h3>
+              <p class="tech-bento-sub">High-concurrency event loop, RESTful microservices, Express APIs.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <path d="M10,15 C40,5 100,25 130,15" stroke="rgba(83, 158, 67, 0.4)" stroke-width="1.2" fill="none"/>
+                <circle cx="70" cy="15" r="2.5" fill="#539e43"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 05. Tailwind CSS -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-tailwind">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#38bdf8" stroke-width="1.8">
+                  <path d="M6 12c2-4 6-4 8 0s6 4 8 0c-2 4-6 4-8 0s-6-4-8 0z"/>
+                  <path d="M2 16c2-4 6-4 8 0s6 4 8 0c-2 4-6 4-8 0s-6-4-8 0z"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">DESIGN SYSTEM</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">Tailwind CSS</h3>
+              <p class="tech-bento-sub">Utility-first styling, design tokens, fluid responsive layouts.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <path d="M20,15 Q45,5 70,15 T120,15" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.2" fill="none"/>
+                <circle cx="70" cy="15" r="2.5" fill="#38bdf8"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 06. MongoDB -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-mongo">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#47a248" stroke-width="1.8">
+                  <path d="M12 2C9 7 6 12 12 22C18 12 15 7 12 2Z"/>
+                  <path d="M12 22V2"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">NOSQL DATABASE</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">MongoDB</h3>
+              <p class="tech-bento-sub">Document aggregation pipelines, indexing, Mongoose schemas.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <circle cx="70" cy="15" r="8" stroke="rgba(71, 162, 72, 0.4)" stroke-width="1.2" fill="none"/>
+                <circle cx="70" cy="15" r="3" fill="#47a248"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 07. PostgreSQL -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-postgres">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#4169e1" stroke-width="1.8">
+                  <ellipse cx="12" cy="6" rx="9" ry="3"/>
+                  <path d="M3 6v6c0 1.66 4.03 3 9 3s9-1.34 9-3V6"/>
+                  <path d="M3 12v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">RELATIONAL SQL</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">PostgreSQL</h3>
+              <p class="tech-bento-sub">Complex joins, ACID transactions, Prisma ORM, migrations.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <rect x="40" y="8" width="60" height="14" rx="4" stroke="rgba(65, 105, 225, 0.4)" stroke-width="1.2" fill="none"/>
+                <circle cx="70" cy="15" r="2.5" fill="#4169e1"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 08. Docker -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-docker">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#2496ed" stroke-width="1.8">
+                  <path d="M2 13h20M2 13c1 4 5 7 10 7s9-3 10-7M5 13V9h3v4M9 13V6h3v7M13 13V9h3v4"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">CONTAINERIZATION</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">Docker</h3>
+              <p class="tech-bento-sub">Multi-stage builds, container isolation, compose workflows.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <line x1="20" y1="15" x2="120" y2="15" stroke="rgba(36, 150, 237, 0.4)" stroke-width="1.2" stroke-dasharray="5 5"/>
+                <circle cx="70" cy="15" r="2.5" fill="#2496ed"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 09. C++ -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-cpp">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="#00599c" stroke-width="1.8">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">SYSTEMS &amp; DSA</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">C++</h3>
+              <p class="tech-bento-sub">Data structures, memory management, algorithmic problem solving.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <polygon points="70,6 88,15 70,24 52,15" stroke="rgba(0, 89, 156, 0.4)" stroke-width="1.2" fill="none"/>
+                <circle cx="70" cy="15" r="2.5" fill="#00599c"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- 10. Git & GitHub -->
+          <div class="tech-bento-card" data-tilt>
+            <div class="tech-bento-top">
+              <div class="tech-bento-icon-wrap icon-github">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </div>
+              <span class="tech-bento-tag">DEV WORKFLOW</span>
+            </div>
+            <div class="tech-bento-body">
+              <h3 class="tech-bento-name">Git &amp; GitHub</h3>
+              <p class="tech-bento-sub">Branching strategies, CI/CD automated pipelines, code reviews.</p>
+            </div>
+            <div class="tech-bento-footer">
+              <svg viewBox="0 0 140 30" class="tech-bento-vector">
+                <circle cx="50" cy="15" r="4" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1.2" fill="none"/>
+                <line x1="54" y1="15" x2="86" y2="15" stroke="rgba(255, 255, 255, 0.3)" stroke-width="1.2"/>
+                <circle cx="90" cy="15" r="4" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1.2" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 06. CERTIFICATES & HONORS SCENE ==================== -->
+    <section class="section-certificates" id="certificates" data-section-id="06">
+      <div class="certificates-stage">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-pill">CERTIFICATES &amp; HONORS</span>
+          </div>
+          <h2 class="section-title">
+            Verified <span class="script-font">Credentials</span>.
+          </h2>
+        </div>
+
+        <!-- Elliptical Orbit & 3D Fan Stack Presentation -->
+        <div class="orbital-certificates-stage" id="cert-orbital-stage">
+          
+          <!-- Multi-Layered Gyroscopic Animated Orbit Rings -->
+          <div class="orbit-ellipse-wireframe" aria-hidden="true">
+            <svg viewBox="0 0 1400 500" class="orbit-svg" preserveAspectRatio="none">
+              <!-- Outer Elliptical Orbit Glow -->
+              <g class="orbit-g-1">
+                <ellipse cx="700" cy="250" rx="640" ry="190" stroke="rgba(255,255,255,0.18)" stroke-width="1.6" stroke-dasharray="8 10" class="orbit-ring-animated-1"/>
+                <ellipse cx="700" cy="250" rx="640" ry="190" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-dasharray="16 22" class="orbit-ring-pulse-1"/>
+                <circle cx="700" cy="60" r="4.5" fill="#ffffff" class="orbit-satellite-dot dot-1"/>
+                <circle cx="1340" cy="250" r="3.5" fill="#ffffff" class="orbit-satellite-dot dot-2"/>
+              </g>
+              <!-- Inner Counter Orbit Ring -->
+              <g class="orbit-g-2">
+                <ellipse cx="700" cy="250" rx="580" ry="160" stroke="rgba(255,255,255,0.14)" stroke-width="1.2" stroke-dasharray="6 8" class="orbit-ring-animated-2"/>
+                <circle cx="60" cy="250" r="4" fill="#ffffff" class="orbit-satellite-dot dot-3"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Left / Right Manual Orbit Controls -->
+          <button class="cert-orbit-nav prev-btn magnetic-btn" id="cert-prev-btn" aria-label="Rotate certificates left">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+
+          <!-- 3D Fan Cards Layout (Auto-Rotating 3D Deck of 9 Certificates) -->
+          <div class="cert-fan-stack" id="cert-fan-stack">
+            
+            <!-- Card 01: DSA Placement Bootcamp LPU (Grade A) -->
+            <div class="fan-card pos-0" data-orbit-pos="0" 
+                 data-cert-img="assets/certificates/cert_dsa_lpu_bootcamp.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf"
+                 data-cert-title="DSA Placement Bootcamp: Master Data Structures & Algorithms for Industry" 
+                 data-cert-issuer="Centre for Professional Enhancement (CPE), Lovely Professional University" 
+                 data-cert-grade="GRADE A • MERIT" 
+                 data-cert-id="Cert #489747 • Reg: 12402017 • Completed 27-07-2026" 
+                 data-tilt>
+              <div class="fan-card-inner center-hero-inner">
+                <div class="fan-badge gold-badge">GRADE A • MERIT</div>
+                <div class="fan-preview-box hero-preview">
+                  <img src="assets/certificates/cert_dsa_lpu_bootcamp.png" alt="DSA Bootcamp Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">DSA Placement Bootcamp</h4>
+                  <p class="fan-issuer">LPU CPE &bull; Algorithmic Mastery &amp; Problem Solving</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 02: Cisco & NASSCOM thingQbator -->
+            <div class="fan-card pos-1" data-orbit-pos="1" 
+                 data-cert-img="assets/certificates/cert_cisco_thingqbator_webdev.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_Cisco_thingQbator_HTML_CSS.pdf"
+                 data-cert-title="thingQbator Program: Certificate of Excellence in HTML & CSS" 
+                 data-cert-issuer="NASSCOM Foundation & Cisco CSR Innovation Program (Zikshaa)" 
+                 data-cert-grade="EXCELLENCE AWARD" 
+                 data-cert-id="NASSCOM Foundation &amp; Cisco thingQbator" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge gold-badge">EXCELLENCE AWARD</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_cisco_thingqbator_webdev.png" alt="Cisco thingQbator Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">Cisco thingQbator Web Dev</h4>
+                  <p class="fan-issuer">NASSCOM Foundation &amp; Cisco CSR</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 03: Flight Fury 2nd Position Silver -->
+            <div class="fan-card pos-2" data-orbit-pos="2" 
+                 data-cert-img="assets/certificates/cert_flight_fury_2nd_position.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_Flight_Fury_2nd_Position.pdf"
+                 data-cert-title="Flight Fury (Drone Aeromodeling & Robotics) — 2nd Position Excellence" 
+                 data-cert-issuer="ADVITIYA'26 Technical Festival & BOST" 
+                 data-cert-grade="🥈 2ND POSITION SILVER" 
+                 data-cert-id="Secured 2nd Podium • Autonomous Drone Maneuvering" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge gold-badge">🥈 2ND POSITION SILVER</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_flight_fury_2nd_position.png" alt="Flight Fury 2nd Position Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">Flight Fury Aeromodeling</h4>
+                  <p class="fan-issuer">ADVITIYA'26 Technical Festival &bull; BOST</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 04: AI Web Development Workshop -->
+            <div class="fan-card pos-3" data-orbit-pos="3" 
+                 data-cert-img="assets/certificates/cert_ai_web_dev_workshop.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_AI_Web_Development_Workshop.png"
+                 data-cert-title="AI Web Development Workshop: Building Intelligent Web Applications" 
+                 data-cert-issuer="Creative Alley" 
+                 data-cert-grade="AI & MODERN WEB" 
+                 data-cert-id="Cert ID: AI-WD 07080028 • Modern Web Frameworks & AI Tools" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge">AI &amp; MODERN WEB</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_ai_web_dev_workshop.png" alt="AI Web Dev Workshop Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">AI Web Development</h4>
+                  <p class="fan-issuer">Creative Alley &bull; Intelligent Web Applications</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 05: Coding Tantra C Programming Proctored MOOC -->
+            <div class="fan-card pos-4" data-orbit-pos="4" 
+                 data-cert-img="assets/certificates/cert_coding_tantra_c_prog.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_Coding_Tantra_C_Programming.png"
+                 data-cert-title="C Programming with Proctored Exam (15+ Hours MOOC)" 
+                 data-cert-issuer="Coding Tantra" 
+                 data-cert-grade="PROCTORED MOOC" 
+                 data-cert-id="Cert # CT-01/2025-CP-025 • Proctored Assessment" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge">PROCTORED MOOC</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_coding_tantra_c_prog.png" alt="Coding Tantra C Programming Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">C Programming MOOC</h4>
+                  <p class="fan-issuer">Coding Tantra &bull; 15+ Hours Proctored</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 06: Cod-A-FestX 2.0 18-Hour Hackathon -->
+            <div class="fan-card pos-5" data-orbit-pos="5" 
+                 data-cert-img="assets/certificates/cert_codafestx_hackathon.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf"
+                 data-cert-title="Cod-A-FestX 2.0: 18-Hour Dynamic Coding & Innovation Hackathon" 
+                 data-cert-issuer="INNOVXUS & Nexoninterns (MSME Govt. of India Registered)" 
+                 data-cert-grade="HACKATHON BUILDER" 
+                 data-cert-id="Cert # 20240709-97 • 18-Hour Non-Stop Sprint" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge">HACKATHON BUILDER</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_codafestx_hackathon.png" alt="Cod-A-FestX Hackathon Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">Cod-A-FestX 2.0 Hackathon</h4>
+                  <p class="fan-issuer">INNOVXUS &amp; Nexoninterns &bull; MSME</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 07: AI FUSION Symposium -->
+            <div class="fan-card pos-6" data-orbit-pos="6" 
+                 data-cert-img="assets/certificates/cert_ai_fusion_advitiya.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_AI_Fusion_ADVITIYA.pdf"
+                 data-cert-title="AI FUSION: Machine Intelligence & Emerging Tech Symposium" 
+                 data-cert-issuer="ADVITIYA'26 Technical Festival & BOST" 
+                 data-cert-grade="AI TECH SYMPOSIUM" 
+                 data-cert-id="Advitiya'26 • Machine Intelligence Track" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge">AI TECH SYMPOSIUM</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_ai_fusion_advitiya.png" alt="AI FUSION Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">AI FUSION Symposium</h4>
+                  <p class="fan-issuer">ADVITIYA'26 &bull; Emerging Tech</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 08: RoboSoccer Autonomous Robotics -->
+            <div class="fan-card pos-7" data-orbit-pos="7" 
+                 data-cert-img="assets/certificates/cert_robosoccer_advitiya.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_RoboSoccer_ADVITIYA.pdf"
+                 data-cert-title="RoboSoccer: Competitive Autonomous & Controlled Robotics" 
+                 data-cert-issuer="ADVITIYA'26 Technical Festival & BOST" 
+                 data-cert-grade="ROBOTICS & HARDWARE" 
+                 data-cert-id="Advitiya'26 • Bot Mechanics & Control" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge">ROBOTICS &amp; HARDWARE</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_robosoccer_advitiya.png" alt="RoboSoccer Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">RoboSoccer Competition</h4>
+                  <p class="fan-issuer">ADVITIYA'26 &bull; Competitive Bots</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+            <!-- Card 09: Flight Fury Workshop -->
+            <div class="fan-card pos-8" data-orbit-pos="8" 
+                 data-cert-img="assets/certificates/cert_flight_fury_advitiya.png" 
+                 data-cert-doc="assets/certificates/docs/Shivansh_Srivastava_Flight_Fury_ADVITIYA.pdf"
+                 data-cert-title="Flight Fury: Aeromodeling & Drone Maneuvering Workshop" 
+                 data-cert-issuer="ADVITIYA'26 Technical Festival & BOST" 
+                 data-cert-grade="AEROMODELING" 
+                 data-cert-id="Advitiya'26 • Aerodynamics & Precision Control" 
+                 data-tilt>
+              <div class="fan-card-inner">
+                <div class="fan-badge">AEROMODELING</div>
+                <div class="fan-preview-box">
+                  <img src="assets/certificates/cert_flight_fury_advitiya.png" alt="Flight Fury Workshop Certificate" class="fan-thumb-img">
+                </div>
+                <div class="fan-info">
+                  <h4 class="fan-title">Flight Fury Maneuvering</h4>
+                  <p class="fan-issuer">ADVITIYA'26 &bull; Aerodynamics</p>
+                </div>
+                <span class="inspect-tag">INSPECT SCAN ✦</span>
+              </div>
+            </div>
+
+          </div>
+
+          <button class="cert-orbit-nav next-btn magnetic-btn" id="cert-next-btn" aria-label="Rotate certificates right">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+
+          <!-- Orbit Interactive Pagination Indicator & Live Counter -->
+          <div class="cert-orbit-pagination" id="cert-orbit-pagination">
+            <span class="cert-counter-badge" id="cert-counter-badge">01 / 09 &bull; DSA Placement Bootcamp</span>
+            <div class="cert-dots-container" id="cert-dots-container"></div>
+          </div>
+
+        </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 07. LET'S CONNECT SCENE ==================== -->
+    <section class="section-contact" id="contact" data-section-id="07">
+      <div class="contact-stage">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-pill">LET'S CONNECT</span>
+          </div>
+          <h2 class="section-title">
+            Let's Build Something <span class="script-font">Remarkable</span>.
+          </h2>
+        </div>
+
+        <div class="contact-scene-grid">
+          
+          <!-- Column 1: Info & Bio -->
+          <div class="contact-info-col">
+            <h3 class="contact-col-title">Have a project in mind or just want to say hi? I'd love to hear from you.</h3>
+            
+            <div class="contact-meta-items">
+              <a href="mailto:shivanshsrivastava080@gmail.com" class="meta-item-link" id="email-copy-link">
+                <span class="meta-icon">✉</span>
+                <span class="meta-text">shivanshsrivastava080@gmail.com</span>
+              </a>
+              <div class="meta-item">
+                <span class="meta-icon">📞</span>
+                <span class="meta-text">+91 7525891099</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-icon">📍</span>
+                <span class="meta-text">Varanasi, Uttar Pradesh, India</span>
+              </div>
+            </div>
+
+            <div class="contact-social-pills">
+              <a href="https://github.com/shivansh01-24" target="_blank" rel="noopener" class="social-circle-btn magnetic-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/" target="_blank" rel="noopener" class="social-circle-btn magnetic-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.45 1.45 0 0 0 1.45-1.45 1.45 1.45 0 0 0-1.45-1.45 1.45 1.45 0 0 0-1.45 1.45 1.45 1.45 0 0 0 1.45 1.45m1.37 9.74v-8.37H5.09v8.37h2.74z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Message Form Card -->
+          <div class="contact-form-col">
+            <form class="glass-message-form" id="contact-form" onsubmit="event.preventDefault();">
+              <div class="form-group">
+                <input type="text" class="glass-input" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="glass-input" placeholder="Your Email" required>
+              </div>
+              <div class="form-group">
+                <textarea class="glass-input glass-textarea" placeholder="Your Message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="submit-msg-btn magnetic-btn">
+                <span>SEND MESSAGE</span>
+                <span class="btn-star">✦</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Column 3: Digital IST Clock Card -->
+          <div class="contact-clock-col">
+            <div class="digital-clock-card" data-tilt>
+              <div class="clock-card-inner">
+                <span class="clock-label">LIVE IST CLOCK</span>
+                
+                <div class="clock-display-row">
+                  <span class="clock-time-main" id="clock-time-digits">10:24</span>
+                  <span class="clock-colon">:</span>
+                  <span class="clock-time-sec" id="clock-time-sec">36</span>
+                  <span class="clock-ampm" id="clock-time-ampm">PM</span>
+                </div>
+
+                <div class="clock-date-line" id="clock-date-str">Wednesday, 02 Sep 2026</div>
+                <div class="clock-timezone-tag">India Standard Time (IST)</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 08. FOOTER SCENE ==================== -->
+    <section class="section-footer-scene" id="footer-scene" data-section-id="08">
+      <div class="footer-scene-stage">
+        
+        <!-- Atmospheric Topographic Wave Contour Lines -->
+        <div class="topo-contour-lines" aria-hidden="true">
+          <svg viewBox="0 0 1440 380" fill="none" class="topo-svg">
+            <path d="M0,190 C360,280 720,100 1080,260 C1260,340 1380,210 1440,240" stroke="rgba(255,255,255,0.12)" stroke-width="1.2"/>
+            <path d="M0,230 C360,320 720,140 1080,300 C1260,380 1380,250 1440,280" stroke="rgba(255,255,255,0.08)" stroke-width="1.2"/>
+            <path d="M0,150 C360,240 720,60 1080,220 C1260,300 1380,170 1440,200" stroke="rgba(255,255,255,0.06)" stroke-width="1.2"/>
+          </svg>
+        </div>
+
+        <div class="footer-center-content">
+          <h2 class="footer-script-title script-font">Thanks for Scrolling</h2>
+          <div class="footer-sub-tag">YOU MADE IT TO THE END</div>
+          <p class="footer-avail-text">Available for freelance &amp; collaboration</p>
+          
+          <a href="#contact" class="footer-talk-btn magnetic-btn">
+            <span>LET'S TALK</span>
+            <span class="btn-star">✦</span>
+          </a>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <div class="footer-copyright">&copy; 2026 Shivansh Srivastava</div>
+          <div class="footer-links-row">
+            <a href="https://github.com/shivansh01-24" target="_blank" rel="noopener">GITHUB</a>
+            <a href="https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/" target="_blank" rel="noopener">LINKEDIN</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== CERTIFICATE LIGHTBOX MODAL ==================== -->
+  <div class="cert-modal-overlay" id="cert-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="cert-modal-backdrop" id="cert-modal-backdrop"></div>
+    
+    <div class="cert-modal-dialog">
+      <button class="cert-modal-close" id="cert-modal-close" aria-label="Close modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="cert-modal-grid">
+        <div class="cert-modal-preview">
+          <img src="" alt="Verified Certificate" id="cert-modal-img" class="cert-modal-image">
+        </div>
+        
+        <div class="cert-modal-details">
+          <div class="modal-badge-row">
+            <span class="modal-grade-pill" id="cert-modal-grade">Grade A+ / Outstanding</span>
+          </div>
+          <h3 class="modal-cert-title" id="cert-modal-title">Certificate Title</h3>
+          <p class="modal-cert-issuer" id="cert-modal-issuer">Issuing Organization</p>
+          <div class="modal-cert-id-tag" id="cert-modal-id">Cert #000000</div>
+          
+          <div class="modal-actions">
+            <a href="" target="_blank" download id="cert-modal-download" class="modal-btn-download magnetic-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>OPEN ORIGINAL SCAN</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="app.js?v=9.0"></script>
+</body>
+</html>
