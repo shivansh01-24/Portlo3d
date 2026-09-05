@@ -21,6 +21,14 @@ cl.txt
 repos.txt
 test.pdf
 *.docx
+*.tex
+Ashutosh*
+Shivansh_Srivastava_CV.html
+Shivansh_Srivastava.pdf
+assets/card_sketch.png
+assets/cards_ref.png
+assets/crop_test.png
+assets/laptop_ref.png
 
 # Python cache
 *.pyc
