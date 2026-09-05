@@ -957,7 +957,7 @@ body {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  padding: 110px 2.8vw 80px 3.6vw;
+  padding: 100px 2.8vw 90px 3.6vw;
 }
 
 .projects-stage {
@@ -966,15 +966,19 @@ body {
   margin: 0 auto;
 }
 
+.section-projects .section-header {
+  margin-bottom: 35px;
+}
+
 .projects-carousel-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 560px;
+  min-height: 620px;
   perspective: 1600px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .carousel-nav-btn {
@@ -1004,10 +1008,12 @@ body {
 }
 
 .prev-btn { left: 10px; }
-.next-btn { right: 10px; }.projects-track-3d {
+.next-btn { right: 10px; }
+
+.projects-track-3d {
   position: relative;
   width: 100%;
-  height: 580px;
+  height: 620px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1017,7 +1023,7 @@ body {
 
 .project-slide-card {
   position: absolute;
-  width: 720px;
+  width: 700px;
   max-width: 86vw;
   transition: transform 0.85s var(--ease-spring), opacity 0.85s var(--ease-spring), filter 0.85s var(--ease-spring);
   will-change: transform, opacity, filter;
@@ -1027,8 +1033,8 @@ body {
 .slide-card-inner {
   background: #0b0e19;
   border: 1.5px solid var(--border-glass);
-  border-radius: 32px;
-  padding: 32px;
+  border-radius: 30px;
+  padding: 26px 28px 24px 28px;
   box-shadow: 0 35px 95px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
@@ -1084,6 +1090,14 @@ body {
   filter: blur(0px) !important;
   transform: translateX(350px) translateZ(-40px) rotateY(-12deg) scale(0.92) !important;
 }
+
+/* Background Hidden Project Slides for 3D Carousel (4+ slides) */
+.project-slide-card:not(.active-center):not(.left-peek):not(.right-peek) {
+  z-index: 1;
+  transform: translateX(0) translateZ(-180px) scale(0.6) !important;
+  opacity: 0 !important;
+  filter: blur(8px) !important;
+  pointer-events: none;
 }
 
 .slide-header {
@@ -1113,16 +1127,47 @@ body {
 .slide-screen-mockup {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 220px;
   background: radial-gradient(circle at 40% 40%, #151828 0%, #06080e 100%);
   border: 1.2px solid rgba(255, 255, 255, 0.22);
   border-radius: 20px;
-  padding: 26px 28px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   overflow: hidden;
+}
+
+/* Custom Mockup Theme Gradients */
+.slide-screen-mockup.erp-theme {
+  background: radial-gradient(circle at 30% 30%, #17243c 0%, #080c16 100%);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.slide-screen-mockup.revive-theme {
+  background: radial-gradient(circle at 30% 30%, #122c3e 0%, #07121b 100%);
+  border-color: rgba(0, 184, 163, 0.35);
+}
+
+.slide-screen-mockup.p2p-theme {
+  background: radial-gradient(circle at 30% 30%, #2b1f13 0%, #0e0a06 100%);
+  border-color: rgba(255, 161, 22, 0.35);
+}
+
+.slide-screen-mockup.philosophy-theme {
+  background: radial-gradient(circle at 30% 30%, #2c2014 0%, #0d0a07 100%);
+  border-color: rgba(234, 179, 8, 0.35);
+}
+
+.slide-screen-mockup.linkhub-theme {
+  background: radial-gradient(circle at 30% 30%, #11281e 0%, #07140f 100%);
+  border-color: rgba(34, 197, 94, 0.35);
+}
+
+.slide-screen-mockup.ai-theme {
+  background: radial-gradient(circle at 30% 30%, #251636 0%, #0d0714 100%);
+  border-color: rgba(168, 85, 247, 0.35);
 }
 
 /* Animated Holographic Beam Sweep */
@@ -1189,18 +1234,18 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .mockup-quote {
-  font-size: 2.2rem;
+  font-size: 1.85rem;
   font-weight: 900;
   letter-spacing: -0.01em;
   color: #ffffff;
 }
 
 .mockup-tag {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 0.16em;
   color: var(--text-silver);
 }
@@ -1212,13 +1257,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.16em;
   color: #ffffff;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid var(--border-glass);
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 9999px;
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.2);
 }
@@ -1239,17 +1284,17 @@ body {
 }
 
 .slide-title {
-  font-size: 1.8rem;
+  font-size: 1.65rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .slide-desc {
-  font-size: 1.02rem;
+  font-size: 0.95rem;
   color: var(--text-silver);
-  line-height: 1.6;
-  margin-bottom: 24px;
+  line-height: 1.5;
+  margin-bottom: 18px;
 }
 
 .slide-actions {
@@ -1290,19 +1335,22 @@ body {
 }
 
 .carousel-pagination-row {
+  position: relative;
+  z-index: 25;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 14px;
+  margin-top: 15px;
 }
 
 .pag-pill {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border-subtle);
   color: var(--text-muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
-  padding: 8px 22px;
+  padding: 7px 20px;
   border-radius: 9999px;
   cursor: pointer;
   transition: all 0.35s var(--ease-spring);

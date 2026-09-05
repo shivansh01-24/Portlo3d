@@ -347,6 +347,8 @@
     isHovered: false,
 
     init() {
+      this.slides = document.querySelectorAll('.project-slide-card');
+      this.pills = document.querySelectorAll('.pag-pill');
       if (!this.slides.length) return;
 
       this.updateSlides();
@@ -447,7 +449,7 @@
           slide.classList.add('active-center');
         } else if (idx === (this.currentIndex - 1 + this.slides.length) % this.slides.length) {
           slide.classList.add('left-peek');
-        } else {
+        } else if (idx === (this.currentIndex + 1) % this.slides.length) {
           slide.classList.add('right-peek');
         }
       });
