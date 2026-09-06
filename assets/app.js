@@ -231,15 +231,15 @@
 
       this.ctx.clearRect(0, 0, w, h);
 
-      // Trajectory calibrated directly under content and through waist
+      // Trajectory calibrated cleanly below text and through waist
       const startX = 0;
-      const startY = h * 0.78;
-      const peakX = w * 0.42;
-      const peakY = h * 0.70 + Math.sin(this.time * 1.5) * 5;
+      const startY = h * 0.83;
+      const peakX = w * 0.40;
+      const peakY = h * 0.77 + Math.sin(this.time * 1.5) * 4;
       const waistX = w * 0.74;
-      const waistY = h * 0.78 + Math.cos(this.time * 1.2) * 4;
+      const waistY = h * 0.80 + Math.cos(this.time * 1.2) * 3;
       const endX = w;
-      const endY = h * 0.76;
+      const endY = h * 0.78;
 
       // 1. Broad atmospheric neon aura
       this.ctx.beginPath();
