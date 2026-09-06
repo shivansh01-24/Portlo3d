@@ -325,6 +325,37 @@ body {
   transform: translateY(-1px);
 }
 
+.header-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(14, 17, 26, 0.72);
+  border: 1.2px solid var(--border-glass);
+  color: var(--text-silver);
+  text-decoration: none;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.35s var(--ease-bounce);
+}
+
+.header-social-btn:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  transform: scale(1.12) translateY(-2px);
+}
+
 .cta-pill-btn {
   display: inline-flex;
   align-items: center;
@@ -545,6 +576,13 @@ body {
   margin-bottom: 38px;
 }
 
+.hero-action-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .primary-explore-btn {
   display: inline-flex;
   align-items: center;
@@ -555,7 +593,7 @@ body {
   font-weight: 800;
   letter-spacing: 0.18em;
   text-decoration: none;
-  padding: 16px 38px;
+  padding: 16px 36px;
   border-radius: 9999px;
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.45);
   transition: all 0.35s var(--ease-bounce);
@@ -564,6 +602,70 @@ body {
 .primary-explore-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 0 45px rgba(255, 255, 255, 0.85);
+}
+
+.secondary-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.2px solid var(--border-glass);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  padding: 15px 28px;
+  border-radius: 9999px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.35s var(--ease-bounce);
+}
+
+.secondary-cv-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+  transform: scale(1.05) translateY(-2px);
+}
+
+.secondary-cv-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.secondary-cv-btn:hover svg {
+  transform: translateY(2px);
+}
+
+.hero-social-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-icon-pill {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.2px solid var(--border-glass);
+  color: var(--text-silver);
+  text-decoration: none;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s var(--ease-bounce);
+}
+
+.hero-icon-pill:hover {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.8);
+  transform: scale(1.12) translateY(-2px);
 }
 
 /* Right Visual Stack */
@@ -3033,6 +3135,15 @@ body {
   .left-rail-indicator { display: none; }
   .site-header { padding: 14px 18px; }
   .logo-signature { font-size: 1.8rem; }
+  .header-right-actions { gap: 8px; }
+  .header-social-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .header-social-btn svg {
+    width: 16px;
+    height: 16px;
+  }
   .cta-pill-btn { padding: 9px 18px; font-size: 0.76rem; }
 
   /* Universal Section Padding & Typography */
@@ -3057,15 +3168,21 @@ body {
     line-height: 1.12 !important;
   }
   .hero-bio { font-size: 1rem !important; margin-bottom: 28px !important; }
-  .hero-cta-group {
+  .hero-action-row {
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 12px !important;
   }
-  .cta-main-btn, .cta-outline-btn {
+  .primary-explore-btn, .secondary-cv-btn {
     width: 100% !important;
     justify-content: center !important;
     padding: 15px 24px !important;
+    text-align: center !important;
+  }
+  .hero-social-pills {
+    justify-content: center !important;
+    gap: 14px !important;
+    margin-top: 4px !important;
   }
   .hero-visual-right {
     height: 360px !important;
