@@ -59,9 +59,11 @@ module.exports = async function handler(req, res) {
     // 5. Configurable Allowed Free Models (Strictly Free -> Free -> Free)
     const primaryModel = process.env.OPENROUTER_PRIMARY_MODEL || 'google/gemma-4-31b-it:free';
     const fallbackModel1 = process.env.OPENROUTER_FALLBACK_MODEL_1 || 'google/gemma-4-26b-a4b-it:free';
-    const fallbackModel2 = process.env.OPENROUTER_FALLBACK_MODEL_2 || 'nvidia/nemotron-3-super-120b-a12b:free';
+    const fallbackModel2 = process.env.OPENROUTER_FALLBACK_MODEL_2 || 'z-ai/glm-5.2:free';
+    const fallbackModel3 = 'nvidia/nemotron-3-super-120b-a12b:free';
+    const fallbackModel4 = 'minimax/minimax-m3:free';
 
-    const allowedFreeModels = [primaryModel, fallbackModel1, fallbackModel2].filter(Boolean);
+    const allowedFreeModels = [primaryModel, fallbackModel1, fallbackModel2, fallbackModel3, fallbackModel4].filter(Boolean);
 
     // 6. Build Strict System Prompt
     const systemPrompt = `
@@ -93,32 +95,56 @@ STRICT RULES & GUARDRAILS:
 10. Tone & Formatting: Intelligent, concise, professional, and conversational. Use short paragraphs or clean bullet points (2–4 paragraphs max).
 `.trim();
 
-    // 7. Call OpenRouter API with Ordered Model Fallback
-    const openRouterPayload = {
-      models: allowedFreeModels,
-      messages: [
-        { role: 'system', content: systemPrompt },
-        ...sanitizedHistory,
-        { role: 'user', content: userMessage }
-      ],
-      temperature: 0.2,
-      max_tokens: 550
-    };
+    // 7. Active Multi-Model Fallback Engine (Strictly Free -> Free -> Free)
+    let aiReply = null;
+    let successfulModel = null;
 
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey.trim()}`,
-        'HTTP-Referer': 'https://portlo3d.vercel.app',
-        'X-Title': 'Shivansh Srivastava Portfolio Assistant'
-      },
-      body: JSON.stringify(openRouterPayload)
-    });
+    for (const modelId of allowedFreeModels) {
+      try {
+        const openRouterPayload = {
+          model: modelId,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            ...sanitizedHistory,
+            { role: 'user', content: userMessage }
+          ],
+          temperature: 0.2,
+          max_tokens: 550
+        };
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('[OpenRouter API Error]', response.status, errorText);
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey.trim()}`,
+            'HTTP-Referer': 'https://portlo3d.vercel.app',
+            'X-Title': 'Shivansh Srivastava Portfolio Assistant'
+          },
+          body: JSON.stringify(openRouterPayload)
+        });
+
+        if (!response.ok) {
+          console.warn(`[OpenRouter Model Failed: ${modelId}] HTTP ${response.status}`);
+          continue; // Fallback to next free model
+        }
+
+        const data = await response.json();
+        const content = data?.choices?.[0]?.message?.content;
+
+        if (content && typeof content === 'string' && content.trim().length > 0) {
+          aiReply = content.trim();
+          successfulModel = modelId;
+          break; // Success!
+        } else {
+          console.warn(`[OpenRouter Empty Response: ${modelId}]`, data);
+        }
+      } catch (err) {
+        console.warn(`[OpenRouter Exception: ${modelId}]`, err.message);
+      }
+    }
+
+    // 8. Validate Model Response
+    if (!aiReply) {
       return res.status(200).json({
         success: true,
         reply: "I'm having trouble connecting right now. Please try again in a moment.",
@@ -126,31 +152,10 @@ STRICT RULES & GUARDRAILS:
       });
     }
 
-    const data = await response.json();
-
-    // 8. Validate Model Response
-    if (
-      !data ||
-      !data.choices ||
-      !data.choices[0] ||
-      !data.choices[0].message ||
-      !data.choices[0].message.content
-    ) {
-      console.error('[Invalid OpenRouter Response]', data);
-      return res.status(200).json({
-        success: true,
-        reply: "The portfolio assistant couldn't generate a response right now. Please try asking again.",
-        isFallback: true
-      });
-    }
-
-    let aiReply = data.choices[0].message.content.trim();
-
     // 9. Output Filtering Guard (protect sensitive system prompts/keys)
     if (
       aiReply.includes('OPENROUTER_API_KEY') ||
-      aiReply.includes('VERIFIED PORTFOLIO KNOWLEDGE BASE') ||
-      aiReply.length === 0
+      aiReply.includes('VERIFIED PORTFOLIO KNOWLEDGE BASE')
     ) {
       aiReply = "I am here specifically to help you explore Shivansh's projects, skills, experience, and background.";
     }
@@ -158,7 +163,7 @@ STRICT RULES & GUARDRAILS:
     return res.status(200).json({
       success: true,
       reply: aiReply,
-      modelUsed: data.model || allowedFreeModels[0]
+      modelUsed: successfulModel || allowedFreeModels[0]
     });
 
   } catch (err) {
