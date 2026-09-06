@@ -57,9 +57,9 @@ module.exports = async function handler(req, res) {
     }
 
     // 5. Configurable Allowed Free Models (Strictly Free -> Free -> Free)
-    const primaryModel = process.env.OPENROUTER_PRIMARY_MODEL || 'meta-llama/llama-3.3-70b-instruct:free';
-    const fallbackModel1 = process.env.OPENROUTER_FALLBACK_MODEL_1 || 'google/gemini-2.0-flash-exp:free';
-    const fallbackModel2 = process.env.OPENROUTER_FALLBACK_MODEL_2 || 'deepseek/deepseek-chat:free';
+    const primaryModel = process.env.OPENROUTER_PRIMARY_MODEL || 'google/gemma-4-31b-it:free';
+    const fallbackModel1 = process.env.OPENROUTER_FALLBACK_MODEL_1 || 'google/gemma-4-26b-a4b-it:free';
+    const fallbackModel2 = process.env.OPENROUTER_FALLBACK_MODEL_2 || 'nvidia/nemotron-3-super-120b-a12b:free';
 
     const allowedFreeModels = [primaryModel, fallbackModel1, fallbackModel2].filter(Boolean);
 
