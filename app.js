@@ -1148,9 +1148,9 @@
           <div class="chat-msg-row assistant-row">
             <div class="msg-avatar-icon">✦</div>
             <div class="chat-bubble assistant-bubble">
-              <p>Hey.</p>
-              <p>I'm Shivansh's portfolio assistant.</p>
-              <p>Ask me about his projects, skills, experience, or anything else related to his work.</p>
+              <p>Hey!</p>
+              <p>I'm Shivansh. Welcome to my portfolio.</p>
+              <p>Feel free to ask me anything about my projects, technical skills, experience at BLW, or what I'm currently building.</p>
             </div>
           </div>
         `;

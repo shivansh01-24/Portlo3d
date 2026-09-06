@@ -3408,8 +3408,8 @@ body {
 
 .mascot-launcher {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, rgba(30, 41, 59, 0.75), rgba(8, 11, 18, 0.96));
   border: 1.5px solid rgba(255, 255, 255, 0.22);
@@ -3844,6 +3844,18 @@ body {
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.8);
 }
 
+.chat-powered-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .mascot-dock {
@@ -3866,4 +3878,5 @@ body {
     border-bottom: none !important;
   }
 }
+
 
