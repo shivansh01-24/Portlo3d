@@ -28,17 +28,17 @@ const PORTFOLIO_KNOWLEDGE = {
       details: "Focusing on Data Structures & Algorithms, Systems Programming, Distributed Architecture, and Full-Stack Engineering."
     },
     {
-      institution: "Senior Secondary School (Class XII)",
-      degree: "Higher Secondary Certificate (PCM with Computer Science)",
+      institution: "Little Flower House (Class XII)",
+      degree: "Senior Secondary Certificate (PCM with Computer Science)",
       location: "Varanasi, Uttar Pradesh, India",
       year: "2024",
       details: "Physics, Chemistry, Mathematics with Computer Science foundation."
     },
     {
-      institution: "Secondary School (Class X)",
+      institution: "Aryan International School (Class X)",
       degree: "Secondary School Examination",
       location: "Varanasi, Uttar Pradesh, India",
-      year: "2020",
+      year: "2022",
       details: "Foundational academics with excellence in Mathematics and Science."
     }
   ],
@@ -49,9 +49,9 @@ const PORTFOLIO_KNOWLEDGE = {
     timeline: "June 2026 - July 2026",
     location: "Varanasi, India",
     whatIDid: [
-      "Automated modular Electronic Data Processing (EDP) pipelines, streamlining enterprise report compilation across 4 production divisions and reducing data processing latency by 45%.",
-      "Evaluated locomotive control software architectures and diagnostic telemetry, verifying 20+ system parameters to ensure 99.9% fault-tolerant real-time hardware communication.",
-      "Collaborated with cross-functional engineering teams in an Agile development environment to optimize computer numerical control execution pipelines, increasing industrial scheduling throughput by 30%."
+      "Assisted the Electronic Data Processing (EDP) department in organizing and managing digital records and production reports across workshop divisions.",
+      "Studied locomotive control software architectures and diagnostic tools used for real-time engine telemetry and system monitoring.",
+      "Gained hands-on experience with enterprise IT workflows, database management, and operational software systems used in railway engineering."
     ]
   },
 

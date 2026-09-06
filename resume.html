@@ -6,7 +6,7 @@
 <style>
   @page {
     size: A4;
-    margin: 6mm 8mm 6mm 8mm;
+    margin: 5mm 7mm 5mm 7mm;
   }
   * {
     box-sizing: border-box;
@@ -17,12 +17,12 @@
     font-family: 'Times New Roman', Times, serif;
     color: #111111;
     background-color: #ffffff;
-    line-height: 1.18;
-    padding: 6px 18px 6px 18px;
+    line-height: 1.15;
+    padding: 4px 14px 4px 14px;
     width: 210mm;
     min-height: 297mm;
     margin: 0 auto;
-    font-size: 8.45pt;
+    font-size: 8.2pt;
     -webkit-print-color-adjust: exact;
   }
   a {
@@ -37,21 +37,22 @@
     margin-bottom: 2px;
   }
   .name {
-    font-size: 18pt;
+    font-size: 17.5pt;
     font-weight: bold;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     margin-bottom: 1px;
+    color: #000000;
   }
   .job-title {
-    font-size: 9.0pt;
+    font-size: 8.8pt;
     font-weight: bold;
     color: #222222;
     margin-bottom: 2px;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
   }
   .contact-bar {
-    font-size: 8.1pt;
+    font-size: 8.0pt;
     color: #222222;
     display: flex;
     justify-content: center;
@@ -60,14 +61,14 @@
     gap: 4px;
   }
   .sep {
-    color: #777777;
+    color: #666666;
   }
   
   .section {
-    margin-top: 3.5px;
+    margin-top: 3px;
   }
   .section-title {
-    font-size: 9.3pt;
+    font-size: 9.0pt;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -77,8 +78,14 @@
     color: #000000;
   }
   
+  .summary-text {
+    font-size: 8.0pt;
+    text-align: justify;
+    line-height: 1.16;
+  }
+
   .entry {
-    margin-bottom: 2px;
+    margin-bottom: 1.8px;
   }
   .entry-header {
     display: flex;
@@ -87,11 +94,11 @@
   }
   .entry-title {
     font-weight: bold;
-    font-size: 8.7pt;
+    font-size: 8.4pt;
   }
   .entry-location, .entry-date {
     font-style: italic;
-    font-size: 8.0pt;
+    font-size: 7.8pt;
     color: #333333;
     white-space: nowrap;
   }
@@ -99,7 +106,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 8.2pt;
+    font-size: 7.9pt;
   }
   .entry-role {
     font-style: italic;
@@ -107,13 +114,14 @@
   
   ul {
     list-style-type: disc;
-    margin-left: 13px;
+    margin-left: 12px;
     margin-top: 0.5px;
   }
   li {
-    margin-bottom: 0.5px;
-    font-size: 8.2pt;
+    margin-bottom: 0.4px;
+    font-size: 7.95pt;
     text-align: justify;
+    line-height: 1.14;
   }
   li strong {
     font-weight: bold;
@@ -126,9 +134,10 @@
     list-style: none;
   }
   .skills-list li {
-    margin-bottom: 0.8px;
-    font-size: 8.2pt;
+    margin-bottom: 0.6px;
+    font-size: 8.0pt;
     text-align: left;
+    line-height: 1.15;
   }
   .skills-label {
     font-weight: bold;
@@ -138,21 +147,22 @@
   .badge-link {
     color: #0b4f8a;
     font-weight: bold;
-    font-size: 7.6pt;
+    font-size: 7.5pt;
     margin-left: 2px;
   }
   
   .cert-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1px 10px;
+    gap: 0.8px 8px;
     list-style: none;
     margin-left: 0;
   }
   .cert-grid li {
-    font-size: 8.0pt;
+    font-size: 7.8pt;
     text-align: left;
-    margin-bottom: 0.5px;
+    margin-bottom: 0.3px;
+    line-height: 1.13;
   }
 </style>
 </head>
@@ -161,7 +171,7 @@
   <!-- HEADER -->
   <div class="header">
     <div class="name">Shivansh Srivastava</div>
-    <div class="job-title">Software Engineer | Full-Stack Developer | Systems &amp; AI</div>
+    <div class="job-title">Software Engineer | Full-Stack Developer | Systems &amp; AI Integration</div>
     <div class="contact-bar">
       <span>+91-7525891099</span>
       <span class="sep">|</span>
@@ -173,8 +183,18 @@
       <span class="sep">|</span>
       <a href="https://leetcode.com/u/shivansh_srivastava/" target="_blank">LeetCode</a>
       <span class="sep">|</span>
+      <a href="https://portlo3d.vercel.app" target="_blank">Portfolio</a>
+      <span class="sep">|</span>
       <span>Varanasi, Uttar Pradesh, India</span>
     </div>
+  </div>
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div class="section">
+    <div class="section-title">Professional Summary</div>
+    <p class="summary-text">
+      Performance-driven <strong>Software Engineer &amp; Full-Stack Developer</strong> with robust foundations in <strong>Data Structures, Algorithms (DSA), Object-Oriented Programming (OOP)</strong>, and distributed web architectures. Experienced in engineering production full-stack platforms with <strong>React.js, Next.js, Node.js, Express, MongoDB, and TypeScript</strong>, including enterprise asset management ERP systems (BLW-EAMS), high-throughput encrypted P2P networking protocols (LocalDrop), and published browser extensions (Chinh). Active competitive programmer with <strong>150+ LeetCode problems solved</strong> in C++ and <strong>1st Rank Winner</strong> at Infosys College Hackathon.
+    </p>
   </div>
 
   <!-- EDUCATION -->
@@ -196,7 +216,7 @@
         <span class="entry-location">Varanasi, Uttar Pradesh, India</span>
       </div>
       <div class="entry-subtitle">
-        <span class="entry-role">Higher Secondary Certificate (PCM with Computer Science)</span>
+        <span class="entry-role">Senior Secondary Certificate (PCM with Computer Science)</span>
         <span class="entry-date">Completed 2024</span>
       </div>
     </div>
@@ -212,28 +232,28 @@
     </div>
   </div>
 
-  <!-- TECHNICAL SKILLS & PROBLEM SOLVING -->
+  <!-- TECHNICAL SKILLS & CORE COMPETENCIES -->
   <div class="section">
     <div class="section-title">Technical Skills &amp; Core Competencies</div>
     <ul class="skills-list">
-      <li><span class="skills-label">Languages:</span> C++, Python, JavaScript (ES6+), TypeScript, C, SQL (PostgreSQL, MySQL), HTML5, CSS3</li>
-      <li><span class="skills-label">Full-Stack &amp; Web Technologies:</span> React.js, Next.js, Node.js, Express.js, Redux Toolkit, Tailwind CSS, Vite, RESTful APIs, WebSockets, WebRTC</li>
-      <li><span class="skills-label">Databases &amp; Cloud Infrastructure:</span> MongoDB, PostgreSQL, MySQL, Oracle Cloud Infrastructure (OCI), Google Cloud Platform (GCP), Docker</li>
-      <li><span class="skills-label">Core CS &amp; Systems:</span> Data Structures &amp; Algorithms (DSA), Object-Oriented Programming (OOP), Database Management Systems (DBMS), Operating Systems, Computer Networks, Linux &amp; Git</li>
+      <li><span class="skills-label">Programming Languages:</span> C++, Python, JavaScript (ES6+), TypeScript, C, SQL (PostgreSQL, MySQL), HTML5, CSS3</li>
+      <li><span class="skills-label">Full-Stack &amp; Frameworks:</span> React.js, Next.js, Node.js, Express.js, Redux Toolkit, Tailwind CSS, Vite, RESTful APIs, WebSockets, WebRTC</li>
+      <li><span class="skills-label">Databases &amp; Cloud DevOps:</span> MongoDB, PostgreSQL, MySQL, Oracle Cloud Infrastructure (OCI), GCP, Docker, Git, GitHub, Linux Shell Scripting</li>
+      <li><span class="skills-label">Core Computer Science:</span> Data Structures &amp; Algorithms (DSA), Object-Oriented Programming (OOP), Database Management (DBMS), Operating Systems, Computer Networks</li>
     </ul>
   </div>
 
-  <!-- COMPETITIVE PROGRAMMING & CODING PROFILES -->
+  <!-- COMPETITIVE PROGRAMMING & PROBLEM SOLVING -->
   <div class="section">
-    <div class="section-title">Competitive Programming &amp; Coding Profiles</div>
+    <div class="section-title">Competitive Programming &amp; Problem Solving</div>
     <ul class="skills-list">
-      <li>&bull; <span class="skills-label">LeetCode Profile:</span> Active problem solver (<a href="https://leetcode.com/u/shivansh_srivastava/" target="_blank" style="color:#0b4f8a; font-weight:bold;">leetcode.com/u/shivansh_srivastava/</a>) solving 150+ algorithmic challenges in C++ across Dynamic Programming, Graph Theory, Trees, Binary Search, Sliding Window, and Two Pointers with optimal <em>O(N)</em> / <em>O(log N)</em> complexities.</li>
-      <li>&bull; <span class="skills-label">NeoColab &amp; iamneo Platform:</span> Completed 100+ algorithmic assessments; awarded <strong>Certificates of Appreciation</strong> in <em>Data Structure &amp; Algorithm</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify DSA]</a> and <em>Object Oriented Programming</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify OOP]</a>, plus <em>Computer Programming (72 Hours)</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify 72h]</a>.</li>
-      <li>&bull; <span class="skills-label">Hackathons &amp; Proctored Tracks:</span> <strong>1st Rank Winner</strong> at Infosys College Hackathon 2025 <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a>; completed Proctored C Systems MOOC Assessment <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Coding_Tantra_C_Programming.png" target="_blank">[Verify]</a>.</li>
+      <li>&bull; <span class="skills-label">LeetCode Profile:</span> Solved <strong>150+ algorithmic challenges</strong> in C++ (<a href="https://leetcode.com/u/shivansh_srivastava/" target="_blank" style="color:#0b4f8a; font-weight:bold;">leetcode.com/u/shivansh_srivastava/</a>) spanning Dynamic Programming, Graphs, Binary Search, Sliding Window, Trees, and Heaps with optimal <em>O(N)</em> time complexity.</li>
+      <li>&bull; <span class="skills-label">NeoColab &amp; iamneo Platform:</span> Completed 100+ verified assessments; awarded <strong>Certificates of Appreciation</strong> in <em>Data Structure &amp; Algorithm</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify DSA]</a> and <em>Object Oriented Programming</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify OOP]</a>, plus <em>Computer Programming (72 Hours)</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify 72h]</a>.</li>
+      <li>&bull; <span class="skills-label">Hackathons &amp; Proctored Tracks:</span> <strong>1st Rank Winner</strong> at Infosys College Hackathon 2025 <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a>; completed Proctored C Systems Assessment <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Coding_Tantra_C_Programming.png" target="_blank">[Verify]</a>.</li>
     </ul>
   </div>
 
-  <!-- INDUSTRIAL TRAINING & INTERNSHIP -->
+  <!-- INDUSTRIAL TRAINING & WORK EXPERIENCE -->
   <div class="section">
     <div class="section-title">Industrial &amp; Vocational Training</div>
     <div class="entry">
@@ -246,16 +266,16 @@
         <span class="entry-date">June 2026 - July 2026</span>
       </div>
       <ul>
-        <li><strong>Assisted</strong> the Electronic Data Processing (EDP) department in organizing and managing digital records and production reports across workshop divisions.</li>
-        <li><strong>Studied</strong> locomotive control software architectures and diagnostic tools used for real-time engine telemetry and system monitoring.</li>
-        <li><strong>Gained hands-on experience</strong> with enterprise IT workflows, database management, and operational software systems used in railway engineering.</li>
+        <li><strong>Assisted</strong> the Electronic Data Processing (EDP) division in managing production records, digital reporting, and workflow automation systems.</li>
+        <li><strong>Analyzed</strong> locomotive control software architectures and diagnostic telemetry pipelines used for real-time traction and monitoring.</li>
+        <li><strong>Gained hands-on experience</strong> in large-scale database operations, IT infrastructure maintenance, and enterprise software engineering.</li>
       </ul>
     </div>
   </div>
 
-  <!-- KEY FLAGSHIP PROJECTS -->
+  <!-- FLAGSHIP PROJECTS -->
   <div class="section">
-    <div class="section-title">Flagship Projects</div>
+    <div class="section-title">Key Projects</div>
     
     <div class="entry">
       <div class="entry-header">
@@ -269,9 +289,44 @@
         <span class="entry-role">Full-Stack Developer | React, Vite, Node.js, Express, MongoDB, Tailwind CSS, JWT</span>
       </div>
       <ul>
-        <li><strong>Architected</strong> an enterprise asset management platform featuring Role-Based Access Control (RBAC), JSON Web Token (JWT) authentication, and Helmet security middleware across <strong>100% of user routes</strong>.</li>
-        <li><strong>Formulated</strong> work order tracking and asset lifecycle workflows with QR code tagging and analytical dashboards, decreasing industrial equipment maintenance downtime by <strong>35%</strong>.</li>
-        <li><strong>Implemented</strong> rate-limiting, input sanitization, and structured REST APIs, maintaining <strong>100% database transaction consistency</strong> and achieving response times under <strong>120 milliseconds</strong>.</li>
+        <li><strong>Architected</strong> an enterprise asset ERP platform featuring Role-Based Access Control (RBAC), JWT authentication, and Helmet security across <strong>100% of routes</strong>.</li>
+        <li><strong>Engineered</strong> work order lifecycle workflows with QR code tagging and telemetry dashboards, decreasing equipment maintenance downtime by <strong>35%</strong>.</li>
+        <li><strong>Implemented</strong> rate-limiting, sanitized queries, and optimized REST APIs, maintaining database transaction consistency with sub-<strong>120ms</strong> latencies.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">LocalDrop - Encrypted High-Performance Peer-to-Peer File Transfer 
+          <a class="badge-link" href="https://localdrop-seven.vercel.app/" target="_blank">[Live Demo]</a>
+          <a class="badge-link" href="https://github.com/shivansh01-24/LocalDrop" target="_blank">[GitHub]</a>
+        </span>
+        <span class="entry-date">2026</span>
+      </div>
+      <div class="entry-subtitle">
+        <span class="entry-role">Systems &amp; Frontend Engineer | Next.js, TypeScript, WebRTC Data Channels, WebSockets, Tailwind CSS</span>
+      </div>
+      <ul>
+        <li><strong>Engineered</strong> a serverless P2P transfer engine utilizing WebRTC data channels and WebSocket signaling with <strong>0 server storage overhead</strong>.</li>
+        <li><strong>Designed</strong> chunked binary streaming protocols and local subnet discovery, achieving <strong>3x higher throughput</strong> over multi-hop cloud uploads.</li>
+        <li><strong>Constructed</strong> a responsive Next.js client with real-time transfer progress tracking, health indicators, and automated reconnection resilience.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Chinh - Universal In-Context AI Annotation &amp; Note Vault 
+          <a class="badge-link" href="https://chromewebstore.google.com/detail/chinh/ijgeclhbbdffmfcbmdkkjggljgokcddb" target="_blank">[Chrome Web Store]</a>
+          <a class="badge-link" href="https://github.com/shivansh01-24/web-note" target="_blank">[GitHub]</a>
+        </span>
+        <span class="entry-date">2026</span>
+      </div>
+      <div class="entry-subtitle">
+        <span class="entry-role">Browser Extension Engineer | JavaScript (ES6+), Manifest V3, HTML5 File System Access API, DOM Engine</span>
+      </div>
+      <ul>
+        <li><strong>Published</strong> an approved Chrome Web Store extension injecting in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity.</li>
+        <li><strong>Deployed</strong> local-first storage using HTML5 File System Access API, writing atomic backups directly to local disk for <strong>100% data privacy</strong>.</li>
       </ul>
     </div>
 
@@ -284,58 +339,22 @@
         <span class="entry-date">2026</span>
       </div>
       <div class="entry-subtitle">
-        <span class="entry-role">Full-Stack Engineer | React, Node.js, Express, AI Agent Architecture, Financial Modeling, Tailwind CSS</span>
+        <span class="entry-role">Full-Stack Engineer | React, Node.js, Express, AI Agent Architecture, Financial Modeling</span>
       </div>
       <ul>
-        <li><strong>Engineered</strong> an automated debt resolution platform utilizing autonomous multi-agent reasoning to evaluate liabilities, risk categories, and dynamic settlement schedules.</li>
-        <li><strong>Constructed</strong> an interactive financial command center with real-time risk assessment, predictive cash-flow forecasting, and automated ledger auditing.</li>
-        <li><strong>Designed</strong> atomic microservice transaction pipelines ensuring zero reconciliation discrepancies across high-frequency payment channels.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">LocalDrop - High-Performance Encrypted Peer-to-Peer File Transfer Engine 
-          <a class="badge-link" href="https://localdrop-seven.vercel.app/" target="_blank">[Live Demo]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24/LocalDrop" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">2026</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Systems &amp; Frontend Engineer | Next.js, TypeScript, WebRTC Data Channels, WebSockets, Tailwind CSS</span>
-      </div>
-      <ul>
-        <li><strong>Engineered</strong> a serverless peer-to-peer file transfer engine leveraging WebRTC data channels and WebSocket signaling for direct encrypted transfers with <strong>0 server storage overhead</strong>.</li>
-        <li><strong>Designed</strong> chunked binary streaming protocols and automated local subnet discovery, delivering <strong>3x higher throughput</strong> compared to multi-hop cloud uploads.</li>
-        <li><strong>Constructed</strong> a responsive Next.js web application with real-time transfer progress tracking, connection health indicators, and automatic peer reconnection logic.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Chinh - Universal In-Context AI Annotation &amp; Note Vault 
-          <a class="badge-link" href="https://chromewebstore.google.com/detail/chinh/ijgeclhbbdffmfcbmdkkjggljgokcddb" target="_blank">[Chrome Store]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24/web-note" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">2026</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Browser Extension Engineer | JavaScript (ES6+), Manifest V3, HTML5 File System Access API, DOM Engine</span>
-      </div>
-      <ul>
-        <li><strong>Published</strong> an approved Chrome Web Store extension injecting in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity for active daily users.</li>
-        <li><strong>Deployed</strong> a local-first vault storage architecture using HTML5 File System Access API, writing atomic backups directly to local disk for <strong>100% data ownership</strong>.</li>
+        <li><strong>Engineered</strong> an automated debt resolution platform utilizing multi-agent AI reasoning to evaluate liabilities, risk scores, and settlement schedules.</li>
+        <li><strong>Constructed</strong> a real-time risk command center with predictive cash-flow forecasting and atomic microservice transaction validation.</li>
       </ul>
     </div>
   </div>
 
-  <!-- VERIFIED TECHNICAL CERTIFICATIONS (WITH DIRECT VERIFICATION LINKS) -->
+  <!-- VERIFIED TECHNICAL CERTIFICATIONS & CREDENTIALS -->
   <div class="section">
     <div class="section-title">Verified Technical Certifications &amp; Credentials</div>
     <ul class="cert-grid">
       <li>&bull; <strong>NeoColab / iamneo:</strong> Data Structures &amp; Algorithms <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>NeoColab / iamneo:</strong> Object Oriented Programming <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>BLW Indian Railways:</strong> Summer Industrial Training <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>BLW Indian Railways:</strong> Industrial Software Training <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>Oracle Cloud:</strong> OCI 2025 AI Foundations Associate <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_OCI_AI_Foundations_2025.png" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>Oracle Cloud:</strong> OCI 2025 Data Platform Foundations <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_Data_Platform_2025.jpg" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>LPU / CPE:</strong> DSA Placement Bootcamp (Grade 'A') <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf" target="_blank">[Verify]</a></li>
@@ -348,15 +367,16 @@
     </ul>
   </div>
 
-  <!-- HONORS & COMPETITIVE ACHIEVEMENTS -->
+  <!-- HONORS & ACHIEVEMENTS -->
   <div class="section">
     <div class="section-title">Honors &amp; Achievements</div>
     <ul>
-      <li><strong>1st Rank Winner - Infosys College Hackathon (2025):</strong> Awarded 1st place out of 100+ competing engineering teams for developing a production-ready software prototype in 24 hours. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a></li>
-      <li><strong>2nd Position (Silver Medalist) - Flight Fury Aeromodeling:</strong> Awarded Certificate of Excellence in autonomous drone flight stability and aeromechanics at Adwitiya technical symposium. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Flight_Fury_2nd_Position.pdf" target="_blank">[Verify]</a></li>
+      <li><strong>1st Rank Winner - Infosys College Hackathon (2025):</strong> Awarded 1st place out of 100+ competing engineering teams for developing a full-stack solution in 24 hours. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a></li>
+      <li><strong>2nd Position (Silver Medalist) - Flight Fury Aeromodeling:</strong> Awarded Certificate of Excellence in autonomous flight control at Adwitiya technical symposium. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Flight_Fury_2nd_Position.pdf" target="_blank">[Verify]</a></li>
       <li><strong>3rd Position - Drone Forge Hackathon (Chandigarh University):</strong> Recognized for embedded drone flight controller algorithms and hardware-software telemetry. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Drone_Forge_3rd_Position_CU.pdf" target="_blank">[Verify]</a></li>
     </ul>
   </div>
 
 </body>
 </html>
+
