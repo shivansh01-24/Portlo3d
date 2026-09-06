@@ -922,18 +922,18 @@
             entry.target.classList.remove('is-hidden-scroll', 'is-faded-top');
           } else {
             const top = entry.boundingClientRect.top;
-            if (top > window.innerHeight * 0.95) {
+            if (top > window.innerHeight * 0.98) {
               entry.target.classList.remove('is-revealed', 'is-faded-top');
               entry.target.classList.add('is-hidden-scroll');
-            } else if (entry.boundingClientRect.bottom < window.innerHeight * 0.1) {
+            } else if (entry.boundingClientRect.bottom < 0) {
               entry.target.classList.remove('is-revealed', 'is-hidden-scroll');
               entry.target.classList.add('is-faded-top');
             }
           }
         });
       }, {
-        threshold: [0, 0.08, 0.5],
-        rootMargin: '20px 0px -20px 0px'
+        threshold: [0, 0.05, 0.2],
+        rootMargin: '100px 0px 60px 0px'
       });
 
       targets.forEach((el) => observer.observe(el));

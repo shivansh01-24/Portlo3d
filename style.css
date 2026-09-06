@@ -3017,28 +3017,246 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE MEDIA QUERIES
+   RESPONSIVE MEDIA QUERIES (MOBILE, TABLET & DESKTOP TUNING)
    ========================================================================== */
+
+/* Disable custom cursor on touch-only devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-glow,
+  .cursor-dot {
+    display: none !important;
+  }
+  body {
+    cursor: auto !important;
+  }
+}
+
+/* Tablets & Small Desktops (<= 1200px) */
 @media (max-width: 1200px) {
-  .about-top-split { grid-template-columns: 1fr; gap: 40px; }
+  .about-top-split { grid-template-columns: 1fr; gap: 36px; }
   .pointer-arrow-wrap { display: none; }
   .about-capabilities-grid { grid-template-columns: repeat(2, 1fr); }
-  .tech-grid-bento { grid-template-columns: repeat(3, 1fr); }
+  .tech-grid-bento { grid-template-columns: repeat(2, 1fr); }
+  .leetcode-grid { grid-template-columns: 1fr 1fr; }
   .contact-scene-grid { grid-template-columns: 1fr; gap: 30px; }
-  .cert-fan-stack { width: 100%; height: auto; display: grid; grid-template-columns: 1fr; gap: 24px; }
-  .fan-card { position: static; width: 100%; transform: none !important; }
+  .cert-modal-dialog { max-width: 90vw; }
 }
 
+/* Mobile Devices & Tablets (<= 768px) */
 @media (max-width: 768px) {
-  .hero-stage { grid-template-columns: 1fr; }
-  .hero-visual-right { height: 60vh; }
-  .about-capabilities-grid { grid-template-columns: 1fr; }
-  .tech-grid-bento { grid-template-columns: repeat(2, 1fr); }
-  .cert-modal-grid { grid-template-columns: 1fr; }
+  html { font-size: 15px; }
+
+  /* Navigation & Rails */
   .nav-pills-bar { display: none; }
   .left-rail-indicator { display: none; }
+  .site-header { padding: 14px 18px; }
+  .logo-signature { font-size: 1.8rem; }
+  .cta-pill-btn { padding: 9px 18px; font-size: 0.76rem; }
+
+  /* Universal Section Padding & Typography */
+  .page-container section {
+    padding: 90px 18px 60px 18px !important;
+  }
+  .section-title {
+    font-size: clamp(2.3rem, 8.5vw, 3.2rem) !important;
+    line-height: 1.15 !important;
+    word-break: break-word;
+  }
+  .section-header { margin-bottom: 35px !important; }
+
+  /* Scene 01: Hero */
+  .hero-stage {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    padding: 95px 0 30px 0 !important;
+  }
+  .hero-title {
+    font-size: clamp(2.6rem, 9.2vw, 3.8rem) !important;
+    line-height: 1.12 !important;
+  }
+  .hero-bio { font-size: 1rem !important; margin-bottom: 28px !important; }
+  .hero-cta-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+  .cta-main-btn, .cta-outline-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 15px 24px !important;
+  }
+  .hero-visual-right {
+    height: 360px !important;
+    width: 100% !important;
+  }
+
+  /* Scene 02: About */
+  .about-capabilities-grid { grid-template-columns: 1fr !important; gap: 16px; }
+  .cap-card { padding: 22px 18px !important; }
+
+  /* Scene 03: Projects */
+  .carousel-viewport {
+    min-height: 490px !important;
+    height: auto !important;
+  }
+  .project-slide-card {
+    width: calc(100vw - 44px) !important;
+    max-width: 350px !important;
+  }
+  .slide-card-inner { padding: 20px 16px !important; border-radius: 24px !important; }
+  .slide-screen-mockup { height: 180px !important; }
+  .slide-title { font-size: 1.35rem !important; }
+  .slide-desc { font-size: 0.84rem !important; line-height: 1.45 !important; }
+  .slide-actions {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .slide-btn { width: 100% !important; justify-content: center !important; }
+  .carousel-nav-btn {
+    width: 36px !important;
+    height: 36px !important;
+    top: 26% !important;
+    background: rgba(14, 17, 26, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    z-index: 100 !important;
+  }
+  .carousel-nav-btn.prev-btn { left: 4px !important; }
+  .carousel-nav-btn.next-btn { right: 4px !important; }
+  .carousel-pagination-row { gap: 6px !important; flex-wrap: wrap !important; }
+  .pag-pill { padding: 5px 14px !important; font-size: 0.8rem !important; }
+
+  /* Scene 04: Experience Journey (Vertical Timeline for Mobile) */
+  .timeline-visual-track {
+    min-height: auto !important;
+    padding: 10px 0 !important;
+    display: block !important;
+    position: relative !important;
+  }
+  .timeline-svg-curve { display: none !important; }
+  .timeline-nodes-row {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 22px !important;
+    padding-left: 28px !important;
+    border-left: 2.5px solid rgba(255, 255, 255, 0.22) !important;
+    margin-left: 12px !important;
+  }
+  .milestone-node {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    align-items: flex-start !important;
+    flex-direction: row !important;
+  }
+  .node-bullet {
+    position: absolute !important;
+    left: -39px !important;
+    top: 14px !important;
+    margin: 0 !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .node-card {
+    width: 100% !important;
+    text-align: left !important;
+    padding: 16px 18px !important;
+  }
+  .node-year { font-size: 1.15rem !important; }
+  .node-desc { font-size: 0.84rem !important; }
+
+  /* Scene 05: Skills & LeetCode Command Deck */
+  .leetcode-analytics-deck { padding: 20px 16px !important; border-radius: 20px !important; }
+  .leetcode-deck-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .leetcode-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .tech-grid-bento { grid-template-columns: 1fr !important; gap: 14px !important; }
+
+  /* Scene 06: Certificates Orbital Deck */
+  .cert-category-filter-row {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-bottom: 22px !important;
+    padding: 0 4px !important;
+  }
+  .cert-filter-pill {
+    padding: 8px 14px !important;
+    font-size: 0.72rem !important;
+  }
+  .cert-orbit-stage {
+    min-height: 480px !important;
+    height: auto !important;
+  }
+  .cert-orbital-card {
+    width: calc(100vw - 52px) !important;
+    max-width: 325px !important;
+    min-height: 380px !important;
+  }
+  .cert-orbit-nav {
+    width: 36px !important;
+    height: 36px !important;
+    top: 26% !important;
+    background: rgba(14, 17, 26, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    z-index: 100 !important;
+  }
+  .cert-orbit-nav.prev-btn { left: 4px !important; }
+  .cert-orbit-nav.next-btn { right: 4px !important; }
+  .cert-card-inner { padding: 18px 15px !important; }
+  .cert-preview-window { height: 175px !important; }
+  .cert-card-title { font-size: 1.08rem !important; }
+
+  /* Scene 07: Contact */
+  .contact-scene-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .contact-form-col { padding: 24px 18px !important; border-radius: 24px !important; }
+  .contact-clock-col { padding: 24px 18px !important; border-radius: 24px !important; }
+  .clock-time-main { font-size: 2.8rem !important; }
+  .clock-time-sec { font-size: 1.8rem !important; }
+
+  /* Scene 08: Footer */
+  .section-footer-scene {
+    padding: 80px 18px 36px 18px !important;
+    min-height: auto !important;
+  }
+  .footer-center-content { margin-bottom: 45px !important; }
+  .footer-script-title { font-size: clamp(2.8rem, 11vw, 4.2rem) !important; }
+  .footer-bottom-bar {
+    flex-direction: column !important;
+    gap: 16px !important;
+    text-align: center !important;
+  }
+  .footer-links-row {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 16px !important;
+  }
+
+  /* Lightbox Modal */
+  .cert-modal-dialog {
+    max-height: 92vh !important;
+    border-radius: 22px !important;
+    overflow-y: auto !important;
+  }
+  .cert-modal-grid { grid-template-columns: 1fr !important; }
+  .cert-modal-preview { padding: 18px !important; }
+  .cert-modal-details { padding: 24px 18px !important; }
+  .modal-cert-title { font-size: 1.35rem !important; }
 }
 
+/* Small Mobile Phones (<= 480px) */
 @media (max-width: 480px) {
-  .tech-grid-bento { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.5rem !important; }
+  .section-title { font-size: 2.2rem !important; }
+  .project-slide-card { width: calc(100vw - 36px) !important; }
+  .cert-orbital-card { width: calc(100vw - 40px) !important; }
+  .cert-filter-pill { font-size: 0.68rem !important; padding: 7px 11px !important; }
 }
