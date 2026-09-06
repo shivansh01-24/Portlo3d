@@ -145,7 +145,8 @@ const PORTFOLIO_KNOWLEDGE = {
   myAchievements: [
     { title: "1st Rank Winner — Infosys College Hackathon (2025)", details: "I won 1st place out of 100+ competing engineering teams for developing a production-ready software prototype within a 24-hour hackathon." },
     { title: "2nd Position (Silver Medalist) — Flight Fury Aeromodeling", details: "Certificate of Excellence in autonomous drone flight stability, aerodynamics, and telemetry control at Adwitiya Technical Symposium." },
-    { title: "3rd Position — Drone Forge Hackathon", details: "Recognized for embedded drone flight controller algorithms, sensor integration, and telemetry at Chandigarh University." }
+    { title: "3rd Position — Drone Forge Hackathon", details: "Recognized for embedded drone flight controller algorithms, sensor integration, and telemetry at Chandigarh University." },
+    { title: "Search Engine Optimization (SEO) & Web Performance", details: "Practical experience in technical on-page SEO, Core Web Vitals, structured schema markup, and search index optimization." }
   ],
 
   myContact: {
