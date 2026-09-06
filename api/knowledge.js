@@ -121,7 +121,7 @@ const PORTFOLIO_KNOWLEDGE = {
 
   mySkills: {
     programmingLanguages: ["C++", "Python", "JavaScript (ES6+)", "TypeScript", "C", "SQL (PostgreSQL, MySQL)", "HTML5", "CSS3"],
-    frameworksAndTools: ["React.js", "Next.js", "Node.js", "Express.js", "Three.js", "Redux Toolkit", "Tailwind CSS", "Vite", "Docker"],
+    frameworksAndTools: ["React.js", "Next.js", "Node.js", "Express.js", "Three.js", "Tailwind CSS", "Vite", "Docker"],
     cloudAndDatabases: ["MongoDB", "PostgreSQL", "MySQL", "Oracle Cloud Infrastructure (OCI)", "Google Cloud Platform (GCP)", "Vercel"],
     protocolsAndArchitecture: ["REST APIs", "WebSockets", "WebRTC Data Channels", "JWT Authentication", "OpenRouter AI API", "Clean Architecture", "Microservices"],
     dsaProblemSolving: "I solve algorithmic problems actively on LeetCode (https://leetcode.com/u/0777AJ/) focusing on Dynamic Programming, Graph Theory, Trees, Binary Search, and Sliding Window in C++ with optimal O(N) or O(log N) time complexity."
