@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Shivansh Srivastava - Software Engineer Resume</title>
+<title>Shivansh Srivastava - Resume</title>
 <style>
   @page {
     size: A4;
-    margin: 5mm 7mm 5mm 7mm;
+    margin: 0;
   }
   * {
     box-sizing: border-box;
@@ -14,78 +14,61 @@
     padding: 0;
   }
   body {
-    font-family: 'Times New Roman', Times, serif;
-    color: #111111;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
     background-color: #ffffff;
-    line-height: 1.15;
-    padding: 4px 14px 4px 14px;
+    line-height: 1.13;
+    padding: 10px 22px 8px 22px;
     width: 210mm;
-    min-height: 297mm;
+    height: 297mm;
     margin: 0 auto;
-    font-size: 8.2pt;
+    font-size: 8.0pt;
     -webkit-print-color-adjust: exact;
   }
   a {
     color: #0b4f8a;
     text-decoration: none;
+    font-weight: bold;
   }
   a:hover {
     text-decoration: underline;
   }
-  .header {
-    text-align: center;
-    margin-bottom: 2px;
-  }
-  .name {
-    font-size: 17.5pt;
+  
+  /* HEADER */
+  .name-title {
+    font-size: 15pt;
     font-weight: bold;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin-bottom: 1px;
     color: #000000;
+    margin-bottom: 1.5px;
   }
-  .job-title {
-    font-size: 8.8pt;
-    font-weight: bold;
-    color: #222222;
-    margin-bottom: 2px;
-    letter-spacing: 0.2px;
-  }
-  .contact-bar {
-    font-size: 8.0pt;
-    color: #222222;
+  .contact-row {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  .sep {
-    color: #666666;
-  }
-  
-  .section {
-    margin-top: 3px;
-  }
-  .section-title {
-    font-size: 9.0pt;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    border-bottom: 1px solid #222222;
-    padding-bottom: 0.5px;
-    margin-bottom: 2px;
-    color: #000000;
-  }
-  
-  .summary-text {
+    justify-content: space-between;
+    align-items: baseline;
     font-size: 8.0pt;
-    text-align: justify;
-    line-height: 1.16;
+    margin-bottom: 1px;
+    color: #111111;
+  }
+  .contact-item strong {
+    color: #000000;
   }
 
+  /* SECTION HEADERS */
+  .section {
+    margin-top: 2.8px;
+  }
+  .section-title {
+    font-size: 9.3pt;
+    font-weight: bold;
+    color: #000000;
+    border-bottom: 1.2px solid #000000;
+    padding-bottom: 0.5px;
+    margin-bottom: 1.5px;
+  }
+  
+  /* ENTRIES */
   .entry {
-    margin-bottom: 1.8px;
+    margin-bottom: 1.5px;
   }
   .entry-header {
     display: flex;
@@ -94,107 +77,247 @@
   }
   .entry-title {
     font-weight: bold;
-    font-size: 8.4pt;
+    font-size: 8.35pt;
+    color: #000000;
   }
-  .entry-location, .entry-date {
-    font-style: italic;
-    font-size: 7.8pt;
-    color: #333333;
+  .entry-tech {
+    font-size: 7.85pt;
+    color: #222222;
+  }
+  .entry-date {
+    font-size: 7.85pt;
+    color: #444444;
     white-space: nowrap;
   }
   .entry-subtitle {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    font-size: 7.9pt;
-  }
-  .entry-role {
+    font-size: 7.85pt;
     font-style: italic;
+    color: #333333;
+    margin-bottom: 0.5px;
   }
   
+  /* BULLETS */
   ul {
     list-style-type: disc;
-    margin-left: 12px;
+    margin-left: 13px;
     margin-top: 0.5px;
   }
   li {
-    margin-bottom: 0.4px;
-    font-size: 7.95pt;
+    margin-bottom: 0.3px;
+    font-size: 7.8pt;
     text-align: justify;
-    line-height: 1.14;
-  }
-  li strong {
-    font-weight: bold;
-    color: #000000;
+    line-height: 1.12;
+    color: #111111;
   }
   
-  .skills-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .skills-list li {
-    margin-bottom: 0.6px;
-    font-size: 8.0pt;
-    text-align: left;
-    line-height: 1.15;
+  /* SKILLS & CERTS */
+  .skills-row {
+    display: flex;
+    font-size: 7.9pt;
+    margin-bottom: 0.5px;
+    line-height: 1.12;
   }
   .skills-label {
     font-weight: bold;
+    width: 105px;
+    flex-shrink: 0;
     color: #000000;
+  }
+  .skills-val {
+    color: #111111;
+  }
+
+  .cert-list {
+    margin-left: 13px;
+  }
+  .cert-list li {
+    margin-bottom: 0.3px;
+    font-size: 7.8pt;
+  }
+  .cert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
   }
   
   .badge-link {
     color: #0b4f8a;
     font-weight: bold;
-    font-size: 7.5pt;
+    font-size: 7.4pt;
     margin-left: 2px;
-  }
-  
-  .cert-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8px 8px;
-    list-style: none;
-    margin-left: 0;
-  }
-  .cert-grid li {
-    font-size: 7.8pt;
-    text-align: left;
-    margin-bottom: 0.3px;
-    line-height: 1.13;
   }
 </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="name">Shivansh Srivastava</div>
-    <div class="job-title">Software Engineer | Full-Stack Developer | Systems &amp; AI Integration</div>
-    <div class="contact-bar">
-      <span>+91-7525891099</span>
-      <span class="sep">|</span>
-      <a href="mailto:shivanshsrivastava080@gmail.com">shivanshsrivastava080@gmail.com</a>
-      <span class="sep">|</span>
-      <a href="https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/" target="_blank">LinkedIn</a>
-      <span class="sep">|</span>
-      <a href="https://github.com/shivansh01-24" target="_blank">GitHub</a>
-      <span class="sep">|</span>
-      <a href="https://leetcode.com/u/0777AJ/" target="_blank">LeetCode</a>
-      <span class="sep">|</span>
-      <a href="https://portlo3d.vercel.app" target="_blank">Portfolio</a>
-      <span class="sep">|</span>
-      <span>Varanasi, Uttar Pradesh, India</span>
+  <!-- TITLE / HEADER -->
+  <div class="name-title">Shivansh Srivastava</div>
+  <div class="contact-row">
+    <div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/" target="_blank">linkedin.com/in/shivansh-srivastava-67b7892b9</a></div>
+    <div><strong>Email:</strong> <a href="mailto:shivanshsrivastava080@gmail.com">shivanshsrivastava080@gmail.com</a></div>
+  </div>
+  <div class="contact-row">
+    <div><strong>GitHub:</strong> <a href="https://github.com/shivansh01-24" target="_blank">github.com/shivansh01-24</a></div>
+    <div><strong>Mobile:</strong> +91 7525891099</div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Skills</div>
+    <div class="skills-row">
+      <div class="skills-label">Languages:</div>
+      <div class="skills-val">C++, Python, C, JavaScript, TypeScript, SQL, HTML5, CSS3</div>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Frontend:</div>
+      <div class="skills-val">React, Next.js, Tailwind CSS, Vite, Responsive Design</div>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Backend/APIs:</div>
+      <div class="skills-val">Node.js, Express.js, RESTful APIs, Asynchronous Programming, WebSockets</div>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Databases:</div>
+      <div class="skills-val">MongoDB, PostgreSQL, MySQL</div>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Core CS:</div>
+      <div class="skills-val">Data Structures &amp; Algorithms (DSA), OOP, DBMS, OS, Computer Networks, Agile, Git</div>
+    </div>
+    <div class="skills-row">
+      <div class="skills-label">Soft Skills:</div>
+      <div class="skills-val">Problem-Solving, Team Player, Adaptability, Analytical Thinking</div>
     </div>
   </div>
 
-  <!-- PROFESSIONAL SUMMARY -->
+  <!-- COMPETITIVE PROGRAMMING & PROBLEM SOLVING -->
   <div class="section">
-    <div class="section-title">Professional Summary</div>
-    <p class="summary-text">
-      Performance-driven <strong>Software Engineer &amp; Full-Stack Developer</strong> with robust foundations in <strong>Data Structures, Algorithms (DSA), Object-Oriented Programming (OOP)</strong>, and distributed web architectures. Experienced in engineering production full-stack platforms with <strong>React.js, Next.js, Node.js, Express, MongoDB, and TypeScript</strong>, including enterprise asset management ERP systems (BLW-EAMS), high-throughput encrypted P2P networking protocols (LocalDrop), and published browser extensions (Chinh). Active competitive programmer with <strong>150+ LeetCode problems solved</strong> in C++ and <strong>1st Rank Winner</strong> at Infosys College Hackathon.
-    </p>
+    <div class="section-title">Competitive Programming &amp; Problem Solving</div>
+    <ul>
+      <li><strong>LeetCode Profile:</strong> Solved <strong>150+ algorithmic challenges</strong> in C++ (<a href="https://leetcode.com/u/0777AJ/" target="_blank">leetcode.com/u/0777AJ/</a>) spanning Dynamic Programming, Graphs, Binary Search, Sliding Window, Trees, and Heaps with optimal <em>O(N)</em> time complexity.</li>
+      <li><strong>NeoColab &amp; iamneo Platform:</strong> Completed 100+ verified assessments; awarded <strong>Certificates of Appreciation</strong> in <em>Data Structure &amp; Algorithm</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify DSA]</a> and <em>Object Oriented Programming</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify OOP]</a>, plus <em>Computer Programming (72 Hours)</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify 72h]</a>.</li>
+      <li><strong>Proctored Assessments:</strong> Completed Proctored C Systems Assessment <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Coding_Tantra_C_Programming.png" target="_blank">[Verify]</a> on CodingTantra with strong proficiency in pointer semantics and memory management.</li>
+    </ul>
+  </div>
+
+  <!-- INDUSTRIAL & VOCATIONAL TRAINING -->
+  <div class="section">
+    <div class="section-title">Industrial &amp; Vocational Training</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Banaras Locomotive Works (BLW), Indian Railways</span>
+        <span class="entry-date">Varanasi, India</span>
+      </div>
+      <div class="entry-subtitle">
+        <span>Summer Industrial Trainee — EDP &amp; Technical Systems (Locomotive Software) <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify Credential]</a></span>
+        <span>June 2026 - July 2026</span>
+      </div>
+      <ul>
+        <li>Assisted the Electronic Data Processing (EDP) division in managing production records, digital reporting, and workflow automation systems.</li>
+        <li>Analyzed locomotive control software architectures and diagnostic telemetry pipelines used for real-time traction and monitoring.</li>
+        <li>Gained hands-on experience in large-scale database operations, IT infrastructure maintenance, and enterprise software engineering.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+    
+    <div class="entry">
+      <div class="entry-header">
+        <span>
+          <strong class="entry-title">BLW-EAMS</strong> 
+          <span class="entry-tech">| React, Vite, Node.js, Express, MongoDB, Tailwind CSS, JWT</span>
+          <a class="badge-link" href="https://blw-eams.vercel.app/login" target="_blank">[Live Demo]</a>
+          <a class="badge-link" href="https://github.com/shivansh01-24/blw-eams" target="_blank">[GitHub]</a>
+        </span>
+        <span class="entry-date">2026</span>
+      </div>
+      <ul>
+        <li>Architected an enterprise asset management platform featuring Role-Based Access Control (RBAC), JWT authentication, and Helmet security across 100% of routes.</li>
+        <li>Formulated work order tracking and asset lifecycle workflows with QR code tagging and analytical dashboards, decreasing maintenance downtime by 35%.</li>
+        <li>Implemented rate-limiting, sanitized queries, and structured REST APIs, maintaining database transaction consistency with sub-120ms response times.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span>
+          <strong class="entry-title">LocalDrop</strong> 
+          <span class="entry-tech">| Next.js, TypeScript, WebRTC Data Channels, WebSockets, Tailwind CSS</span>
+          <a class="badge-link" href="https://localdrop-seven.vercel.app/" target="_blank">[Live Demo]</a>
+          <a class="badge-link" href="https://github.com/shivansh01-24/LocalDrop" target="_blank">[GitHub]</a>
+        </span>
+        <span class="entry-date">2026</span>
+      </div>
+      <ul>
+        <li>Engineered a serverless peer-to-peer file transfer engine leveraging WebRTC data channels and WebSocket signaling with zero server storage overhead.</li>
+        <li>Designed chunked binary streaming protocols and automated local subnet discovery, delivering 3x higher throughput compared to multi-hop cloud uploads.</li>
+        <li>Constructed a responsive Next.js web application with real-time transfer progress tracking, connection health indicators, and automatic reconnection logic.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span>
+          <strong class="entry-title">Chinh</strong> 
+          <span class="entry-tech">| JavaScript (ES6+), Chrome Extension (Manifest V3), HTML5 File System API</span>
+          <a class="badge-link" href="https://chromewebstore.google.com/detail/chinh/obehgcfdedmdgdgahnlejaldhnelifnl" target="_blank">[Chrome Store]</a>
+          <a class="badge-link" href="https://github.com/shivansh01-24/web-note" target="_blank">[GitHub]</a>
+        </span>
+        <span class="entry-date">2026</span>
+      </div>
+      <ul>
+        <li>Published an approved Chrome Web Store extension injecting in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity for active users.</li>
+        <li>Deployed a local-first vault storage architecture using HTML5 File System Access API, writing atomic JSON backups directly to local disk for 100% data ownership.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS & HONORS -->
+  <div class="section">
+    <div class="section-title">Certifications &amp; Honors</div>
+    <ul class="cert-list">
+      <li>
+        <div class="cert-item">
+          <span>First Place Winner (1st Rank) - Infosys College Hackathon</span>
+          <span style="color:#444;">2025</span>
+        </div>
+      </li>
+      <li>
+        <div class="cert-item">
+          <span>Oracle Cloud Infrastructure (OCI) 2025 AI Foundations Associate <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_OCI_AI_Foundations_2025.png" target="_blank">[Verify AI]</a></span>
+          <span style="color:#444;">2026</span>
+        </div>
+      </li>
+      <li>
+        <div class="cert-item">
+          <span>Oracle Cloud Infrastructure (OCI) 2025 Data Platform Foundations <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_Data_Platform_2025.jpg" target="_blank">[Verify Data]</a></span>
+          <span style="color:#444;">2026</span>
+        </div>
+      </li>
+      <li>
+        <div class="cert-item">
+          <span>Certificate of Merit (Grade 'A') - DSA Placement Bootcamp, CPE LPU <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf" target="_blank">[Verify Bootcamp]</a></span>
+          <span style="color:#444;">2026</span>
+        </div>
+      </li>
+      <li>
+        <div class="cert-item">
+          <span>Google Professional Certification: Introduction to Git and GitHub Version Control <a class="badge-link" href="https://coursera.org/verify/BYD54O2TLDJF" target="_blank">[Verify Google]</a></span>
+          <span style="color:#444;">2025</span>
+        </div>
+      </li>
+      <li>
+        <div class="cert-item">
+          <span>IBM Professional Certification: Hands-on Linux Commands and Shell Scripting <a class="badge-link" href="https://coursera.org/verify/J7UC6FNS11AL" target="_blank">[Verify IBM]</a></span>
+          <span style="color:#444;">2025</span>
+        </div>
+      </li>
+    </ul>
   </div>
 
   <!-- EDUCATION -->
@@ -203,181 +326,43 @@
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Lovely Professional University (LPU)</span>
-        <span class="entry-location">Punjab, India</span>
+        <span class="entry-date">2024 - 2028</span>
       </div>
       <div class="entry-subtitle">
-        <span class="entry-role">Bachelor of Technology (B.Tech) in Computer Science and Engineering</span>
-        <span class="entry-date">2024 - 2028</span>
+        <span>Bachelor of Technology in Computer Science and Engineering</span>
+        <span>Phagwara, Punjab</span>
       </div>
     </div>
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Little Flower House (Class XII)</span>
-        <span class="entry-location">Varanasi, Uttar Pradesh, India</span>
+        <span class="entry-date">Completed 2024</span>
       </div>
       <div class="entry-subtitle">
-        <span class="entry-role">Senior Secondary Certificate (PCM with Computer Science)</span>
-        <span class="entry-date">Completed 2024</span>
+        <span>Senior Secondary Certificate (PCM with Computer Science)</span>
+        <span>Varanasi, Uttar Pradesh</span>
       </div>
     </div>
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Aryan International School (Class X)</span>
-        <span class="entry-location">Varanasi, Uttar Pradesh, India</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Secondary School Examination</span>
         <span class="entry-date">Completed 2022</span>
       </div>
-    </div>
-  </div>
-
-  <!-- TECHNICAL SKILLS & CORE COMPETENCIES -->
-  <div class="section">
-    <div class="section-title">Technical Skills &amp; Core Competencies</div>
-    <ul class="skills-list">
-      <li><span class="skills-label">Programming Languages:</span> C++, Python, JavaScript (ES6+), TypeScript, C, SQL (PostgreSQL, MySQL), HTML5, CSS3</li>
-      <li><span class="skills-label">Full-Stack &amp; Frameworks:</span> React.js, Next.js, Node.js, Express.js, Tailwind CSS, Vite, RESTful APIs, WebSockets, WebRTC</li>
-      <li><span class="skills-label">Databases &amp; Cloud DevOps:</span> MongoDB, PostgreSQL, MySQL, Oracle Cloud Infrastructure (OCI), GCP, Docker, Git, GitHub, Linux Shell Scripting</li>
-      <li><span class="skills-label">Core Computer Science:</span> Data Structures &amp; Algorithms (DSA), Object-Oriented Programming (OOP), Database Management (DBMS), Operating Systems, Computer Networks</li>
-    </ul>
-  </div>
-
-  <!-- COMPETITIVE PROGRAMMING & PROBLEM SOLVING -->
-  <div class="section">
-    <div class="section-title">Competitive Programming &amp; Problem Solving</div>
-    <ul class="skills-list">
-      <li>&bull; <span class="skills-label">LeetCode Profile:</span> Solved <strong>150+ algorithmic challenges</strong> in C++ (<a href="https://leetcode.com/u/0777AJ/" target="_blank" style="color:#0b4f8a; font-weight:bold;">leetcode.com/u/0777AJ/</a>) spanning Dynamic Programming, Graphs, Binary Search, Sliding Window, Trees, and Heaps with optimal <em>O(N)</em> time complexity.</li>
-      <li>&bull; <span class="skills-label">NeoColab &amp; iamneo Platform:</span> Completed 100+ verified assessments; awarded <strong>Certificates of Appreciation</strong> in <em>Data Structure &amp; Algorithm</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify DSA]</a> and <em>Object Oriented Programming</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify OOP]</a>, plus <em>Computer Programming (72 Hours)</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify 72h]</a>.</li>
-      <li>&bull; <span class="skills-label">Hackathons &amp; Proctored Tracks:</span> <strong>1st Rank Winner</strong> at Infosys College Hackathon 2025 <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a>; completed Proctored C Systems Assessment <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Coding_Tantra_C_Programming.png" target="_blank">[Verify]</a>.</li>
-    </ul>
-  </div>
-
-  <!-- INDUSTRIAL TRAINING & WORK EXPERIENCE -->
-  <div class="section">
-    <div class="section-title">Industrial &amp; Vocational Training</div>
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Banaras Locomotive Works (BLW), Indian Railways</span>
-        <span class="entry-location">Varanasi, India</span>
-      </div>
       <div class="entry-subtitle">
-        <span class="entry-role">Summer Industrial Trainee — EDP &amp; Technical Systems (Locomotive Software) <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify Credential]</a></span>
-        <span class="entry-date">June 2026 - July 2026</span>
+        <span>Secondary School Examination</span>
+        <span>Varanasi, Uttar Pradesh</span>
       </div>
-      <ul>
-        <li><strong>Assisted</strong> the Electronic Data Processing (EDP) division in managing production records, digital reporting, and workflow automation systems.</li>
-        <li><strong>Analyzed</strong> locomotive control software architectures and diagnostic telemetry pipelines used for real-time traction and monitoring.</li>
-        <li><strong>Gained hands-on experience</strong> in large-scale database operations, IT infrastructure maintenance, and enterprise software engineering.</li>
-      </ul>
     </div>
   </div>
 
-  <!-- FLAGSHIP PROJECTS -->
+  <!-- EXTRACURRICULAR ACTIVITIES & INTERESTS -->
   <div class="section">
-    <div class="section-title">Key Projects</div>
-    
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">BLW-EAMS - Enterprise Asset Management &amp; Maintenance ERP 
-          <a class="badge-link" href="https://blw-eams.vercel.app/login" target="_blank">[Live Demo]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24/blw-eams" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">2026</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Full-Stack Developer | React, Vite, Node.js, Express, MongoDB, Tailwind CSS, JWT</span>
-      </div>
-      <ul>
-        <li><strong>Architected</strong> an enterprise asset ERP platform featuring Role-Based Access Control (RBAC), JWT authentication, and Helmet security across <strong>100% of routes</strong>.</li>
-        <li><strong>Engineered</strong> work order lifecycle workflows with QR code tagging and telemetry dashboards, decreasing equipment maintenance downtime by <strong>35%</strong>.</li>
-        <li><strong>Implemented</strong> rate-limiting, sanitized queries, and optimized REST APIs, maintaining database transaction consistency with sub-<strong>120ms</strong> latencies.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">LocalDrop - Encrypted High-Performance Peer-to-Peer File Transfer 
-          <a class="badge-link" href="https://localdrop-seven.vercel.app/" target="_blank">[Live Demo]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24/LocalDrop" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">2026</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Systems &amp; Frontend Engineer | Next.js, TypeScript, WebRTC Data Channels, WebSockets, Tailwind CSS</span>
-      </div>
-      <ul>
-        <li><strong>Engineered</strong> a serverless P2P transfer engine utilizing WebRTC data channels and WebSocket signaling with <strong>0 server storage overhead</strong>.</li>
-        <li><strong>Designed</strong> chunked binary streaming protocols and local subnet discovery, achieving <strong>3x higher throughput</strong> over multi-hop cloud uploads.</li>
-        <li><strong>Constructed</strong> a responsive Next.js client with real-time transfer progress tracking, health indicators, and automated reconnection resilience.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Chinh - Universal In-Context AI Annotation &amp; Note Vault 
-          <a class="badge-link" href="https://chromewebstore.google.com/detail/chinh/ijgeclhbbdffmfcbmdkkjggljgokcddb" target="_blank">[Chrome Web Store]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24/web-note" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">2026</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Browser Extension Engineer | JavaScript (ES6+), Manifest V3, HTML5 File System Access API, DOM Engine</span>
-      </div>
-      <ul>
-        <li><strong>Published</strong> an approved Chrome Web Store extension injecting in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity.</li>
-        <li><strong>Deployed</strong> local-first storage using HTML5 File System Access API, writing atomic backups directly to local disk for <strong>100% data privacy</strong>.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">REVIVE - Autonomous Financial Recovery &amp; Debt Resolution Engine 
-          <a class="badge-link" href="https://revive-navy-sigma.vercel.app/" target="_blank">[Live Demo]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">2026</span>
-      </div>
-      <div class="entry-subtitle">
-        <span class="entry-role">Full-Stack Engineer | React, Node.js, Express, AI Agent Architecture, Financial Modeling</span>
-      </div>
-      <ul>
-        <li><strong>Engineered</strong> an automated debt resolution platform utilizing multi-agent AI reasoning to evaluate liabilities, risk scores, and settlement schedules.</li>
-        <li><strong>Constructed</strong> a real-time risk command center with predictive cash-flow forecasting and atomic microservice transaction validation.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- VERIFIED TECHNICAL CERTIFICATIONS & CREDENTIALS -->
-  <div class="section">
-    <div class="section-title">Verified Technical Certifications &amp; Credentials</div>
-    <ul class="cert-grid">
-      <li>&bull; <strong>NeoColab / iamneo:</strong> Data Structures &amp; Algorithms <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>NeoColab / iamneo:</strong> Object Oriented Programming <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>BLW Indian Railways:</strong> Industrial Software Training <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Oracle Cloud:</strong> OCI 2025 AI Foundations Associate <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_OCI_AI_Foundations_2025.png" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Oracle Cloud:</strong> OCI 2025 Data Platform Foundations <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_Data_Platform_2025.jpg" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>LPU / CPE:</strong> DSA Placement Bootcamp (Grade 'A') <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Google:</strong> Git &amp; GitHub Version Control <a class="badge-link" href="https://coursera.org/verify/BYD54O2TLDJF" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>IBM:</strong> Linux Commands &amp; Shell Scripting <a class="badge-link" href="https://coursera.org/verify/J7UC6FNS11AL" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Coursera &amp; NIIT:</strong> Node.js Server-Side JS <a class="badge-link" href="https://coursera.org/verify/2X8UA1725PMQ" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Infosys Springboard:</strong> Programming Using C++ <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Infosys_Programming_Using_CPP.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Infosys Springboard:</strong> Database &amp; SQL Specialist <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Infosys_Database_and_SQL.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>iamneo:</strong> Computer Programming (72 Hours) <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify]</a></li>
-    </ul>
-  </div>
-
-  <!-- HONORS & ACHIEVEMENTS -->
-  <div class="section">
-    <div class="section-title">Honors &amp; Achievements</div>
+    <div class="section-title">Extracurricular Activities &amp; Interests</div>
     <ul>
-      <li><strong>1st Rank Winner - Infosys College Hackathon (2025):</strong> Awarded 1st place out of 100+ competing engineering teams for developing a full-stack solution in 24 hours. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a></li>
-      <li><strong>2nd Position (Silver Medalist) - Flight Fury Aeromodeling:</strong> Awarded Certificate of Excellence in autonomous flight control at Adwitiya technical symposium. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Flight_Fury_2nd_Position.pdf" target="_blank">[Verify]</a></li>
-      <li><strong>3rd Position - Drone Forge Hackathon (Chandigarh University):</strong> Recognized for embedded drone flight controller algorithms and hardware-software telemetry. <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Drone_Forge_3rd_Position_CU.pdf" target="_blank">[Verify]</a></li>
-      <li><strong>Search Engine Optimization (SEO) &amp; Web Performance:</strong> Technical on-page SEO, Core Web Vitals, semantic web indexing, and structured schema markup.</li>
+      <li><strong>Search Engine Optimization (SEO) &amp; Web Performance:</strong> Practical experience in technical on-page SEO, Core Web Vitals optimization, semantic HTML indexing, metadata architecture, and structured schema markup.</li>
+      <li><strong>Robotics &amp; Drone Aeromodeling:</strong> Secured 2nd Position in Flight Fury (Drone Aeromodeling) and 3rd Position in Drone Forge Hackathon (CU).</li>
     </ul>
   </div>
 
 </body>
 </html>
-

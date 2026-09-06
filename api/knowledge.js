@@ -96,7 +96,7 @@ const PORTFOLIO_KNOWLEDGE = {
     {
       title: "Chinh - Universal In-Context AI Annotation & Note Vault",
       technologies: ["JavaScript (ES6+)", "Manifest V3", "HTML5 File System Access API", "DOM Mutation Engine"],
-      liveDemo: "https://chromewebstore.google.com/detail/chinh/ijgeclhbbdffmfcbmdkkjggljgokcddb",
+      liveDemo: "https://chromewebstore.google.com/detail/chinh/obehgcfdedmdgdgahnlejaldhnelifnl",
       github: "https://github.com/shivansh01-24/web-note",
       whatItIs: "An approved Chrome Web Store extension I developed that injects in-context annotation overlays across major AI platforms (ChatGPT, Claude, Gemini, Perplexity) with local-first file storage.",
       highlights: [
@@ -132,8 +132,8 @@ const PORTFOLIO_KNOWLEDGE = {
     { title: "Certificate of Appreciation: Object Oriented Programming", issuer: "neo colab / iamneo (NIIT) & LPU", year: "2026", certNo: "30b25B710N85O9cP6BQ1" },
     { title: "Certificate of Completion: Computer Programming (72 Hours)", issuer: "iamneo & LPU", year: "2025", certNo: "290m8529579CN2AO0BP1" },
     { title: "Summer Industrial Training — EDP & Technical Systems", issuer: "Banaras Locomotive Works (BLW), Indian Railways", year: "2026" },
-    { title: "Oracle Cloud Infrastructure (OCI) 2025 AI Foundations Associate", issuer: "Oracle", year: "2025" },
-    { title: "Oracle Cloud Infrastructure (OCI) 2025 Data Platform Foundations", issuer: "Oracle", year: "2025" },
+    { title: "Oracle Cloud Infrastructure (OCI) 2025 AI Foundations Associate", issuer: "Oracle", year: "2026" },
+    { title: "Oracle Cloud Infrastructure (OCI) 2025 Data Platform Foundations", issuer: "Oracle", year: "2026" },
     { title: "Introduction to Git and GitHub", issuer: "Google & Coursera", year: "2025", certId: "BYD54O2TLDJF" },
     { title: "Hands-on Introduction to Linux Commands and Shell Scripting", issuer: "IBM & Coursera", year: "2025", certId: "J7UC6FNS11AL" },
     { title: "Server side JavaScript with Node.js", issuer: "NIIT & Coursera", year: "2026", certId: "2X8UA1725PMQ" },
