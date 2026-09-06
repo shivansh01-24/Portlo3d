@@ -1,43 +1,124 @@
 const PORTFOLIO_KNOWLEDGE = require('./knowledge.js');
 
 /**
- * Serverless API Route Handler for OpenRouter AI Portfolio Chatbot
- * First-Person Conversational Voice & Intelligent Knowledge Engine for Shivansh Srivastava
+ * Robust helper to extract JSON body across all Vercel Node runtimes
  */
-module.exports = async function handler(req, res) {
-  // 1. CORS & Preflight Handling
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+async function parseRequestBody(req) {
+  if (req.body !== undefined && req.body !== null) {
+    if (typeof req.body === 'object') return req.body;
+    if (typeof req.body === 'string') {
+      try {
+        return JSON.parse(req.body);
+      } catch {
+        return {};
+      }
+    }
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({
-      success: false,
-      error: 'Method Not Allowed. Use POST.'
+  // If body is in request stream (Node http.IncomingMessage)
+  if (typeof req.on === 'function') {
+    return new Promise((resolve) => {
+      let raw = '';
+      req.on('data', chunk => { raw += chunk; });
+      req.on('end', () => {
+        try {
+          resolve(raw ? JSON.parse(raw) : {});
+        } catch {
+          resolve({});
+        }
+      });
+      req.on('error', () => resolve({}));
     });
   }
 
+  return {};
+}
+
+/**
+ * Universal JSON response sender (compatible with Vercel serverless & native Node http)
+ */
+function sendJson(res, statusCode, data) {
   try {
-    // 2. Parse and Validate Input Body
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body || {};
+    if (typeof res.setHeader === 'function') {
+      res.setHeader('Content-Type', 'application/json');
+    }
+    res.statusCode = statusCode;
+
+    // Vercel Serverless / Express chaining: res.status(code).json(data)
+    if (typeof res.status === 'function') {
+      const chained = res.status(statusCode);
+      if (chained && typeof chained.json === 'function') {
+        return chained.json(data);
+      }
+      if (chained && typeof chained.send === 'function') {
+        return chained.send(JSON.stringify(data));
+      }
+      if (chained && typeof chained.end === 'function') {
+        return chained.end(JSON.stringify(data));
+      }
+    }
+
+    if (typeof res.json === 'function') {
+      return res.json(data);
+    }
+
+    if (typeof res.send === 'function') {
+      return res.send(JSON.stringify(data));
+    }
+
+    if (typeof res.end === 'function') {
+      return res.end(JSON.stringify(data));
+    }
+  } catch (err) {
+    console.error('[sendJson error]', err);
+    try {
+      if (typeof res.end === 'function') {
+        res.end(JSON.stringify({ success: true, reply: "I'm having trouble connecting right now." }));
+      }
+    } catch {}
+  }
+}
+
+/**
+ * Serverless API Route Handler for OpenRouter AI Portfolio Chatbot
+ * Supported natively on Vercel Serverless Functions and local Node.js server.
+ */
+module.exports = async function handler(req, res) {
+  try {
+    // 1. CORS & Preflight Handling
+    if (typeof res.setHeader === 'function') {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    }
+
+    if (req.method === 'OPTIONS') {
+      return sendJson(res, 200, { ok: true });
+    }
+
+    if (req.method !== 'POST') {
+      return sendJson(res, 200, {
+        success: true,
+        reply: "Hey! I'm Shivansh. Feel free to send a POST request with your question."
+      });
+    }
+
+    // 2. Parse request body safely
+    const body = await parseRequestBody(req);
     const rawMessage = body.message;
     const rawHistory = Array.isArray(body.history) ? body.history : [];
     const currentSection = typeof body.currentSection === 'string' ? body.currentSection.trim().toLowerCase() : 'hero';
 
     if (!rawMessage || typeof rawMessage !== 'string' || !rawMessage.trim()) {
-      return res.status(400).json({
-        success: false,
-        error: 'A valid message string is required.'
+      return sendJson(res, 200, {
+        success: true,
+        reply: "Hey! Feel free to ask me about my projects, skills, experience at BLW, or background."
       });
     }
 
     const userMessage = rawMessage.trim().slice(0, 600);
 
-    // 3. Sanitize Conversation History (limit to last 6 turns)
+    // 3. Sanitize History
     const sanitizedHistory = rawHistory
       .filter(item => item && (item.role === 'user' || item.role === 'assistant') && typeof item.content === 'string')
       .slice(-6)
@@ -49,18 +130,18 @@ module.exports = async function handler(req, res) {
     // 4. Check OpenRouter API Key
     const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey || apiKey === 'your_key_here' || apiKey.trim() === '') {
-      return res.status(200).json({
+      return sendJson(res, 200, {
         success: true,
-        reply: "Hey! I'm Shivansh. To enable live AI responses, please add your OPENROUTER_API_KEY to the server environment variables. Meanwhile, feel free to explore my projects, skills, and experience right here on the portfolio!",
+        reply: "Hey! I'm Shivansh. To enable live AI responses on Vercel, please add your OPENROUTER_API_KEY in your Vercel Project Settings under Environment Variables.",
         modelUsed: "offline-demo"
       });
     }
 
-    // 5. Configurable Allowed Free Models (Prioritizing high-compliance free models)
+    // 5. Configurable Allowed Free Models
     const primaryModel = process.env.OPENROUTER_PRIMARY_MODEL || 'minimax/minimax-m3:free';
     const fallbackModel1 = process.env.OPENROUTER_FALLBACK_MODEL_1 || 'minimax/minimax-m2.7:free';
-    const fallbackModel2 = process.env.OPENROUTER_FALLBACK_MODEL_2 || 'google/gemma-4-31b-it:free';
-    const fallbackModel3 = 'google/gemma-4-26b-a4b-it:free';
+    const fallbackModel2 = process.env.OPENROUTER_FALLBACK_MODEL_2 || 'nvidia/nemotron-3.5-lightning:free';
+    const fallbackModel3 = 'google/gemma-4-31b-it:free';
     const fallbackModel4 = 'nvidia/nemotron-3-super-120b-a12b:free';
 
     const allowedFreeModels = [primaryModel, fallbackModel1, fallbackModel2, fallbackModel3, fallbackModel4].filter(Boolean);
@@ -92,7 +173,7 @@ MY BACKGROUND & PROJECTS (KNOWLEDGE BASE):
 ${JSON.stringify(PORTFOLIO_KNOWLEDGE, null, 2)}
 `.trim();
 
-    // 7. Active Multi-Model Fallback Engine
+    // 7. Active Multi-Model Fallback Loop
     let aiReply = null;
     let successfulModel = null;
 
@@ -132,31 +213,29 @@ ${JSON.stringify(PORTFOLIO_KNOWLEDGE, null, 2)}
           aiReply = content.trim();
           successfulModel = modelId;
           break;
-        } else {
-          console.warn(`[OpenRouter Empty Response: ${modelId}]`, data);
         }
       } catch (err) {
         console.warn(`[OpenRouter Exception: ${modelId}]`, err.message);
       }
     }
 
-    // 8. Post-Processing: Clean up any rare third-person starters
+    // 8. Post-Processing: Clean up rare third-person starters
     if (aiReply) {
       aiReply = aiReply
         .replace(/^Shivansh Srivastava is /i, "I'm ")
         .replace(/^Shivansh is /i, "I'm ");
     }
 
-    // 9. Fallback if all models failed
+    // 9. Fallback if models failed
     if (!aiReply) {
-      return res.status(200).json({
+      return sendJson(res, 200, {
         success: true,
         reply: "I'm having trouble connecting right now. Please feel free to try again in a moment or explore my projects directly on the page.",
         isFallback: true
       });
     }
 
-    // 10. Sensitive Prompt Filter
+    // 10. Filter sensitive prompts
     if (
       aiReply.includes('OPENROUTER_API_KEY') ||
       aiReply.includes('MY BACKGROUND & PROJECTS')
@@ -164,15 +243,15 @@ ${JSON.stringify(PORTFOLIO_KNOWLEDGE, null, 2)}
       aiReply = "I'm here to chat about my software projects, engineering background, and tech stack! Feel free to ask about any of my work.";
     }
 
-    return res.status(200).json({
+    return sendJson(res, 200, {
       success: true,
       reply: aiReply,
       modelUsed: successfulModel || allowedFreeModels[0]
     });
 
   } catch (err) {
-    console.error('[Chat API Exception]', err);
-    return res.status(200).json({
+    console.error('[Chat API Top-Level Exception]', err);
+    return sendJson(res, 200, {
       success: true,
       reply: "I'm having trouble connecting right now. Please try again in a moment.",
       isFallback: true
