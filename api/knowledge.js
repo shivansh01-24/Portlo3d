@@ -14,7 +14,7 @@ const PORTFOLIO_KNOWLEDGE = {
     phone: "+91-7525891099",
     github: "https://github.com/shivansh01-24",
     linkedin: "https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/",
-    leetcode: "https://leetcode.com/u/shivansh_srivastava/",
+    leetcode: "https://leetcode.com/u/0777AJ/",
     summary: "I'm a Computer Science Engineer passionate about building scalable full-stack applications, real-time distributed systems, and autonomous AI agents. I care deeply about clean architecture, high performance, and crafting smooth user experiences.",
     designPhilosophy: "I like combining clean engineering with great UX. My philosophy centers on minimal monochrome aesthetics, buttery-smooth interactions, modular architecture, and sub-millisecond responsiveness.",
     workingStyle: "I'm systematic, detail-oriented, and security-first. I focus on clean code standards, rapid prototyping, robust error handling, and writing software that actually performs reliably."
@@ -124,7 +124,7 @@ const PORTFOLIO_KNOWLEDGE = {
     frameworksAndTools: ["React.js", "Next.js", "Node.js", "Express.js", "Three.js", "Redux Toolkit", "Tailwind CSS", "Vite", "Docker"],
     cloudAndDatabases: ["MongoDB", "PostgreSQL", "MySQL", "Oracle Cloud Infrastructure (OCI)", "Google Cloud Platform (GCP)", "Vercel"],
     protocolsAndArchitecture: ["REST APIs", "WebSockets", "WebRTC Data Channels", "JWT Authentication", "OpenRouter AI API", "Clean Architecture", "Microservices"],
-    dsaProblemSolving: "I solve algorithmic problems actively on LeetCode (https://leetcode.com/u/shivansh_srivastava/) focusing on Dynamic Programming, Graph Theory, Trees, Binary Search, and Sliding Window in C++ with optimal O(N) or O(log N) time complexity."
+    dsaProblemSolving: "I solve algorithmic problems actively on LeetCode (https://leetcode.com/u/0777AJ/) focusing on Dynamic Programming, Graph Theory, Trees, Binary Search, and Sliding Window in C++ with optimal O(N) or O(log N) time complexity."
   },
 
   myCertificates: [
@@ -155,7 +155,7 @@ const PORTFOLIO_KNOWLEDGE = {
     github: "https://github.com/shivansh01-24",
     linkedin: "https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/",
     portfolio: "https://portlo3d.vercel.app/",
-    leetcode: "https://leetcode.com/u/shivansh_srivastava/"
+    leetcode: "https://leetcode.com/u/0777AJ/"
   }
 };
 
