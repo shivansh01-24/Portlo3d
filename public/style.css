@@ -3856,26 +3856,38 @@ body {
   opacity: 0.8;
 }
 
-/* Mobile Responsiveness */
+/* Mobile Responsiveness & Safe Area Insets */
 @media (max-width: 768px) {
   .mascot-dock {
-    bottom: 18px;
-    right: 18px;
+    bottom: max(14px, env(safe-area-inset-bottom, 14px));
+    right: max(14px, env(safe-area-inset-right, 14px));
   }
   .mascot-launcher {
-    width: 76px;
-    height: 76px;
+    width: 66px;
+    height: 66px;
   }
   .chat-drawer-panel {
     position: fixed;
     inset: auto 0 0 0;
     width: 100% !important;
     max-width: 100% !important;
-    height: 82vh !important;
+    height: 85vh !important;
+    max-height: 85vh !important;
     bottom: 0 !important;
     right: 0 !important;
     border-radius: 26px 26px 0 0 !important;
     border-bottom: none !important;
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
+  }
+  .chat-input-form {
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+  }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
