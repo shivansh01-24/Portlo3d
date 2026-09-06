@@ -1009,6 +1009,304 @@
   }
 
   /* ==========================================================================
+     13. AI CHATBOT CONTROLLER & CONTEXT SYNCHRONIZER
+     ========================================================================== */
+  const aiChatController = {
+    drawer: null,
+    backdrop: null,
+    closeBtn: null,
+    resetBtn: null,
+    suggestionsTrack: null,
+    messagesContainer: null,
+    typingIndicator: null,
+    form: null,
+    input: null,
+    sendBtn: null,
+    isOpen: false,
+    currentSection: 'hero',
+    sessionHistory: [],
+
+    suggestionsMap: {
+      hero: [
+        "Who is Shivansh?",
+        "What does he do?",
+        "What is his design philosophy?",
+        "What is his educational background?"
+      ],
+      about: [
+        "What does Shivansh actually build?",
+        "What makes his approach different?",
+        "What are his core engineering interests?"
+      ],
+      projects: [
+        "Which project should I see first?",
+        "What did he build for BLW?",
+        "Tell me about LocalDrop & WebRTC",
+        "What is Chinh Chrome extension?"
+      ],
+      experience: [
+        "What did Shivansh do at BLW?",
+        "Tell me about his railway software training",
+        "What diagnostic telemetry did he work on?"
+      ],
+      skills: [
+        "What technologies does he use?",
+        "What's his strongest technical area?",
+        "Tell me about his LeetCode problem solving"
+      ],
+      certificates: [
+        "What certificates does he have?",
+        "Tell me about Oracle AI certification",
+        "What is his DSA bootcamp grade?"
+      ],
+      contact: [
+        "How can I contact Shivansh?",
+        "Where can I find his GitHub & LinkedIn?",
+        "What roles is Shivansh open to?"
+      ]
+    },
+
+    init() {
+      this.drawer = document.getElementById('ai-chat-drawer');
+      this.backdrop = document.getElementById('chat-drawer-backdrop');
+      this.closeBtn = document.getElementById('chat-close-btn');
+      this.resetBtn = document.getElementById('chat-reset-btn');
+      this.suggestionsTrack = document.getElementById('chat-suggestions-track');
+      this.messagesContainer = document.getElementById('chat-messages-container');
+      this.typingIndicator = document.getElementById('chat-typing-indicator');
+      this.form = document.getElementById('chat-input-form');
+      this.input = document.getElementById('chat-user-input');
+      this.sendBtn = document.getElementById('chat-send-btn');
+
+      if (!this.drawer || !this.form) return;
+
+      this.bindEvents();
+      this.updateSuggestions();
+      this.observeSections();
+    },
+
+    bindEvents() {
+      // Toggle from Mascot Click
+      window.addEventListener('toggle-ai-chat', () => {
+        this.toggle();
+      });
+
+      if (this.closeBtn) {
+        this.closeBtn.addEventListener('click', () => this.close());
+      }
+
+      if (this.backdrop) {
+        this.backdrop.addEventListener('click', () => this.close());
+      }
+
+      if (this.resetBtn) {
+        this.resetBtn.addEventListener('click', () => this.resetConversation());
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.close();
+        }
+      });
+
+      this.form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = this.input.value.trim();
+        if (text) {
+          this.sendMessage(text);
+          this.input.value = '';
+        }
+      });
+    },
+
+    open() {
+      this.isOpen = true;
+      this.drawer.classList.add('is-open');
+      this.drawer.setAttribute('aria-hidden', 'false');
+      window.dispatchEvent(new CustomEvent('ai-chat-state', { detail: { isOpen: true } }));
+      setTimeout(() => {
+        if (this.input) this.input.focus();
+      }, 300);
+    },
+
+    close() {
+      this.isOpen = false;
+      this.drawer.classList.remove('is-open');
+      this.drawer.setAttribute('aria-hidden', 'true');
+      window.dispatchEvent(new CustomEvent('ai-chat-state', { detail: { isOpen: false } }));
+    },
+
+    toggle() {
+      if (this.isOpen) this.close();
+      else this.open();
+    },
+
+    resetConversation() {
+      this.sessionHistory = [];
+      if (this.messagesContainer) {
+        this.messagesContainer.innerHTML = `
+          <div class="chat-msg-row assistant-row">
+            <div class="msg-avatar-icon">✦</div>
+            <div class="chat-bubble assistant-bubble">
+              <p>Hey.</p>
+              <p>I'm Shivansh's portfolio assistant.</p>
+              <p>Ask me about his projects, skills, experience, or anything else related to his work.</p>
+            </div>
+          </div>
+        `;
+      }
+    },
+
+    observeSections() {
+      const sectionIds = ['hero', 'about', 'projects', 'experience', 'skills', 'certificates', 'contact'];
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            if (id && sectionIds.includes(id) && this.currentSection !== id) {
+              this.currentSection = id;
+              this.updateSuggestions();
+            }
+          }
+        });
+      }, { threshold: 0.35 });
+
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    },
+
+    updateSuggestions() {
+      if (!this.suggestionsTrack) return;
+      const questions = this.suggestionsMap[this.currentSection] || this.suggestionsMap.hero;
+      this.suggestionsTrack.innerHTML = '';
+
+      questions.forEach((q) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'suggestion-chip';
+        chip.textContent = q;
+        chip.addEventListener('click', () => {
+          this.sendMessage(q);
+        });
+        this.suggestionsTrack.appendChild(chip);
+      });
+    },
+
+    formatMessage(text) {
+      if (!text) return '';
+      // Escape raw HTML tags
+      let safe = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      
+      // Convert bold markdown **text** to <strong>text</strong>
+      safe = safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      
+      // Convert bullet points
+      const lines = safe.split('\n');
+      let inList = false;
+      let html = '';
+
+      for (let line of lines) {
+        line = line.trim();
+        if (line.startsWith('- ') || line.startsWith('* ') || line.startsWith('• ')) {
+          if (!inList) {
+            html += '<ul>';
+            inList = true;
+          }
+          html += `<li>${line.slice(2)}</li>`;
+        } else {
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+          if (line.length > 0) {
+            html += `<p>${line}</p>`;
+          }
+        }
+      }
+      if (inList) html += '</ul>';
+
+      return html;
+    },
+
+    appendMessage(role, content) {
+      if (!this.messagesContainer) return;
+      const row = document.createElement('div');
+      row.className = `chat-msg-row ${role}-row`;
+
+      if (role === 'assistant') {
+        const icon = document.createElement('div');
+        icon.className = 'msg-avatar-icon';
+        icon.textContent = '✦';
+        row.appendChild(icon);
+      }
+
+      const bubble = document.createElement('div');
+      bubble.className = `chat-bubble ${role}-bubble`;
+      
+      if (role === 'assistant') {
+        bubble.innerHTML = this.formatMessage(content);
+      } else {
+        bubble.textContent = content;
+      }
+
+      row.appendChild(bubble);
+      this.messagesContainer.appendChild(row);
+      this.scrollToBottom();
+    },
+
+    scrollToBottom() {
+      if (this.messagesContainer) {
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+      }
+    },
+
+    async sendMessage(text) {
+      this.appendMessage('user', text);
+      this.sessionHistory.push({ role: 'user', content: text });
+
+      if (this.typingIndicator) {
+        this.typingIndicator.classList.remove('is-hidden');
+        this.scrollToBottom();
+      }
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: text,
+            history: this.sessionHistory.slice(-6),
+            currentSection: this.currentSection
+          })
+        });
+
+        if (this.typingIndicator) {
+          this.typingIndicator.classList.add('is-hidden');
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error ${response.status}`);
+        }
+
+        const data = await response.json();
+        const reply = data.reply || "I don't have that information in my portfolio knowledge.";
+        
+        this.appendMessage('assistant', reply);
+        this.sessionHistory.push({ role: 'assistant', content: reply });
+
+      } catch (err) {
+        console.error('[AI Chatbot Fetch Error]', err);
+        if (this.typingIndicator) {
+          this.typingIndicator.classList.add('is-hidden');
+        }
+        this.appendMessage('assistant', "I'm having trouble connecting right now. Please try again in a moment.");
+      }
+    }
+  };
+
+  /* ==========================================================================
      DOM INITIALIZATION
      ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
@@ -1025,6 +1323,7 @@
     initContactForm();
     initCursorAndMagnetics();
     scrollReveal.init();
+    aiChatController.init();
   });
 
 })();

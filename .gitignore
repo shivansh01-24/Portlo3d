@@ -12,6 +12,9 @@ node_modules/
 .user_uploaded/
 faded_hero_clean.png
 rim_only.png
+.env
+.env.local
+
 
 # Build & scratch test scripts
 *.py
