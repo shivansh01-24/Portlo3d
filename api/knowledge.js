@@ -135,7 +135,7 @@ const PORTFOLIO_KNOWLEDGE = {
     { title: "Artificial Intelligence & Machine Learning with Python", issuer: "IBM / Cognitive Class", year: "2025" },
     { title: "Certified C++ Professional (OOP / Data Structures)", issuer: "Infosys Springboard", year: "2025" },
     { title: "Database Management Systems & SQL Schema Specialist", issuer: "Infosys Springboard", year: "2025" },
-    { title: "DSA Placement Bootcamp (Grade 'A+' Outstanding)", issuer: "Lovely Professional University (LPU / CPE)", year: "2025" }
+    { title: "DSA Placement Bootcamp (Grade 'A')", issuer: "Lovely Professional University (LPU / CPE)", year: "2025" }
   ],
 
   myAchievements: [
