@@ -231,15 +231,47 @@
 
       this.ctx.clearRect(0, 0, w, h);
 
-      // Trajectory calibrated cleanly below text and through waist
-      const startX = 0;
-      const startY = h * 0.83;
-      const peakX = w * 0.40;
-      const peakY = h * 0.77 + Math.sin(this.time * 1.5) * 4;
-      const waistX = w * 0.74;
-      const waistY = h * 0.80 + Math.cos(this.time * 1.2) * 3;
-      const endX = w;
-      const endY = h * 0.78;
+      const dpr = window.devicePixelRatio || 1;
+      const isMobile = window.innerWidth <= 768;
+
+      // Dynamically measure bio and stage rects to guarantee ZERO overlap on any screen/device
+      const bioEl = document.querySelector('.hero-bio');
+      const stageEl = document.querySelector('.hero-stage');
+      const actionEl = document.querySelector('.hero-action-row');
+
+      let startX = 0;
+      let startY = h * 0.84;
+      let peakX = w * 0.40;
+      let peakY = h * 0.78 + Math.sin(this.time * 1.5) * 4;
+      let waistX = w * 0.74;
+      let waistY = h * 0.81 + Math.cos(this.time * 1.2) * 3;
+      let endX = w;
+      let endY = h * 0.79;
+
+      if (bioEl && stageEl) {
+        const bioRect = bioEl.getBoundingClientRect();
+        const stageRect = stageEl.getBoundingClientRect();
+        const bioBottomRel = (bioRect.bottom - stageRect.top) * dpr;
+
+        if (isMobile) {
+          const actionRect = actionEl ? actionEl.getBoundingClientRect() : null;
+          const safeTop = actionRect ? (actionRect.bottom - stageRect.top + 14) * dpr : (bioBottomRel + 30 * dpr);
+          startY = safeTop + 18 * dpr;
+          peakY = safeTop + Math.sin(this.time * 1.5) * 4;
+          waistY = safeTop + 22 * dpr + Math.cos(this.time * 1.2) * 3;
+          endY = safeTop + 14 * dpr;
+        } else {
+          // On desktop, ensure the peak and start are ALWAYS at least 22px below bio bottom
+          const minClearance = bioBottomRel + 22 * dpr;
+          if (peakY < minClearance) {
+            const shift = minClearance - peakY;
+            peakY += shift;
+            startY += shift * 0.9;
+            waistY += shift * 0.7;
+            endY += shift * 0.6;
+          }
+        }
+      }
 
       // 1. Broad atmospheric neon aura
       this.ctx.beginPath();

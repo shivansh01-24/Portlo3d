@@ -3128,7 +3128,7 @@ body {
 
 /* Mobile Devices & Tablets (<= 768px) */
 @media (max-width: 768px) {
-  html { font-size: 15px; }
+  html { font-size: 14.5px; }
 
   /* Navigation & Rails */
   .nav-pills-bar { display: none; }
@@ -3148,69 +3148,172 @@ body {
 
   /* Universal Section Padding & Typography */
   .page-container section {
-    padding: 90px 18px 60px 18px !important;
+    padding: 80px 18px 50px 18px !important;
   }
   .section-title {
-    font-size: clamp(2.3rem, 8.5vw, 3.2rem) !important;
+    font-size: clamp(2.2rem, 7.5vw, 3.0rem) !important;
     line-height: 1.15 !important;
     word-break: break-word;
   }
-  .section-header { margin-bottom: 35px !important; }
+  .section-header { margin-bottom: 28px !important; }
 
-  /* Scene 01: Hero */
+  /* Scene 01: Hero (Sleek PC-identical horizontal button group & centered portrait) */
   .hero-stage {
     grid-template-columns: 1fr !important;
-    gap: 30px !important;
-    padding: 95px 0 30px 0 !important;
+    gap: 22px !important;
+    padding: 85px 0 20px 0 !important;
+    min-height: auto !important;
   }
   .hero-title {
-    font-size: clamp(2.6rem, 9.2vw, 3.8rem) !important;
-    line-height: 1.12 !important;
+    font-size: clamp(2.4rem, 8.5vw, 3.6rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 14px !important;
   }
-  .hero-bio { font-size: 1rem !important; margin-bottom: 28px !important; }
+  .title-script {
+    font-size: clamp(2.8rem, 10vw, 4.0rem) !important;
+  }
+  .hero-bio {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 20px !important;
+    max-width: 100% !important;
+  }
   .hero-action-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 12px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    margin-bottom: 16px !important;
   }
-  .primary-explore-btn, .secondary-cv-btn {
-    width: 100% !important;
-    justify-content: center !important;
-    padding: 15px 24px !important;
-    text-align: center !important;
+  .primary-explore-btn {
+    width: auto !important;
+    display: inline-flex !important;
+    padding: 11px 22px !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.12em !important;
+  }
+  .secondary-cv-btn {
+    width: auto !important;
+    display: inline-flex !important;
+    padding: 10px 18px !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.12em !important;
   }
   .hero-social-pills {
-    justify-content: center !important;
-    gap: 14px !important;
-    margin-top: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-top: 0 !important;
+  }
+  .hero-icon-pill {
+    width: 38px !important;
+    height: 38px !important;
   }
   .hero-visual-right {
-    height: 360px !important;
+    height: 300px !important;
     width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    margin-top: 10px !important;
+  }
+  .character-silhouette-wrapper {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    height: 100% !important;
+    width: min(320px, 85vw) !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
   }
 
   /* Scene 02: About */
-  .about-capabilities-grid { grid-template-columns: 1fr !important; gap: 16px; }
-  .cap-card { padding: 22px 18px !important; }
+  .about-top-split {
+    grid-template-columns: 1fr !important;
+    gap: 26px !important;
+    margin-bottom: 24px !important;
+  }
+  .about-card-column {
+    justify-content: center !important;
+  }
+  .laptop-device-3d {
+    width: min(350px, 92vw) !important;
+    max-width: 100% !important;
+    height: 230px !important;
+  }
+  .screen-art-wrap {
+    width: 140px !important;
+    height: 140px !important;
+  }
+  .screen-signature {
+    font-size: 1.6rem !important;
+  }
+  .about-capabilities-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  .cap-card {
+    min-height: 210px !important;
+    padding: 16px 14px !important;
+    border-radius: 18px !important;
+  }
+  .cap-title {
+    font-size: 1.05rem !important;
+  }
+  .cap-desc {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
 
   /* Scene 03: Projects */
-  .carousel-viewport {
-    min-height: 490px !important;
+  .projects-carousel-container {
+    min-height: 480px !important;
     height: auto !important;
   }
+  .projects-track-3d {
+    height: 480px !important;
+  }
   .project-slide-card {
-    width: calc(100vw - 44px) !important;
+    width: calc(100vw - 40px) !important;
     max-width: 350px !important;
   }
-  .slide-card-inner { padding: 20px 16px !important; border-radius: 24px !important; }
-  .slide-screen-mockup { height: 180px !important; }
-  .slide-title { font-size: 1.35rem !important; }
-  .slide-desc { font-size: 0.84rem !important; line-height: 1.45 !important; }
+  .slide-card-inner {
+    padding: 18px 16px 16px 16px !important;
+    border-radius: 22px !important;
+  }
+  .slide-screen-mockup {
+    height: 165px !important;
+    padding: 14px 16px !important;
+  }
+  .mockup-quote {
+    font-size: 1.45rem !important;
+  }
+  .slide-title {
+    font-size: 1.3rem !important;
+    margin-bottom: 4px !important;
+  }
+  .slide-desc {
+    font-size: 0.82rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 14px !important;
+  }
   .slide-actions {
-    flex-direction: column !important;
+    display: flex !important;
+    flex-direction: row !important;
     gap: 10px !important;
   }
-  .slide-btn { width: 100% !important; justify-content: center !important; }
+  .slide-btn {
+    flex: 1 !important;
+    width: auto !important;
+    padding: 10px 14px !important;
+    font-size: 0.76rem !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
   .carousel-nav-btn {
     width: 36px !important;
     height: 36px !important;
@@ -3239,10 +3342,10 @@ body {
     height: auto !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 22px !important;
-    padding-left: 28px !important;
+    gap: 18px !important;
+    padding-left: 26px !important;
     border-left: 2.5px solid rgba(255, 255, 255, 0.22) !important;
-    margin-left: 12px !important;
+    margin-left: 10px !important;
   }
   .milestone-node {
     position: relative !important;
@@ -3255,7 +3358,7 @@ body {
   }
   .node-bullet {
     position: absolute !important;
-    left: -39px !important;
+    left: -37px !important;
     top: 14px !important;
     margin: 0 !important;
     width: 20px !important;
@@ -3264,41 +3367,80 @@ body {
   .node-card {
     width: 100% !important;
     text-align: left !important;
-    padding: 16px 18px !important;
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
   }
-  .node-year { font-size: 1.15rem !important; }
-  .node-desc { font-size: 0.84rem !important; }
+  .node-year { font-size: 1.1rem !important; }
+  .node-desc { font-size: 0.82rem !important; }
 
   /* Scene 05: Skills & LeetCode Command Deck */
-  .leetcode-analytics-deck { padding: 20px 16px !important; border-radius: 20px !important; }
+  .leetcode-analytics-deck {
+    padding: 18px 16px !important;
+    border-radius: 20px !important;
+  }
   .leetcode-deck-header {
     flex-direction: column !important;
     align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  .leetcode-grid {
+    grid-template-columns: 1fr !important;
     gap: 12px !important;
   }
-  .leetcode-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-  .tech-grid-bento { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .tech-grid-bento {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .tech-bento-card {
+    min-height: 165px !important;
+    padding: 14px !important;
+    border-radius: 18px !important;
+  }
+  .tech-bento-icon-wrap {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 10px !important;
+  }
+  .tech-bento-name {
+    font-size: 1.05rem !important;
+  }
+  .tech-bento-sub {
+    font-size: 0.76rem !important;
+  }
 
   /* Scene 06: Certificates Orbital Deck */
   .cert-category-filter-row {
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 8px !important;
-    margin-bottom: 22px !important;
+    gap: 6px !important;
+    margin-bottom: 18px !important;
     padding: 0 4px !important;
   }
   .cert-filter-pill {
-    padding: 8px 14px !important;
+    padding: 6px 12px !important;
     font-size: 0.72rem !important;
   }
-  .cert-orbit-stage {
-    min-height: 480px !important;
+  .orbital-certificates-stage {
+    min-height: 460px !important;
     height: auto !important;
   }
-  .cert-orbital-card {
-    width: calc(100vw - 52px) !important;
-    max-width: 325px !important;
-    min-height: 380px !important;
+  .cert-fan-stack {
+    width: 100% !important;
+    height: 380px !important;
+  }
+  .fan-card {
+    width: calc(100vw - 44px) !important;
+    max-width: 340px !important;
+  }
+  .fan-card-inner {
+    padding: 16px !important;
+    border-radius: 20px !important;
+  }
+  .fan-preview-box {
+    height: 160px !important;
+  }
+  .fan-title {
+    font-size: 1.1rem !important;
   }
   .cert-orbit-nav {
     width: 36px !important;
@@ -3310,33 +3452,37 @@ body {
   }
   .cert-orbit-nav.prev-btn { left: 4px !important; }
   .cert-orbit-nav.next-btn { right: 4px !important; }
-  .cert-card-inner { padding: 18px 15px !important; }
-  .cert-preview-window { height: 175px !important; }
-  .cert-card-title { font-size: 1.08rem !important; }
 
   /* Scene 07: Contact */
-  .contact-scene-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
-  .contact-form-col { padding: 24px 18px !important; border-radius: 24px !important; }
-  .contact-clock-col { padding: 24px 18px !important; border-radius: 24px !important; }
+  .contact-scene-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .glass-message-form,
+  .clock-card-inner {
+    padding: 22px 18px !important;
+    border-radius: 22px !important;
+  }
   .clock-time-main { font-size: 2.8rem !important; }
-  .clock-time-sec { font-size: 1.8rem !important; }
+  .clock-colon { font-size: 2.6rem !important; }
+  .clock-time-sec { font-size: 1.6rem !important; }
 
   /* Scene 08: Footer */
   .section-footer-scene {
-    padding: 80px 18px 36px 18px !important;
+    padding: 70px 18px 30px 18px !important;
     min-height: auto !important;
   }
-  .footer-center-content { margin-bottom: 45px !important; }
-  .footer-script-title { font-size: clamp(2.8rem, 11vw, 4.2rem) !important; }
+  .footer-center-content { margin-bottom: 40px !important; }
+  .footer-script-title { font-size: clamp(2.6rem, 10vw, 3.8rem) !important; }
   .footer-bottom-bar {
     flex-direction: column !important;
-    gap: 16px !important;
+    gap: 14px !important;
     text-align: center !important;
   }
   .footer-links-row {
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 16px !important;
+    gap: 14px !important;
   }
 
   /* Lightbox Modal */
