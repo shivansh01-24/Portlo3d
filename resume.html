@@ -6,7 +6,7 @@
 <style>
   @page {
     size: A4;
-    margin: 8mm 10mm 8mm 10mm;
+    margin: 6mm 8mm 6mm 8mm;
   }
   * {
     box-sizing: border-box;
@@ -17,12 +17,12 @@
     font-family: 'Times New Roman', Times, serif;
     color: #111111;
     background-color: #ffffff;
-    line-height: 1.22;
-    padding: 10px 24px 10px 24px;
+    line-height: 1.18;
+    padding: 6px 18px 6px 18px;
     width: 210mm;
     min-height: 297mm;
     margin: 0 auto;
-    font-size: 8.85pt;
+    font-size: 8.45pt;
     -webkit-print-color-adjust: exact;
   }
   a {
@@ -34,51 +34,51 @@
   }
   .header {
     text-align: center;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
   .name {
-    font-size: 19pt;
+    font-size: 18pt;
     font-weight: bold;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     margin-bottom: 1px;
   }
   .job-title {
-    font-size: 9.4pt;
+    font-size: 9.0pt;
     font-weight: bold;
     color: #222222;
     margin-bottom: 2px;
     letter-spacing: 0.3px;
   }
   .contact-bar {
-    font-size: 8.4pt;
+    font-size: 8.1pt;
     color: #222222;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 4px;
   }
   .sep {
     color: #777777;
   }
   
   .section {
-    margin-top: 4.5px;
+    margin-top: 3.5px;
   }
   .section-title {
-    font-size: 9.8pt;
+    font-size: 9.3pt;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.4px;
     border-bottom: 1px solid #222222;
-    padding-bottom: 1px;
-    margin-bottom: 2.5px;
+    padding-bottom: 0.5px;
+    margin-bottom: 2px;
     color: #000000;
   }
   
   .entry {
-    margin-bottom: 2.5px;
+    margin-bottom: 2px;
   }
   .entry-header {
     display: flex;
@@ -87,11 +87,11 @@
   }
   .entry-title {
     font-weight: bold;
-    font-size: 9.05pt;
+    font-size: 8.7pt;
   }
   .entry-location, .entry-date {
     font-style: italic;
-    font-size: 8.4pt;
+    font-size: 8.0pt;
     color: #333333;
     white-space: nowrap;
   }
@@ -99,7 +99,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 8.6pt;
+    font-size: 8.2pt;
   }
   .entry-role {
     font-style: italic;
@@ -107,12 +107,12 @@
   
   ul {
     list-style-type: disc;
-    margin-left: 14px;
-    margin-top: 1px;
+    margin-left: 13px;
+    margin-top: 0.5px;
   }
   li {
-    margin-bottom: 0.8px;
-    font-size: 8.5pt;
+    margin-bottom: 0.5px;
+    font-size: 8.2pt;
     text-align: justify;
   }
   li strong {
@@ -126,8 +126,8 @@
     list-style: none;
   }
   .skills-list li {
-    margin-bottom: 1.2px;
-    font-size: 8.5pt;
+    margin-bottom: 0.8px;
+    font-size: 8.2pt;
     text-align: left;
   }
   .skills-label {
@@ -138,21 +138,21 @@
   .badge-link {
     color: #0b4f8a;
     font-weight: bold;
-    font-size: 8pt;
-    margin-left: 3px;
+    font-size: 7.6pt;
+    margin-left: 2px;
   }
   
   .cert-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5px 12px;
+    gap: 1px 10px;
     list-style: none;
     margin-left: 0;
   }
   .cert-grid li {
-    font-size: 8.35pt;
+    font-size: 8.0pt;
     text-align: left;
-    margin-bottom: 1px;
+    margin-bottom: 0.5px;
   }
 </style>
 </head>
@@ -214,13 +214,22 @@
 
   <!-- TECHNICAL SKILLS & PROBLEM SOLVING -->
   <div class="section">
-    <div class="section-title">Technical Skills &amp; Algorithmic Competencies</div>
+    <div class="section-title">Technical Skills &amp; Core Competencies</div>
     <ul class="skills-list">
       <li><span class="skills-label">Languages:</span> C++, Python, JavaScript (ES6+), TypeScript, C, SQL (PostgreSQL, MySQL), HTML5, CSS3</li>
       <li><span class="skills-label">Full-Stack &amp; Web Technologies:</span> React.js, Next.js, Node.js, Express.js, Redux Toolkit, Tailwind CSS, Vite, RESTful APIs, WebSockets, WebRTC</li>
       <li><span class="skills-label">Databases &amp; Cloud Infrastructure:</span> MongoDB, PostgreSQL, MySQL, Oracle Cloud Infrastructure (OCI), Google Cloud Platform (GCP), Docker</li>
       <li><span class="skills-label">Core CS &amp; Systems:</span> Data Structures &amp; Algorithms (DSA), Object-Oriented Programming (OOP), Database Management Systems (DBMS), Operating Systems, Computer Networks, Linux &amp; Git</li>
-      <li><span class="skills-label">LeetCode &amp; Problem Solving:</span> Active algorithmic problem solver (<a href="https://leetcode.com/u/shivansh_srivastava/" target="_blank" style="color:#0b4f8a; font-weight:bold;">LeetCode Profile</a>) focusing on Dynamic Programming, Graph Theory, Trees, Two Pointers, Binary Search, and Sliding Window in C++ with optimal <em>O(N)</em> / <em>O(log N)</em> time and <em>O(1)</em> auxiliary space complexities.</li>
+    </ul>
+  </div>
+
+  <!-- COMPETITIVE PROGRAMMING & CODING PROFILES -->
+  <div class="section">
+    <div class="section-title">Competitive Programming &amp; Coding Profiles</div>
+    <ul class="skills-list">
+      <li>&bull; <span class="skills-label">LeetCode Profile:</span> Active problem solver (<a href="https://leetcode.com/u/shivansh_srivastava/" target="_blank" style="color:#0b4f8a; font-weight:bold;">leetcode.com/u/shivansh_srivastava/</a>) solving 150+ algorithmic challenges in C++ across Dynamic Programming, Graph Theory, Trees, Binary Search, Sliding Window, and Two Pointers with optimal <em>O(N)</em> / <em>O(log N)</em> complexities.</li>
+      <li>&bull; <span class="skills-label">NeoColab &amp; iamneo Platform:</span> Completed 100+ algorithmic assessments; awarded <strong>Certificates of Appreciation</strong> in <em>Data Structure &amp; Algorithm</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify DSA]</a> and <em>Object Oriented Programming</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify OOP]</a>, plus <em>Computer Programming (72 Hours)</em> <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify 72h]</a>.</li>
+      <li>&bull; <span class="skills-label">Hackathons &amp; Proctored Tracks:</span> <strong>1st Rank Winner</strong> at Infosys College Hackathon 2025 <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_CodAFestX_Hackathon.pdf" target="_blank">[Verify]</a>; completed Proctored C Systems MOOC Assessment <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Coding_Tantra_C_Programming.png" target="_blank">[Verify]</a>.</li>
     </ul>
   </div>
 
@@ -324,16 +333,18 @@
   <div class="section">
     <div class="section-title">Verified Technical Certifications &amp; Credentials</div>
     <ul class="cert-grid">
+      <li>&bull; <strong>NeoColab / iamneo:</strong> Data Structures &amp; Algorithms <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_DSA.pdf" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>NeoColab / iamneo:</strong> Object Oriented Programming <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_NeoColab_OOP.pdf" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>BLW Indian Railways:</strong> Summer Industrial Training <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>IBM:</strong> Linux Commands &amp; Shell Scripting <a class="badge-link" href="https://coursera.org/verify/J7UC6FNS11AL" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>Oracle Cloud:</strong> OCI 2025 AI Foundations Associate <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_OCI_AI_Foundations_2025.png" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Coursera &amp; NIIT:</strong> Node.js Server-Side JS <a class="badge-link" href="https://coursera.org/verify/2X8UA1725PMQ" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>Oracle Cloud:</strong> OCI 2025 Data Platform Foundations <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_Data_Platform_2025.jpg" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Infosys Springboard:</strong> Programming Using C++ <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Infosys_Programming_Using_CPP.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Google:</strong> Git &amp; GitHub Version Control <a class="badge-link" href="https://coursera.org/verify/BYD54O2TLDJF" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Infosys Springboard:</strong> Database &amp; SQL Specialist <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Infosys_Database_and_SQL.pdf" target="_blank">[Verify]</a></li>
       <li>&bull; <strong>LPU / CPE:</strong> DSA Placement Bootcamp (Grade 'A') <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf" target="_blank">[Verify]</a></li>
-      <li>&bull; <strong>Cisco &amp; NASSCOM:</strong> thingQbator Web Development <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Cisco_thingQbator_HTML_CSS.pdf" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>Google:</strong> Git &amp; GitHub Version Control <a class="badge-link" href="https://coursera.org/verify/BYD54O2TLDJF" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>IBM:</strong> Linux Commands &amp; Shell Scripting <a class="badge-link" href="https://coursera.org/verify/J7UC6FNS11AL" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>Coursera &amp; NIIT:</strong> Node.js Server-Side JS <a class="badge-link" href="https://coursera.org/verify/2X8UA1725PMQ" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>Infosys Springboard:</strong> Programming Using C++ <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Infosys_Programming_Using_CPP.pdf" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>Infosys Springboard:</strong> Database &amp; SQL Specialist <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Infosys_Database_and_SQL.pdf" target="_blank">[Verify]</a></li>
+      <li>&bull; <strong>iamneo:</strong> Computer Programming (72 Hours) <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Iamneo_Computer_Programming_72h.pdf" target="_blank">[Verify]</a></li>
     </ul>
   </div>
 

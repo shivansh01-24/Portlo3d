@@ -128,14 +128,18 @@ const PORTFOLIO_KNOWLEDGE = {
   },
 
   myCertificates: [
+    { title: "Certificate of Appreciation: Data Structure and Algorithm", issuer: "neo colab / iamneo (NIIT) & LPU", year: "2026", certNo: "20C12D63AJ0dK7dL7BM1" },
+    { title: "Certificate of Appreciation: Object Oriented Programming", issuer: "neo colab / iamneo (NIIT) & LPU", year: "2026", certNo: "30b25B710N85O9cP6BQ1" },
+    { title: "Certificate of Completion: Computer Programming (72 Hours)", issuer: "iamneo & LPU", year: "2025", certNo: "290m8529579CN2AO0BP1" },
     { title: "Summer Industrial Training — EDP & Technical Systems", issuer: "Banaras Locomotive Works (BLW), Indian Railways", year: "2026" },
     { title: "Oracle Cloud Infrastructure (OCI) 2025 AI Foundations Associate", issuer: "Oracle", year: "2025" },
     { title: "Oracle Cloud Infrastructure (OCI) 2025 Data Platform Foundations", issuer: "Oracle", year: "2025" },
-    { title: "Cloud Computing & Data Engineering", issuer: "Google Cloud Platform", year: "2025" },
-    { title: "Artificial Intelligence & Machine Learning with Python", issuer: "IBM / Cognitive Class", year: "2025" },
+    { title: "Introduction to Git and GitHub", issuer: "Google & Coursera", year: "2025", certId: "BYD54O2TLDJF" },
+    { title: "Hands-on Introduction to Linux Commands and Shell Scripting", issuer: "IBM & Coursera", year: "2025", certId: "J7UC6FNS11AL" },
+    { title: "Server side JavaScript with Node.js", issuer: "NIIT & Coursera", year: "2026", certId: "2X8UA1725PMQ" },
     { title: "Certified C++ Professional (OOP / Data Structures)", issuer: "Infosys Springboard", year: "2025" },
     { title: "Database Management Systems & SQL Schema Specialist", issuer: "Infosys Springboard", year: "2025" },
-    { title: "DSA Placement Bootcamp (Grade 'A')", issuer: "Lovely Professional University (LPU / CPE)", year: "2025" }
+    { title: "DSA Placement Bootcamp (Grade 'A')", issuer: "Lovely Professional University (LPU / CPE)", year: "2026" }
   ],
 
   myAchievements: [
