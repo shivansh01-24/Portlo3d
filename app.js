@@ -765,8 +765,8 @@
       if (!total) return;
 
       this.activeCards.forEach((card, idx) => {
-        // Clear all pos-* classes
-        card.classList.remove('pos-0', 'pos-1', 'pos-2', 'pos-left-1', 'pos-left-2', 'pos-hidden');
+        // Strip any existing pos-* classes completely
+        card.className = card.className.replace(/\bpos-\S+/g, '').replace(/\s+/g, ' ').trim();
 
         const pos = (idx - this.activePosIndex + total) % total;
 

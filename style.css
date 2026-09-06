@@ -2325,8 +2325,7 @@ body {
 }
 
 /* Left Flanking Orbit Positions */
-.cert-fan-stack .fan-card.pos-left-2,
-.cert-fan-stack .fan-card.pos-17 {
+.cert-fan-stack .fan-card.pos-left-2 {
   z-index: 5;
   transform: translateX(-640px) translateY(38px) rotate(-14deg) scale(0.78) translateZ(-40px);
   opacity: 0.45;
@@ -2334,15 +2333,13 @@ body {
   pointer-events: auto;
 }
 
-.cert-fan-stack .fan-card.pos-left-2:hover,
-.cert-fan-stack .fan-card.pos-17:hover {
+.cert-fan-stack .fan-card.pos-left-2:hover {
   transform: translateX(-600px) translateY(24px) rotate(-10deg) scale(0.85) translateZ(-10px);
   opacity: 0.8;
   filter: blur(0px);
 }
 
-.cert-fan-stack .fan-card.pos-left-1,
-.cert-fan-stack .fan-card.pos-18 {
+.cert-fan-stack .fan-card.pos-left-1 {
   z-index: 8;
   transform: translateX(-380px) translateY(8px) rotate(-7deg) scale(0.92) translateZ(10px);
   opacity: 0.88;
@@ -2350,29 +2347,14 @@ body {
   pointer-events: auto;
 }
 
-.cert-fan-stack .fan-card.pos-left-1:hover,
-.cert-fan-stack .fan-card.pos-18:hover {
+.cert-fan-stack .fan-card.pos-left-1:hover {
   transform: translateX(-350px) translateY(-4px) rotate(-4deg) scale(0.98) translateZ(30px);
   opacity: 1;
 }
 
 /* Background Hidden Orbit Positions */
 .cert-fan-stack .fan-card.pos-hidden,
-.cert-fan-stack .fan-card.is-filtered-out,
-.cert-fan-stack .fan-card.pos-3,
-.cert-fan-stack .fan-card.pos-4,
-.cert-fan-stack .fan-card.pos-5,
-.cert-fan-stack .fan-card.pos-6,
-.cert-fan-stack .fan-card.pos-7,
-.cert-fan-stack .fan-card.pos-8,
-.cert-fan-stack .fan-card.pos-9,
-.cert-fan-stack .fan-card.pos-10,
-.cert-fan-stack .fan-card.pos-11,
-.cert-fan-stack .fan-card.pos-12,
-.cert-fan-stack .fan-card.pos-13,
-.cert-fan-stack .fan-card.pos-14,
-.cert-fan-stack .fan-card.pos-15,
-.cert-fan-stack .fan-card.pos-16 {
+.cert-fan-stack .fan-card.is-filtered-out {
   z-index: 1;
   transform: translateX(0) translateY(80px) scale(0.5) translateZ(-160px);
   opacity: 0;
