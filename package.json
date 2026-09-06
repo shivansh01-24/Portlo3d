@@ -1,8 +1,8 @@
 {
   "name": "portlo3d",
   "version": "1.0.0",
+  "private": true,
   "description": "Shivansh Srivastava - 3D Celestial Portfolio & AI Companion",
-  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
