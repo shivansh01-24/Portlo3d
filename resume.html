@@ -17,12 +17,12 @@
     font-family: Arial, Helvetica, sans-serif;
     color: #000000;
     background-color: #ffffff;
-    line-height: 1.13;
-    padding: 10px 22px 8px 22px;
+    line-height: 1.17;
+    padding: 14px 28px 12px 28px;
     width: 210mm;
     height: 297mm;
     margin: 0 auto;
-    font-size: 8.0pt;
+    font-size: 8.05pt;
     -webkit-print-color-adjust: exact;
   }
   a {
@@ -36,41 +36,49 @@
   
   /* HEADER */
   .name-title {
-    font-size: 15pt;
+    font-size: 15.5pt;
     font-weight: bold;
     color: #2D2F92;
-    margin-bottom: 1.5px;
+    margin-bottom: 2px;
   }
   .contact-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 8.0pt;
-    margin-bottom: 1px;
+    font-size: 8.05pt;
+    margin-bottom: 1.5px;
     color: #000000;
   }
   .contact-item-label {
-    color: #2D2F92;
+    color: #000000;
     font-weight: bold;
+  }
+  .contact-row a {
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+  }
+  .contact-row a:hover {
+    text-decoration: underline;
   }
 
   /* SECTION HEADERS */
   .section {
-    margin-top: 2.8px;
+    margin-top: 3.8px;
   }
   .section-title {
-    font-size: 9.3pt;
+    font-size: 9.35pt;
     font-weight: bold;
     color: #473992;
     border-bottom: 1.2px solid #000000;
     padding-bottom: 0.5px;
-    margin-bottom: 1.5px;
+    margin-bottom: 1.8px;
     letter-spacing: 0.2px;
   }
   
   /* ENTRIES */
   .entry {
-    margin-bottom: 1.5px;
+    margin-bottom: 1.8px;
   }
   .entry-header {
     display: flex;
@@ -83,12 +91,12 @@
     color: #2D2F92;
   }
   .entry-tech {
-    font-size: 7.85pt;
+    font-size: 7.9pt;
     font-style: italic;
     color: #000000;
   }
   .entry-date {
-    font-size: 7.85pt;
+    font-size: 7.9pt;
     color: #222222;
     white-space: nowrap;
     font-style: italic;
@@ -96,9 +104,9 @@
   .entry-subtitle {
     display: flex;
     justify-content: space-between;
-    font-size: 7.85pt;
+    font-size: 7.9pt;
     color: #000000;
-    margin-bottom: 0.5px;
+    margin-bottom: 0.6px;
   }
   .entry-subtitle-title {
     font-style: italic;
@@ -108,23 +116,23 @@
   /* BULLETS */
   ul {
     list-style-type: disc;
-    margin-left: 13px;
-    margin-top: 0.5px;
+    margin-left: 14px;
+    margin-top: 0.6px;
   }
   li {
-    margin-bottom: 0.3px;
-    font-size: 7.8pt;
+    margin-bottom: 0.4px;
+    font-size: 7.85pt;
     text-align: justify;
-    line-height: 1.12;
+    line-height: 1.15;
     color: #000000;
   }
   
   /* SKILLS & CERTS */
   .skills-row {
     display: flex;
-    font-size: 7.9pt;
-    margin-bottom: 0.5px;
-    line-height: 1.12;
+    font-size: 7.95pt;
+    margin-bottom: 0.6px;
+    line-height: 1.15;
   }
   .skills-label {
     font-weight: bold;
@@ -137,11 +145,11 @@
   }
 
   .cert-list {
-    margin-left: 13px;
+    margin-left: 14px;
   }
   .cert-list li {
-    margin-bottom: 0.3px;
-    font-size: 7.8pt;
+    margin-bottom: 0.4px;
+    font-size: 7.85pt;
   }
   .cert-item {
     display: flex;
@@ -206,29 +214,12 @@
     <div class="entry">
       <div class="entry-header">
         <span>
-          <strong class="entry-title">BLW-EAMS</strong> 
-          <span class="entry-tech">| React, Vite, Node.js, Express, MongoDB, Tailwind CSS, JWT</span>
-          <a class="badge-link" href="https://blw-eams.vercel.app/login" target="_blank">[Live Demo]</a>
-          <a class="badge-link" href="https://github.com/shivansh01-24/blw-eams" target="_blank">[GitHub]</a>
-        </span>
-        <span class="entry-date">May 2026</span>
-      </div>
-      <ul>
-        <li>Architected an enterprise asset management platform featuring Role-Based Access Control (RBAC), JWT authentication, and Helmet security across 100% of routes.</li>
-        <li>Formulated work order tracking and asset lifecycle workflows with QR code tagging and analytical dashboards, decreasing maintenance downtime by 35%.</li>
-        <li>Implemented rate-limiting, sanitized queries, and structured REST APIs, maintaining database transaction consistency with sub-120ms response times.</li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <div class="entry-header">
-        <span>
           <strong class="entry-title">LocalDrop</strong> 
           <span class="entry-tech">| Next.js, TypeScript, WebRTC Data Channels, WebSockets, Tailwind CSS</span>
           <a class="badge-link" href="https://localdrop-seven.vercel.app/" target="_blank">[Live Demo]</a>
           <a class="badge-link" href="https://github.com/shivansh01-24/LocalDrop" target="_blank">[GitHub]</a>
         </span>
-        <span class="entry-date">Mar 2026</span>
+        <span class="entry-date">Aug 2026</span>
       </div>
       <ul>
         <li>Engineered a serverless peer-to-peer file transfer engine leveraging WebRTC data channels and WebSocket signaling with zero server storage overhead.</li>
@@ -240,12 +231,29 @@
     <div class="entry">
       <div class="entry-header">
         <span>
+          <strong class="entry-title">BLW-EAMS</strong> 
+          <span class="entry-tech">| React, Vite, Node.js, Express, MongoDB, Tailwind CSS, JWT</span>
+          <a class="badge-link" href="https://blw-eams.vercel.app/login" target="_blank">[Live Demo]</a>
+          <a class="badge-link" href="https://github.com/shivansh01-24/blw-eams" target="_blank">[GitHub]</a>
+        </span>
+        <span class="entry-date">Jun 2026</span>
+      </div>
+      <ul>
+        <li>Architected an enterprise asset management platform featuring Role-Based Access Control (RBAC), JWT authentication, and Helmet security across 100% of routes.</li>
+        <li>Formulated work order tracking and asset lifecycle workflows with QR code tagging and analytical dashboards, decreasing maintenance downtime by 35%.</li>
+        <li>Implemented rate-limiting, sanitized queries, and structured REST APIs, maintaining database transaction consistency with sub-120ms response times.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span>
           <strong class="entry-title">Chinh</strong> 
           <span class="entry-tech">| JavaScript (ES6+), Chrome Extension (Manifest V3), HTML5 File System API</span>
           <a class="badge-link" href="https://chromewebstore.google.com/detail/chinh/obehgcfdedmdgdgahnlejaldhnelifnl" target="_blank">[Chrome Store]</a>
           <a class="badge-link" href="https://github.com/shivansh01-24/web-note" target="_blank">[GitHub]</a>
         </span>
-        <span class="entry-date">Jan 2026</span>
+        <span class="entry-date">May 2026</span>
       </div>
       <ul>
         <li>Published an approved Chrome Web Store extension injecting in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity for active users.</li>
@@ -254,9 +262,9 @@
     </div>
   </div>
 
-  <!-- 3. INDUSTRIAL & VOCATIONAL TRAINING -->
+  <!-- 3. TRAINING -->
   <div class="section">
-    <div class="section-title">Industrial &amp; Vocational Training</div>
+    <div class="section-title">Training</div>
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Banaras Locomotive Works (BLW), Indian Railways</span>
@@ -280,12 +288,6 @@
     <ul class="cert-list">
       <li>
         <div class="cert-item">
-          <span>First Place Winner (1st Rank) - Infosys College Hackathon</span>
-          <span class="entry-date">Nov 2025</span>
-        </div>
-      </li>
-      <li>
-        <div class="cert-item">
           <span>Oracle Cloud Infrastructure (OCI) 2025 AI Foundations Associate <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_OCI_AI_Foundations_2025.png" target="_blank">[Verify AI]</a></span>
           <span class="entry-date">May 2026</span>
         </div>
@@ -300,6 +302,12 @@
         <div class="cert-item">
           <span>Certificate of Merit (Grade 'A') - DSA Placement Bootcamp, CPE LPU <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf" target="_blank">[Verify Bootcamp]</a></span>
           <span class="entry-date">Feb 2026</span>
+        </div>
+      </li>
+      <li>
+        <div class="cert-item">
+          <span>First Place Winner (1st Rank) - Infosys College Hackathon</span>
+          <span class="entry-date">Nov 2025</span>
         </div>
       </li>
       <li>
