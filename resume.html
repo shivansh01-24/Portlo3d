@@ -38,7 +38,7 @@
   .name-title {
     font-size: 15pt;
     font-weight: bold;
-    color: #000000;
+    color: #2D2F92;
     margin-bottom: 1.5px;
   }
   .contact-row {
@@ -47,10 +47,11 @@
     align-items: baseline;
     font-size: 8.0pt;
     margin-bottom: 1px;
-    color: #111111;
-  }
-  .contact-item strong {
     color: #000000;
+  }
+  .contact-item-label {
+    color: #2D2F92;
+    font-weight: bold;
   }
 
   /* SECTION HEADERS */
@@ -60,10 +61,11 @@
   .section-title {
     font-size: 9.3pt;
     font-weight: bold;
-    color: #000000;
+    color: #473992;
     border-bottom: 1.2px solid #000000;
     padding-bottom: 0.5px;
     margin-bottom: 1.5px;
+    letter-spacing: 0.2px;
   }
   
   /* ENTRIES */
@@ -78,24 +80,29 @@
   .entry-title {
     font-weight: bold;
     font-size: 8.35pt;
-    color: #000000;
+    color: #2D2F92;
   }
   .entry-tech {
     font-size: 7.85pt;
-    color: #222222;
+    font-style: italic;
+    color: #000000;
   }
   .entry-date {
     font-size: 7.85pt;
-    color: #444444;
+    color: #222222;
     white-space: nowrap;
+    font-style: italic;
   }
   .entry-subtitle {
     display: flex;
     justify-content: space-between;
     font-size: 7.85pt;
-    font-style: italic;
-    color: #333333;
+    color: #000000;
     margin-bottom: 0.5px;
+  }
+  .entry-subtitle-title {
+    font-style: italic;
+    color: #222222;
   }
   
   /* BULLETS */
@@ -109,7 +116,7 @@
     font-size: 7.8pt;
     text-align: justify;
     line-height: 1.12;
-    color: #111111;
+    color: #000000;
   }
   
   /* SKILLS & CERTS */
@@ -123,10 +130,10 @@
     font-weight: bold;
     width: 105px;
     flex-shrink: 0;
-    color: #000000;
+    color: #2D2F92;
   }
   .skills-val {
-    color: #111111;
+    color: #000000;
   }
 
   .cert-list {
@@ -155,12 +162,12 @@
   <!-- TITLE / HEADER -->
   <div class="name-title">Shivansh Srivastava</div>
   <div class="contact-row">
-    <div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/" target="_blank">linkedin.com/in/shivansh-srivastava-67b7892b9</a></div>
-    <div><strong>Email:</strong> <a href="mailto:shivanshsrivastava080@gmail.com">shivanshsrivastava080@gmail.com</a></div>
+    <div><span class="contact-item-label">LinkedIn:</span> <a href="https://www.linkedin.com/in/shivansh-srivastava-67b7892b9/" target="_blank">linkedin.com/in/shivansh-srivastava-67b7892b9</a></div>
+    <div><span class="contact-item-label">Email:</span> <a href="mailto:shivanshsrivastava080@gmail.com">shivanshsrivastava080@gmail.com</a></div>
   </div>
   <div class="contact-row">
-    <div><strong>GitHub:</strong> <a href="https://github.com/shivansh01-24" target="_blank">github.com/shivansh01-24</a></div>
-    <div><strong>Mobile:</strong> +91 7525891099</div>
+    <div><span class="contact-item-label">GitHub:</span> <a href="https://github.com/shivansh01-24" target="_blank">github.com/shivansh01-24</a></div>
+    <div><span class="contact-item-label">Mobile:</span> +91 7525891099</div>
   </div>
 
   <!-- SKILLS -->
@@ -202,26 +209,6 @@
     </ul>
   </div>
 
-  <!-- INDUSTRIAL & VOCATIONAL TRAINING -->
-  <div class="section">
-    <div class="section-title">Industrial &amp; Vocational Training</div>
-    <div class="entry">
-      <div class="entry-header">
-        <span class="entry-title">Banaras Locomotive Works (BLW), Indian Railways</span>
-        <span class="entry-date">Varanasi, India</span>
-      </div>
-      <div class="entry-subtitle">
-        <span>Summer Industrial Trainee — EDP &amp; Technical Systems (Locomotive Software) <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify Credential]</a></span>
-        <span>June 2026 - July 2026</span>
-      </div>
-      <ul>
-        <li>Assisted the Electronic Data Processing (EDP) division in managing production records, digital reporting, and workflow automation systems.</li>
-        <li>Analyzed locomotive control software architectures and diagnostic telemetry pipelines used for real-time traction and monitoring.</li>
-        <li>Gained hands-on experience in large-scale database operations, IT infrastructure maintenance, and enterprise software engineering.</li>
-      </ul>
-    </div>
-  </div>
-
   <!-- PROJECTS -->
   <div class="section">
     <div class="section-title">Projects</div>
@@ -234,7 +221,7 @@
           <a class="badge-link" href="https://blw-eams.vercel.app/login" target="_blank">[Live Demo]</a>
           <a class="badge-link" href="https://github.com/shivansh01-24/blw-eams" target="_blank">[GitHub]</a>
         </span>
-        <span class="entry-date">2026</span>
+        <span class="entry-date">May 2026</span>
       </div>
       <ul>
         <li>Architected an enterprise asset management platform featuring Role-Based Access Control (RBAC), JWT authentication, and Helmet security across 100% of routes.</li>
@@ -251,7 +238,7 @@
           <a class="badge-link" href="https://localdrop-seven.vercel.app/" target="_blank">[Live Demo]</a>
           <a class="badge-link" href="https://github.com/shivansh01-24/LocalDrop" target="_blank">[GitHub]</a>
         </span>
-        <span class="entry-date">2026</span>
+        <span class="entry-date">Mar 2026</span>
       </div>
       <ul>
         <li>Engineered a serverless peer-to-peer file transfer engine leveraging WebRTC data channels and WebSocket signaling with zero server storage overhead.</li>
@@ -268,7 +255,7 @@
           <a class="badge-link" href="https://chromewebstore.google.com/detail/chinh/obehgcfdedmdgdgahnlejaldhnelifnl" target="_blank">[Chrome Store]</a>
           <a class="badge-link" href="https://github.com/shivansh01-24/web-note" target="_blank">[GitHub]</a>
         </span>
-        <span class="entry-date">2026</span>
+        <span class="entry-date">Jan 2026</span>
       </div>
       <ul>
         <li>Published an approved Chrome Web Store extension injecting in-context annotation overlays across ChatGPT, Claude, Gemini, and Perplexity for active users.</li>
@@ -277,44 +264,64 @@
     </div>
   </div>
 
-  <!-- CERTIFICATIONS & HONORS -->
+  <!-- INDUSTRIAL & VOCATIONAL TRAINING -->
   <div class="section">
-    <div class="section-title">Certifications &amp; Honors</div>
+    <div class="section-title">Industrial &amp; Vocational Training</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Banaras Locomotive Works (BLW), Indian Railways</span>
+        <span class="entry-date" style="font-style: normal; color: #000000; font-weight: bold;">Varanasi, India</span>
+      </div>
+      <div class="entry-subtitle">
+        <span class="entry-subtitle-title">Summer Industrial Trainee — EDP &amp; Technical Systems (Locomotive Software) <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_BLW_Indian_Railways_Internship.jpg" target="_blank">[Verify Credential]</a></span>
+        <span class="entry-date">Jun 2026 - Jul 2026</span>
+      </div>
+      <ul>
+        <li>Assisted the Electronic Data Processing (EDP) division in managing production records, digital reporting, and workflow automation systems.</li>
+        <li>Analyzed locomotive control software architectures and diagnostic telemetry pipelines used for real-time traction and monitoring.</li>
+        <li>Gained hands-on experience in large-scale database operations, IT infrastructure maintenance, and enterprise software engineering.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CERTIFICATES & HONORS -->
+  <div class="section">
+    <div class="section-title">Certificates &amp; Honors</div>
     <ul class="cert-list">
       <li>
         <div class="cert-item">
           <span>First Place Winner (1st Rank) - Infosys College Hackathon</span>
-          <span style="color:#444;">2025</span>
+          <span class="entry-date">Nov 2025</span>
         </div>
       </li>
       <li>
         <div class="cert-item">
           <span>Oracle Cloud Infrastructure (OCI) 2025 AI Foundations Associate <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_OCI_AI_Foundations_2025.png" target="_blank">[Verify AI]</a></span>
-          <span style="color:#444;">2026</span>
+          <span class="entry-date">May 2026</span>
         </div>
       </li>
       <li>
         <div class="cert-item">
           <span>Oracle Cloud Infrastructure (OCI) 2025 Data Platform Foundations <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_Oracle_Data_Platform_2025.jpg" target="_blank">[Verify Data]</a></span>
-          <span style="color:#444;">2026</span>
+          <span class="entry-date">May 2026</span>
         </div>
       </li>
       <li>
         <div class="cert-item">
           <span>Certificate of Merit (Grade 'A') - DSA Placement Bootcamp, CPE LPU <a class="badge-link" href="https://portlo3d.vercel.app/assets/certificates/docs/Shivansh_Srivastava_DSA_Placement_Bootcamp_LPU.pdf" target="_blank">[Verify Bootcamp]</a></span>
-          <span style="color:#444;">2026</span>
+          <span class="entry-date">Feb 2026</span>
         </div>
       </li>
       <li>
         <div class="cert-item">
           <span>Google Professional Certification: Introduction to Git and GitHub Version Control <a class="badge-link" href="https://coursera.org/verify/BYD54O2TLDJF" target="_blank">[Verify Google]</a></span>
-          <span style="color:#444;">2025</span>
+          <span class="entry-date">Jul 2025</span>
         </div>
       </li>
       <li>
         <div class="cert-item">
           <span>IBM Professional Certification: Hands-on Linux Commands and Shell Scripting <a class="badge-link" href="https://coursera.org/verify/J7UC6FNS11AL" target="_blank">[Verify IBM]</a></span>
-          <span style="color:#444;">2025</span>
+          <span class="entry-date">Jul 2025</span>
         </div>
       </li>
     </ul>
@@ -326,31 +333,31 @@
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Lovely Professional University (LPU)</span>
-        <span class="entry-date">2024 - 2028</span>
+        <span class="entry-date" style="font-style: normal; color: #000000; font-weight: bold;">Phagwara, Punjab</span>
       </div>
       <div class="entry-subtitle">
-        <span>Bachelor of Technology in Computer Science and Engineering</span>
-        <span>Phagwara, Punjab</span>
+        <span class="entry-subtitle-title">Bachelor of Technology in Computer Science and Engineering</span>
+        <span class="entry-date">Aug 2024 - Present</span>
       </div>
     </div>
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Little Flower House (Class XII)</span>
-        <span class="entry-date">Completed 2024</span>
+        <span class="entry-date" style="font-style: normal; color: #000000; font-weight: bold;">Varanasi, Uttar Pradesh</span>
       </div>
       <div class="entry-subtitle">
-        <span>Senior Secondary Certificate (PCM with Computer Science)</span>
-        <span>Varanasi, Uttar Pradesh</span>
+        <span class="entry-subtitle-title">Senior Secondary Certificate (PCM with Computer Science)</span>
+        <span class="entry-date">Completed May 2024</span>
       </div>
     </div>
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Aryan International School (Class X)</span>
-        <span class="entry-date">Completed 2022</span>
+        <span class="entry-date" style="font-style: normal; color: #000000; font-weight: bold;">Varanasi, Uttar Pradesh</span>
       </div>
       <div class="entry-subtitle">
-        <span>Secondary School Examination</span>
-        <span>Varanasi, Uttar Pradesh</span>
+        <span class="entry-subtitle-title">Secondary School Examination</span>
+        <span class="entry-date">Completed May 2022</span>
       </div>
     </div>
   </div>
